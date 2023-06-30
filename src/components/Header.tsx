@@ -16,8 +16,6 @@ import {useSession} from "next-auth/react";
 import {usePathname} from "next/navigation";
 import {getCartItemsNumber} from "@/utils/localStorage";
 import {CartItemsNumberContext} from "@/store/CartItemsNumberContext";
-import {stat} from "fs";
-
 
 export default function Header({startWithWhite}: {
     startWithWhite: boolean
@@ -172,7 +170,7 @@ export default function Header({startWithWhite}: {
                                     {!isHovered3 ? <HeartIcon className={iconClasses}/> :
                                         <HeartSolid className={iconClasses}/>}
                                 </Link>
-                                <Link href='/cart' className='relative p-2 cursor-pointer'
+                                <Link prefetch={false} href='/cart' className='relative p-2 cursor-pointer'
                                       onMouseEnter={() => setIsHovered4(true)}
                                       onMouseLeave={() => setIsHovered4(false)}>
                                     {!isHovered4 ? <ShoppingBagIcon className={iconClasses}/> :
