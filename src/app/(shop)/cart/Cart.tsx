@@ -1,6 +1,6 @@
 'use client';
 
-import {AnimatePresence, LayoutGroup, motion} from "framer-motion";
+import {motion} from "framer-motion";
 import {useContext, useEffect, useState} from "react";
 import Image from "next/image";
 import {clamp, fill, sum} from "lodash";
@@ -11,6 +11,8 @@ import {toastEnd, toastStart} from "@/utils/toast";
 import {CartItem} from "@/types";
 import {fetchCardLocalStorage} from "@/utils/localStorage";
 import {CartItemsNumberContext} from "@/store/CartItemsNumberContext";
+import {useRouter} from "next/navigation";
+import Link from "next/link";
 
 export const variants = {
     initial: {
@@ -38,6 +40,7 @@ export const dotVariants = {
 export default function Cart({cartItems}: {
     cartItems?: CartItem[]
 }) {
+    const router = useRouter();
     const cartCtx = useContext(CartItemsNumberContext);
     const [items, setItems] = useState(cartItems ?? []);
     const [disabledButtons, setDisabledButtons] = useState(fill(Array(cartItems ? cartItems.length : 0), false));
@@ -143,7 +146,7 @@ export default function Cart({cartItems}: {
                     <div className='flex flex-col gap-y-7 w-2/3'>
                         <table
                             className='h-min rounded-3xl table-auto text-sm ring-1 ring-[#E4E4E4] ring-inset'>
-                            <thead className='bg-[#E4E4E4] drop-shadow-sm'>
+                            <thead className='bg-[#E4E4E4] drop-shadow-sm h-12'>
                             <tr className='font-medium'>
                                 <th className='py-4 pl-5 w-1/2 text-start rounded-l-3xl'>PRODUCT</th>
                                 <th className='py-4 text-start'>PRICE</th>
@@ -151,17 +154,18 @@ export default function Cart({cartItems}: {
                                 <th className='py-4 text-start w-1/5 rounded-r-3xl'>SUBTOTAL</th>
                             </tr>
                             </thead>
-                            <motion.tbody layout className='divide-y divide-[#E4E4E4]'>
+                            <tbody className='divide-y divide-[#E4E4E4]'>
                             {items.map((item, index) =>
-                                <motion.tr layout animate={{scale: 1, opacity: 1}}
-                                           exit={{scale: 0.8, opacity: 0}} key={item.product?.images[0]! + item.color + item.size}
+                                <motion.tr layout transition={{duration: 0.2}}
+                                           key={item.product?.images[0]! + item.color + item.size}
                                            className=''>
                                     <td className='flex gap-x-5 items-center py-4 pl-5'>
-                                        <Image className='h-full rounded-3xl object-cover aspect-[1/1]'
+                                        <Image onClick={() => router.push('/product/' + item.product!.id)}
+                                               className='cursor-pointer h-full rounded-3xl object-cover aspect-[1/1]'
                                                src={item.product!.images[0]}
                                                alt="Product's image" width='120' height='120'/>
                                         <div className='flex flex-col'>
-                                            {item.product!.name}
+                                            <Link href={'/product/' + item.product!.id}>{item.product!.name}</Link>
                                             {item.color &&
                                                 <p className='text-sm text-[#767676]'>Color: {item.color}</p>}
                                             {item.size &&
@@ -243,16 +247,16 @@ export default function Cart({cartItems}: {
                                         </div>
                                     </td>
                                 </motion.tr>)}
-                            </motion.tbody>
+                            </tbody>
                         </table>
                         <motion.div layout
-                            whileTap={{
-                                scale: 0.9
-                            }}
-                            transition={{
-                                ease: 'easeOut'
-                            }}
-                            className='rounded-full bg-white max-w-[400px] ring-1 ring-[#E4E4E4] h-12 ring-inset flex justify-between items-center'>
+                                    whileTap={{
+                                        scale: 0.9
+                                    }}
+                                    transition={{
+                                        ease: 'easeOut'
+                                    }}
+                                    className='rounded-full bg-white max-w-[400px] ring-1 ring-[#E4E4E4] h-12 ring-inset flex justify-between items-center'>
                             <input type='email' placeholder='Coupon Code'
                                    className='border-transparent focus:border-transparent focus:ring-0 p-0 w-full text-sm my-3 mx-4 placeholder-[#767676]'/>
                             <button type='button'

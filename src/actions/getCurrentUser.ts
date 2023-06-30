@@ -18,7 +18,8 @@ export default async function getCurrentUser() {
                             images: true,
                             name: true,
                             price: true,
-                            quantity: true
+                            quantity: true,
+                            id: true
                         }
                     }, color: true,
                     size: true,
