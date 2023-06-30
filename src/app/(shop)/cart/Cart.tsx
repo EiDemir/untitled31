@@ -11,7 +11,6 @@ import {toastEnd, toastStart} from "@/utils/toast";
 import {CartItem} from "@/types";
 import {fetchCardLocalStorage} from "@/utils/localStorage";
 import {CartItemsNumberContext} from "@/store/CartItemsNumberContext";
-import {useRouter} from "next/navigation";
 import Link from "next/link";
 
 export const variants = {
@@ -40,7 +39,6 @@ export const dotVariants = {
 export default function Cart({cartItems}: {
     cartItems?: CartItem[]
 }) {
-    const router = useRouter();
     const cartCtx = useContext(CartItemsNumberContext);
     const [items, setItems] = useState(cartItems ?? []);
     const [disabledButtons, setDisabledButtons] = useState(fill(Array(cartItems ? cartItems.length : 0), false));
@@ -160,12 +158,15 @@ export default function Cart({cartItems}: {
                                            key={item.product?.images[0]! + item.color + item.size}
                                            className=''>
                                     <td className='flex gap-x-5 items-center py-4 pl-5'>
-                                        <Image onClick={() => router.push('/product/' + item.product!.id)}
-                                               className='cursor-pointer h-full rounded-3xl object-cover aspect-[1/1]'
-                                               src={item.product!.images[0]}
-                                               alt="Product's image" width='120' height='120'/>
+                                        <Link prefetch={false} href={'/product/' + item.product!.id}>
+                                            <Image
+                                                className='cursor-pointer h-full rounded-3xl object-cover aspect-[1/1]'
+                                                src={item.product!.images[0]}
+                                                alt="Product's image" width='120' height='120'/>
+                                        </Link>
                                         <div className='flex flex-col'>
-                                            <Link href={'/product/' + item.product!.id}>{item.product!.name}</Link>
+                                            <Link prefetch={false}
+                                                  href={'/product/' + item.product!.id}>{item.product!.name}</Link>
                                             {item.color &&
                                                 <p className='text-sm text-[#767676]'>Color: {item.color}</p>}
                                             {item.size &&
