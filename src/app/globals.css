@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
+}
+
+body {
+    background: white;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+
+.background {
+    @apply fixed top-0 left-0 bottom-0 w-full sm:w-1/2 bg-white;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 0;
+}
+
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    @apply bg-[#E893CF]/80 backdrop-blur-sm hover:bg-[#E893CF];
+    -webkit-border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #222222;
+}
+
+textarea::-webkit-scrollbar {
+    width: 0;
+}
+
+.parallax {
+    overflow: hidden;
+    letter-spacing: -2px;
+    line-height: 0.8;
+    margin: 0;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.parallax .scroller {
+    text-transform: uppercase;
+    font-size: 50px;
+    display: flex;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+}
+
+.parallax span {
+    display: block;
+    margin-right: 30px;
+}
+
+.toast {
+    @apply tracking-wide rounded-full flex py-4 pr-1 items-center justify-center gap-x-3 backdrop-blur-md text-white
+}
