@@ -117,11 +117,11 @@ export default function Header({startWithWhite}: {
                         </svg>
                     </div>
                     <div className="sm:w-2/5 w-1/3 flex justify-end items-center gap-x-4">
-                        <motion.div layout className='cursor-pointer pr-2' onMouseEnter={() => setIsHovered1(true)}
+                        <div className='cursor-pointer pr-2' onMouseEnter={() => setIsHovered1(true)}
                                     onMouseLeave={() => setIsHovered1(false)}>
                             {!isHovered1 ? <MagnifyingGlassIcon className={iconClasses}/> :
                                 <MagSolid className={`${iconClasses}`}/>}
-                        </motion.div>
+                        </div>
                         {
                             status === 'loading' &&
                             <>
@@ -136,7 +136,7 @@ export default function Header({startWithWhite}: {
                                 {
                                     !pathname.startsWith('/auth/') &&
                                     <>
-                                        <Link href='/cart' className='relative p-2 cursor-pointer'
+                                        <Link prefetch={false} href='/cart' className='relative p-2 cursor-pointer'
                                               onMouseEnter={() => setIsHovered4(true)}
                                               onMouseLeave={() => setIsHovered4(false)}>
                                             {!isHovered4 ? <ShoppingBagIcon className={iconClasses}/> :
