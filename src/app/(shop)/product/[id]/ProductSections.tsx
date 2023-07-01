@@ -4,17 +4,7 @@ import {useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import {range} from "lodash";
 import Reviews from "@/app/(shop)/product/[id]/Reviews";
-import ProductItem from "@/components/product/ProductItem";
-
-const relatedProducts = [{
-    imageLink: '/best-selling/1.jpg', category: 'Tops', title: 'Lorem Ipsum', price: '$100'
-}, {
-    imageLink: '/best-selling/2.jpg', category: 'Tops', title: 'Dolor Sit Amet', price: '$80'
-}, {
-    imageLink: '/best-selling/3.jpg', category: 'Tops', title: 'Consectetur Adipiscing', price: '$90'
-}, {
-    imageLink: '/best-selling/4.jpg', category: 'Tops', title: 'Donec Efficitur', price: '$150'
-}];
+// import ProductItem from "@/components/product/ProductItem";
 
 const variants = {
     enter: (direction: number) => ({
@@ -117,11 +107,11 @@ export default function ProductSections({productId, numberOfReviews, isAuthentic
                 <motion.p layout transition={{duration: 0.5}} className='text-2xl'>RELATED <span
                     className='font-bold'>PRODUCTS</span></motion.p>
                 <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5'>
-                    {relatedProducts.map(product =>
-                        <ProductItem key={product.imageLink} imageLink={product.imageLink}
-                                     category={product.category}
-                                     title={product.title} price={product.price}
-                                     direction={2}/>)}
+                    {/*{relatedProducts.map(product =>*/}
+                    {/*    <ProductItem id='' key={product.imageLink} imageLink={product.imageLink}*/}
+                    {/*                 category={product.category}*/}
+                    {/*                 title={product.title} price={product.price}*/}
+                    {/*                 direction={2}/>)}*/}
                 </div>
             </div>
         </div>
