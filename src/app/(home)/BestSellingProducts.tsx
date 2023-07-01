@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useMemo, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {
     AnimatePresence,
     motion,
@@ -72,7 +72,11 @@ function ParallaxText({children, baseVelocity = 100, className}: ParallaxProps) 
     );
 }
 
-export default function BestSellingProducts() {
+export default function BestSellingProducts({products}: {
+    products: {
+        images: string[], category: { name: string }, name: string, price: number, id: string
+    }[]
+}) {
     const windowWidth = [useMediaQuery('(min-width: 640px)'), useMediaQuery('(min-width: 1024px)')];
     const [[currentProducts, direction], setCurrentProducts] = useState<[number[], number]>([
         windowWidth[1] ? [0, 1, 2, 3] : windowWidth[0] ? [0, 1, 2] : [0, 1]
@@ -107,26 +111,6 @@ export default function BestSellingProducts() {
         return [newArray, 0];
     }), [...windowWidth]);
 
-    const bestSellingProducts = [
-        {
-            imageLink: '/best-selling/1.jpg', category: 'Tops', title: 'Lorem Ipsum', price: '$100'
-        }, {
-            imageLink: '/best-selling/2.jpg', category: 'Tops', title: 'Dolor Sit Amet', price: '$80'
-        }, {
-            imageLink: '/best-selling/3.jpg', category: 'Tops', title: 'Consectetur Adipiscing', price: '$90'
-        }, {
-            imageLink: '/best-selling/4.jpg', category: 'Tops', title: 'Donec Efficitur', price: '$150'
-        }, {
-            imageLink: '/best-selling/5.jpg', category: 'Tops', title: 'Luctus Scelerisque', price: '$130'
-        }, {
-            imageLink: '/best-selling/6.jpg', category: 'Tops', title: 'Aliquam Pretium', price: '$150'
-        }, {
-            imageLink: '/best-selling/7.jpg', category: 'Tops', title: 'Ante Dapibus', price: '$60'
-        }, {
-            imageLink: '/best-selling/8.jpg', category: 'Tops', title: 'Porttitor Lacus', price: '$100'
-        }
-    ];
-
 
     return <div className='flex flex-col py-16 gap-y-16 drop-shadow-sm'>
         <section className='flex flex-col justify-center'>
@@ -148,17 +132,19 @@ export default function BestSellingProducts() {
                 <AnimatePresence initial={false} mode='popLayout' custom={direction}>
                     {currentProducts.map(i => {
                             const {
-                                imageLink,
+                                images,
                                 category,
-                                title,
-                                price
-                            } = bestSellingProducts[(i % bestSellingProducts.length + bestSellingProducts.length) % bestSellingProducts.length];
+                                name,
+                                price,
+                                id
+                            } = products[(i % products.length + products.length) % products.length];
                             return <ProductItem
                                 direction={direction}
-                                key={i} imageLink={imageLink}
-                                category={category}
-                                title={title}
-                                price={price}/>;
+                                key={i} imageLink={images[0]}
+                                category={category.name}
+                                title={name}
+                                price={price}
+                                id={id}/>;
                         }
                     )}
                 </AnimatePresence>

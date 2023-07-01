@@ -2,7 +2,7 @@ import Image from "next/image";
 import {FormEvent, useEffect, useRef, useState} from "react";
 import _ from 'lodash';
 import axios from "axios";
-import {ChevronDownIcon, ChevronUpIcon} from "@heroicons/react/24/solid";
+import {ChevronDownIcon, ChevronUpIcon, StarIcon} from "@heroicons/react/24/solid";
 import {useRouter} from "next/navigation";
 import {motion} from "framer-motion";
 
@@ -25,7 +25,7 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
     const [isLoading, setIsLoading] = useState(true);
     const average = _.mean(reviews.map(item => item.rating));
     const router = useRouter();
-    const ratingRef = useRef<HTMLInputElement>(null);
+    const [rating, setRating] = useState(0);
     const reviewTextRef = useRef<HTMLTextAreaElement>(null);
     const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -54,7 +54,7 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
     const addReviewHandler = (event: FormEvent) => {
         event.preventDefault();
         axios.post('/api/product/' + productId + '/reviews', {
-            rating: ratingRef.current!.value,
+            rating: rating,
             reviewText: reviewTextRef.current!.value
         }).then((data) => {
             setReviews(prevReviews => [...prevReviews, data.data.newReview])
@@ -125,14 +125,12 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
                                         transition={{delay: 0.5}}
                                         className='flex gap-x-3 items-center'>
                                 <label htmlFor='rating'>Your Rating:</label>
-                                <input ref={ratingRef}
-                                       className='mt-1 appearance-none cursor-pointer rounded-full h-1 bg-[#222222]'
-                                       name='rating' type='range' id='rating' step='0.5' min='0'
-                                       defaultValue='5.0'
-                                       max='5'
-                                       onChange={(event) => document.getElementById('rangeNum')!.innerText = parseFloat(event.target.value).toFixed(1).toString()}/>
-                                <p className='mt-1'><span className='font-extrabold text-lg' id='rangeNum'>5</span>
-                                    <span className='text-sm'> out of</span> 5.0</p>
+                                <div className='flex gap-x-2'>
+                                    {_.range(1, 6).map(number =>
+                                        <StarIcon onClick={() => setRating(number)} key={number}
+                                                  className={`drop-shadow-sm w-7 h-auto transition-colors duration-300 ${number <= rating ? 'text-yellow-400' : 'text-white'}`}/>
+                                    )}
+                                </div>
                             </motion.div>
                             <motion.div initial={{opacity: 0}} animate={{opacity: 1}}
                                         transition={{delay: 0.5}} className="relative mt-4">
@@ -157,7 +155,7 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
                                         ease: 'easeOut'
                                     }}
                                     htmlFor='reviewText'
-                                    className={`cursor-text px-2 absolute left-3 h-max ${firstLabelStatus ? 'bg-gray-200 ring-1 ring-inset ring-[#222222] rounded-full' : 'bg-transparent'}`}>Your
+                                    className={`cursor-text px-2 absolute left-3 h-max ${firstLabelStatus ? 'bg-white ring-1 ring-inset ring-[#222222] rounded-full' : 'bg-transparent'}`}>Your
                                     Review *
                                 </motion.label>
                             </motion.div>

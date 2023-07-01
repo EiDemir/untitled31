@@ -3,7 +3,7 @@
 import {useContext, useEffect, useState} from "react";
 import {clamp, floor} from "lodash";
 import {motion} from "framer-motion";
-import {HeartIcon} from "@heroicons/react/24/outline";
+import {HeartIcon, ShareIcon} from "@heroicons/react/24/outline";
 import {HeartIcon as HeartSolid} from "@heroicons/react/24/solid"
 import axios from "axios";
 import {toastEnd, toastStart} from "@/utils/toast";
@@ -16,17 +16,19 @@ export default function ProductDetail({productDetail, user}: {
         price: number,
         id: string,
         maxQuantity: number,
-        colors: string[],
-        sizes: string[]
+        colors: { name: string, hexColorCode: string }[],
+        sizes: string[],
+        category: string
     }, user: { addedToWishlist: boolean, quantity: number } | null
 }) {
     const cartCtx = useContext(CartItemsNumberContext);
     const [selectedOptions, setSelectedOptions] = useState({
-        color: productDetail.colors.length ? productDetail.colors[floor(productDetail.colors.length / 2)] : 'null',
-        size: productDetail.sizes.length ? productDetail.sizes[floor(productDetail.sizes.length / 2)] : 'null'
+        color: productDetail.colors.length ? productDetail.colors[0] : undefined,
+        size: productDetail.sizes.length ? productDetail.sizes[floor(productDetail.sizes.length / 2)] : undefined
     });
     const [quantity, setQuantity] = useState(1);
     const [isHovered, setIsHovered] = useState(false);
+    const [isHovered2, setIsHovered2] = useState(false);
     const [isAddedToCart, setIsAddedToCart] = useState<number>(!user ? 0 : user.quantity);
     const [isAddedToWishlist, setIsAddedToWishlist] = useState<boolean>(!user ? false : user.addedToWishlist);
     const [isWishlistButtonDisabled, setIsWishlistButtonDisabled] = useState(false);
@@ -73,8 +75,8 @@ export default function ProductDetail({productDetail, user}: {
             const items: {
                 productId: string,
                 quantity: number,
-                color: string,
-                size: string
+                color?: { name: string, hexColorCode: string },
+                size?: string
             }[] = data !== null ? JSON.parse(data) : [];
 
             if (items.filter(item =>
@@ -107,7 +109,7 @@ export default function ProductDetail({productDetail, user}: {
 
     return (
         <div className='px-[3.6vw] sm:px-0 sm:w-5/12 flex flex-col gap-y-1'>
-            <p className='mb-6 text-sm font-medium text-[#222222] leading-none'>HOME / THE SHOP</p>
+            <p className='mb-6 text-sm font-medium text-[#222222] leading-none uppercase'> women / {productDetail.category}</p>
             <p className='text-[1.625rem] text-[#222222]'>{productDetail.name}</p>
             <p className='font-medium text-[1.375rem] text-[#222222]'>${productDetail.price}</p>
             <p className='font-sm my-6 text-[#222222]'>Phasellus sed volutpat orci. Fusce eget lore mauris vehicula
@@ -117,7 +119,7 @@ export default function ProductDetail({productDetail, user}: {
                 magna posuere eget.
             </p>
             {productDetail.sizes.length > 0 &&
-                <div className='flex items-center mb-6'>
+                <div className='flex items-center mb-6 gap-x-4'>
                     <p className='min-w-[75px] font-medium'>Sizes</p>
                     <div className='flex flex-wrap gap-3'>
                         {productDetail.sizes.map(size =>
@@ -129,14 +131,17 @@ export default function ProductDetail({productDetail, user}: {
                                 transition={{duration: 0.2, ease: 'easeIn'}}
                                 onClick={() => setSelectedOptions(prevState =>
                                     ({...prevState, size}))} className={`${selectedOptions.size === size ?
-                                'ring-[#222222]' : 'ring-[#E4E4E4]'} ring-inset rounded-full bg-transparent transition-colors cursor-pointer ring-1 py-1 w-11 text-center`}
+                                'ring-[#222222] ring-2' : 'ring-[#E4E4E4] ring-1'} uppercase ring-inset rounded-full bg-transparent transition-colors cursor-pointer py-1.5 w-14 text-center`}
                                 key={size}>{size}</motion.span>)}
                     </div>
                 </div>
             }
             {productDetail.colors.length > 0 &&
-                <div className='flex items-center mb-6'>
-                    <p className='min-w-[75px] font-medium'>Colors</p>
+                <div className='flex items-center mb-6 gap-x-4'>
+                    <div className='min-w-[75px]'>
+                        <p className='font-medium'>Colors</p>
+                        <p className='capitalize font-normal'>{selectedOptions.color!.name}</p>
+                    </div>
                     <div className='flex gap-x-3'>
                         {productDetail.colors.map(color =>
                             <motion.span
@@ -149,10 +154,10 @@ export default function ProductDetail({productDetail, user}: {
                                 transition={{duration: 0.2, ease: 'easeIn'}}
                                 onClick={() => setSelectedOptions(prevState =>
                                     ({...prevState, color}))}
-                                style={{background: color}}
-                                className={`${selectedOptions.color === color ?
-                                    'ring-2 ring-[#222222]' : ''} rounded-full cursor-pointer h-10 w-10`}
-                                key={color}/>)}
+                                style={{background: '#' + color.hexColorCode}}
+                                className={`${selectedOptions.color!.hexColorCode === color.hexColorCode ?
+                                    'ring-2 ring-[#222222]' : ''} ${color.hexColorCode === 'FFFFFF' && selectedOptions.color!.hexColorCode !== color.hexColorCode ? 'ring-1 ring-gray-400' : ''} rounded-full cursor-pointer h-10 w-10`}
+                                key={color.hexColorCode}/>)}
                     </div>
                 </div>
             }
@@ -176,25 +181,36 @@ export default function ProductDetail({productDetail, user}: {
                 </button>
             </div>
             <div className='h-px bg-gray-200 self-center w-full my-6'/>
-            <div className='mb-6'>
+            <div className='mb-6 flex gap-x-6'>
                 <button onClick={toggleFavoriteButton} disabled={isWishlistButtonDisabled} type='button'
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
-                        className='text-sm w-max flex flex-col gap-y-2 items-center cursor-pointer'>
-                    <div className='flex gap-x-2 items-center tracking-wider'>
+                        className='text-sm w-max flex flex-col gap-y-2 items-center'>
+                    <div className='flex gap-x-2 items-center tracking-wider font-medium'>
                         {isAddedToWishlist ? <HeartSolid className='w-6 h-auto'/> :
                             <HeartIcon className='w-6 h-auto'/>}
                         {!isAddedToWishlist ? 'ADD TO WISHLIST' : 'DELETE FROM WISHLIST'}
                     </div>
                     <div
-                        className={`bg-black h-0.5 ${isHovered ? ' w-full' : 'w-2/3'} transition-width ease-in duration-300`}/>
+                        className={`bg-black h-0.5 ${isHovered ? ' w-full' : 'w-2/3'} transition-width ease-in-out duration-300`}/>
+                </button>
+                <button
+                    onClick={toggleFavoriteButton} disabled={isWishlistButtonDisabled} type='button'
+                    onMouseEnter={() => setIsHovered2(true)}
+                    onMouseLeave={() => setIsHovered2(false)}
+                    className='text-sm w-max flex flex-col gap-y-2 items-center'>
+                    <div className='flex gap-x-2 items-center tracking-wider font-medium'>
+                        <ShareIcon className='w-6 h-auto'/>SHARE
+                    </div>
+                    <div
+                        className={`bg-black h-0.5 ${isHovered2 ? ' w-full' : 'w-2/3'} transition-width ease-in-out duration-300`}/>
                 </button>
             </div>
-            <div className='text-sm leading-6'>
-                <p><span className='text-[#767676]'>SKU: </span>N/A</p>
-                <p><span className='text-[#767676]'>CATEGORIES: </span>Casual & Urban Wear, Jackets, Men</p>
-                <p><span className='text-[#767676]'>TAGS: </span>biker, black, bomber, leather</p>
-            </div>
+            {/*<div className='text-sm leading-6'>*/}
+            {/*    <p><span className='text-[#767676]'>SKU: </span>N/A</p>*/}
+            {/*    <p><span className='text-[#767676]'>CATEGORIES: </span>Casual & Urban Wear, Jackets, Men</p>*/}
+            {/*    <p><span className='text-[#767676]'>TAGS: </span>biker, black, bomber, leather</p>*/}
+            {/*</div>*/}
         </div>
     );
 }

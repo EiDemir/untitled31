@@ -1,6 +1,7 @@
 import Image from "next/image";
 import {motion} from "framer-motion";
 import {ForwardedRef, forwardRef, useState} from "react";
+import Link from "next/link";
 
 const variants = {
     initial: (custom: number) => ({
@@ -23,12 +24,13 @@ const variants = {
     })
 };
 
-const ProductItem = forwardRef(({imageLink, category, title, price, direction}: {
+const ProductItem = forwardRef(({imageLink, category, title, price, direction, id}: {
     imageLink: string,
     category: string,
     title: string,
-    price: string,
-    direction: number
+    price: number,
+    direction: number,
+    id: string
 }, ref: ForwardedRef<HTMLDivElement>) => {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -49,8 +51,10 @@ const ProductItem = forwardRef(({imageLink, category, title, price, direction}: 
             <div onMouseEnter={() => setIsHovered(true)}
                  onMouseLeave={() => setIsHovered(false)}
                  className='relative overflow-hidden rounded-xl'>
-                <Image className="rounded-xl" src={imageLink} alt="Product's picture" width={400}
-                       height={485}/>
+                <Link prefetch={false} href={'/product/' + id}>
+                    <Image className="rounded-xl" src={imageLink} alt="Product's picture" width={400}
+                           height={485}/>
+                </Link>
                 <motion.div
                     className='rounded-xl flex text-white divide-x divide-[#222222] text-xs absolute inset-x-0 bg-[#222222]/50 backdrop-blur-lg h-10 bottom-1 mx-1'
                     initial={false}
@@ -67,7 +71,7 @@ const ProductItem = forwardRef(({imageLink, category, title, price, direction}: 
             <div className='flex flex-col font-normal'>
                 <p className="text-[#B9A16B] text-sm">{category}</p>
                 <p className="text-base">{title}</p>
-                <p className="text-[#767676] text-base">{price}</p>
+                <p className="text-[#767676] text-base">#{price}</p>
             </div>
         </motion.div>
     );

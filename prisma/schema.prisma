@@ -63,17 +63,19 @@ model VerificationToken {
 }
 
 model Product {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  price     Float
-  quantity  Int
-  images    String[]
-  colors    String[]
-  sizes     String[]
-  users     User[]     @relation(fields: [userIDs], references: [id])
-  userIDs   String[]   @db.ObjectId
-  cartItems CartItem[]
-  reviews   Review[]
+  id         String         @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  category   Category       @relation(fields: [categoryId], references: [id])
+  price      Float
+  quantity   Int
+  images     String[]
+  colors     ProductColor[]
+  sizes      String[]
+  users      User[]         @relation(fields: [userIDs], references: [id])
+  userIDs    String[]       @db.ObjectId
+  cartItems  CartItem[]
+  reviews    Review[]
+  categoryId String         @db.ObjectId
 }
 
 model Order {
@@ -112,7 +114,18 @@ model Review {
   usersVoted UserVote[]
 }
 
+model Category {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  products Product[]
+}
+
 type UserVote {
   userID String
   vote   String
+}
+
+type ProductColor {
+  name         String
+  hexColorCode String
 }

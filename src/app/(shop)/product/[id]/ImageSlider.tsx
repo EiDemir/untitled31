@@ -59,23 +59,24 @@ export default function ImageSlider({images}: { images: string[] }) {
                             setImage([index, page > index ? -1 : 1]);
                         }
                     }}
-                    className={`aspect-[1/1] w-[90px] sm:w-[65px] md:w-[82px] object-cover ${index !== page ? ' opacity-50 hover:opacity-100 transition-opacity duration-500 ease-in-out' : ''} cursor-pointer`}
+                    className={`w-[90px] sm:w-[65px] md:w-[82px] ${index !== page ? ' opacity-50 hover:opacity-100 transition-opacity duration-500 ease-in-out' : ''} cursor-pointer`}
                     key={index}
                     src={images[index]}
-                    alt="Product's image" width='1000'
-                    height='1000'/>)}
+                    alt="Product's image" width='1333'
+                    height='2000'/>)}
             </div>
 
-            <div className='relative w-full h-max aspect-[1/1] flex items-center overflow-hidden'>
-                <button
+            <div className='relative w-full aspect-[1333/2000] flex items-center overflow-hidden'>
+                <motion.button whileTap={{scale: 0.9}}
                     disabled={page === 0 || areButtonsDisabled} onClick={() => paginate(-1)}
-                    className='disabled:cursor-default disabled:bg-gray-100 cursor-pointer z-10 absolute flex items-center justify-center left-4 bg-white rounded-full w-10 h-10'>
+                    className='disabled:cursor-default disabled:bg-gray-200/70 backdrop-blur-md cursor-pointer z-10 absolute flex items-center justify-center left-4 bg-white/70 rounded-full w-10 h-10'>
                     <ChevronLeftIcon className='w-5'/>
-                </button>
-                <button disabled={page === images.length - 1 || areButtonsDisabled} onClick={() => paginate(1)}
-                        className='disabled:cursor-default disabled:bg-gray-100 cursor-pointer z-10 absolute flex items-center justify-center right-4 bg-white rounded-full w-10 h-10'>
+                </motion.button>
+                <motion.button whileTap={{scale: 0.9}}
+                    disabled={page === images.length - 1 || areButtonsDisabled} onClick={() => paginate(1)}
+                        className='disabled:cursor-default disabled:bg-gray-200/70 backdrop-blur-md cursor-pointer z-10 absolute flex items-center justify-center right-4 bg-white/70 rounded-full w-10 h-10'>
                     <ChevronRightIcon className='w-5'/>
-                </button>
+                </motion.button>
                 <AnimatePresence initial={false} custom={direction}>
                     <motion.div
                         className='absolute inset-0'
@@ -90,11 +91,11 @@ export default function ImageSlider({images}: { images: string[] }) {
                         }}
                     >
                         <Image
-                            className='w-full aspect-[1/1] object-cover'
+                            className='w-full'
                             src={images[page]}
                             alt="Product's image"
-                            width='1000'
-                            height='1000'/>
+                            width='1333'
+                            height='2000'/>
                     </motion.div>
                 </AnimatePresence>
             </div>

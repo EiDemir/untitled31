@@ -2,10 +2,10 @@ import React, {ReactNode} from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Slider from "@/app/(home)/Slider";
-import slide1 from "../../../public/slide1.jpg";
-import slide2 from "../../../public/slide2.jpg";
-import slide3 from "../../../public/slide3.jpg";
-import slide4 from "../../../public/slide4.jpg";
+import slide1 from "../../../public/slide1.webp";
+import slide2 from "../../../public/slide2.webp";
+import slide3 from "../../../public/slide3.webp";
+import slide4 from "../../../public/slide4.webp";
 
 const sliderDetails = [
     {

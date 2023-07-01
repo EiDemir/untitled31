@@ -5,8 +5,6 @@ import {prisma} from "@/libs/prisma";
 import {notFound} from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
 
-export const revalidate = 10;
-
 async function getProduct(productId?: string) {
     try {
         return await prisma.product.findUnique({
@@ -23,6 +21,10 @@ async function getProduct(productId?: string) {
                 _count: {
                     select: {
                         reviews: true
+                    }
+                }, category: {
+                    select: {
+                        name: true
                     }
                 }
             }
@@ -66,7 +68,8 @@ export default async function ProductPage({params}: { params: { id: string } }) 
                     price: product.price,
                     maxQuantity: product.quantity,
                     colors: product.colors,
-                    sizes: product.sizes
+                    sizes: product.sizes,
+                    category: product.category.name
                 }}
                                user={userInfo}/>
             </div>
