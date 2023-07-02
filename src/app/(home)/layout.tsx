@@ -34,7 +34,7 @@ const sliderDetails = [
     }
 ];
 
-export default async function HomeLayout({children}: { children: ReactNode }) {
+export default async function HomeLayout({bestSelling}: { bestSelling: ReactNode }) {
     return (
         <>
             <header className='overflow-hidden h-screen bg-[#222222]'>
@@ -42,7 +42,7 @@ export default async function HomeLayout({children}: { children: ReactNode }) {
                 <Slider details={sliderDetails}/>
             </header>
             <main>
-                {children}
+                {bestSelling}
             </main>
             <footer>
                 <Footer/>
