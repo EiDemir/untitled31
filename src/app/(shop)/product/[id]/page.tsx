@@ -7,7 +7,6 @@ import getCurrentUser from "@/actions/getCurrentUser";
 
 async function getProduct(productId?: string) {
     try {
-        console.log('kos');
         return await prisma.product.findUnique({
             where: {
                 id: productId
