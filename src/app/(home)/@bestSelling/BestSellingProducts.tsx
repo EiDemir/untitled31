@@ -47,10 +47,7 @@ export default function BestSellingProducts({products}: {
     }), [...windowWidth]);
 
 
-    return <div className='flex flex-col py-16 gap-y-16 drop-shadow-sm'>
-        <div className='mx-auto font-bold text-4xl'>
-            Best Selling
-        </div>
+    return (
         <div className='flex'>
             <button
                 disabled={areButtonsDisabled}
@@ -95,5 +92,5 @@ export default function BestSellingProducts({products}: {
                 </svg>
             </button>
         </div>
-    </div>
+    );
 }

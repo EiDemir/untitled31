@@ -21,5 +21,12 @@ async function getBestSellingProducts() {
 export default async function BestSellingPage() {
     const products = await getBestSellingProducts();
 
-    return <BestSellingProducts products={products}/>
+    return (
+        <div className='flex flex-col py-16 gap-y-16 drop-shadow-sm'>
+            <div className='mx-auto font-bold text-4xl'>
+                Best Selling
+            </div>
+            <BestSellingProducts products={products}/>
+        </div>
+    );
 }
