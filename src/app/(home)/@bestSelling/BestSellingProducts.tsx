@@ -1,15 +1,8 @@
 'use client';
 
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {
-    AnimatePresence,
-    motion,
-    useAnimationFrame,
-    useMotionValue,
-    useScroll,
-    useSpring,
-    useTransform,
-    useVelocity
+    AnimatePresence
 } from "framer-motion";
 import {useMediaQuery} from "usehooks-ts";
 import ProductItem from "@/components/product/ProductItem";
