@@ -11,66 +11,8 @@ import {
     useTransform,
     useVelocity
 } from "framer-motion";
-import {wrap} from "@motionone/utils";
-import {Rubik_Marker_Hatch} from "next/font/google";
 import {useMediaQuery} from "usehooks-ts";
 import ProductItem from "@/components/product/ProductItem";
-
-interface ParallaxProps {
-    children: string;
-    baseVelocity: number;
-    className: string
-}
-
-const font = Rubik_Marker_Hatch({
-    weight: '400',
-    subsets: ['latin']
-});
-
-function ParallaxText({children, baseVelocity = 100, className}: ParallaxProps) {
-    const baseX = useMotionValue(0);
-    const {scrollY} = useScroll();
-    const scrollVelocity = useVelocity(scrollY);
-    const smoothVelocity = useSpring(scrollVelocity, {
-        damping: 50,
-        stiffness: 400
-    });
-    const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-        clamp: false
-    });
-
-    const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
-
-    const directionFactor = useRef<number>(1);
-    useAnimationFrame((t, delta) => {
-        let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
-
-        if (velocityFactor.get() < 0) {
-            directionFactor.current = -1;
-        } else if (velocityFactor.get() > 0) {
-            directionFactor.current = 1;
-        }
-
-        moveBy += directionFactor.current * moveBy * velocityFactor.get();
-
-        baseX.set(baseX.get() + moveBy);
-    });
-
-    return (
-        <div className={`parallax ${className} ${font.className}`}>
-            <motion.div className="scroller" style={{x}}>
-                <span>{children} </span>
-                <span>{children} </span>
-                <span>{children} </span>
-                <span>{children} </span>
-                <span>{children} </span>
-                <span>{children} </span>
-                <span>{children} </span>
-                <span>{children} </span>
-            </motion.div>
-        </div>
-    );
-}
 
 export default function BestSellingProducts({products}: {
     products: {
@@ -113,9 +55,9 @@ export default function BestSellingProducts({products}: {
 
 
     return <div className='flex flex-col py-16 gap-y-16 drop-shadow-sm'>
-        <section className='flex flex-col justify-center'>
-            <ParallaxText className='' baseVelocity={-5}>Best Selling</ParallaxText>
-        </section>
+        <div className='mx-auto font-bold text-4xl'>
+            Best Selling
+        </div>
         <div className='flex'>
             <button
                 disabled={areButtonsDisabled}
