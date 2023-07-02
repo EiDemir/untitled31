@@ -4,6 +4,7 @@ import {prisma} from "@/libs/prisma";
 const BestSellingProducts = dynamic(() => import('./BestSellingProducts'), {ssr: false});
 
 async function getBestSellingProducts() {
+    console.log('get');
     return prisma.product.findMany({
         select: {
             images: true,
