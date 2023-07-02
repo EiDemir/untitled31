@@ -8,25 +8,25 @@ export default function BestSellingLoading() {
                 <div className='gap-y-3 flex flex-col w-full'>
                     <div className='rounded-xl w-full aspect-[1333/2000] bg-slate-300'/>
                     <div className='rounded-full bg-slate-300 w-10 h-5'/>
-                    <div className='rounded-full bg-slate-300 w-10 h-16'/>
+                    <div className='rounded-full bg-slate-300 w-36 h-5'/>
                     <div className='rounded-full bg-slate-300 w-10 h-5'/>
                 </div>
                 <div className='gap-y-3 flex flex-col w-full'>
                     <div className='rounded-xl w-full aspect-[1333/2000] bg-slate-300'/>
                     <div className='rounded-full bg-slate-300 w-10 h-5'/>
-                    <div className='rounded-full bg-slate-300 w-10 h-16'/>
+                    <div className='rounded-full bg-slate-300 w-36 h-5'/>
                     <div className='rounded-full bg-slate-300 w-10 h-5'/>
                 </div>
                 <div className='gap-y-3 flex flex-col w-full'>
                     <div className='rounded-xl w-full aspect-[1333/2000] bg-slate-300'/>
                     <div className='rounded-full bg-slate-300 w-10 h-5'/>
-                    <div className='rounded-full bg-slate-300 w-10 h-16'/>
+                    <div className='rounded-full bg-slate-300 w-36 h-5'/>
                     <div className='rounded-full bg-slate-300 w-10 h-5'/>
                 </div>
                 <div className='gap-y-3 flex flex-col w-full'>
                     <div className='rounded-xl w-full aspect-[1333/2000] bg-slate-300'/>
                     <div className='rounded-full bg-slate-300 w-10 h-5'/>
-                    <div className='rounded-full bg-slate-300 w-10 h-16'/>
+                    <div className='rounded-full bg-slate-300 w-36 h-5'/>
                     <div className='rounded-full bg-slate-300 w-10 h-5'/>
                 </div>
             </div>
