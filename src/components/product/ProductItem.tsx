@@ -52,8 +52,8 @@ const ProductItem = forwardRef(({imageLink, category, title, price, direction, i
                  onMouseLeave={() => setIsHovered(false)}
                  className='relative overflow-hidden rounded-xl'>
                 <Link prefetch={false} href={'/product/' + id}>
-                    <Image className="rounded-xl" src={imageLink} alt="Product's picture" width={400}
-                           height={485}/>
+                    <Image className="rounded-xl" src={imageLink} alt="Product's picture" width={1333}
+                           height={2000}/>
                 </Link>
                 <motion.div
                     className='rounded-xl flex text-white divide-x divide-[#222222] text-xs absolute inset-x-0 bg-[#222222]/50 backdrop-blur-lg h-10 bottom-1 mx-1'
