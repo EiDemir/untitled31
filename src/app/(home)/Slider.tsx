@@ -126,7 +126,7 @@ export default function Slider({details}: {
                             </motion.button>
                         </motion.div>
                         <motion.div style={{y: imageY}}>
-                            <Image className='h-screen overflow-hidden object-cover' src={details[active].imageLink}
+                            <Image priority className='h-screen overflow-hidden object-cover' src={details[active].imageLink}
                                    alt='Slider image'/>
                         </motion.div>
                     </div>
