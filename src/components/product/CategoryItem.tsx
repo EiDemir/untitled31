@@ -1,54 +1,39 @@
-'use client';
-
+import Link from "next/link";
 import Image from "next/image";
 import {motion} from "framer-motion";
-import {ForwardedRef, forwardRef, useState} from "react";
-import Link from "next/link";
+import {useState} from "react";
 
 const variants = {
-    initial: (custom: number) => ({
-        x: custom === 1 ? 300 : custom === -1 ? -300 : 0,
+    initial: {
         opacity: 0,
-        zIndex: -10,
-    }),
-    animate: {
-        x: 0,
-        opacity: 1,
-        zIndex: 0,
+        y: 20
     },
-    exit: (custom: number) => ({
-        x: custom === 1 ? -300 : custom === -1 ? 300 : 0,
-        opacity: !custom ? 1 : 0,
-        zIndex: -10,
+    visible: {
+        opacity: 1,
+        y: 0,
         transition: {
-            duration: !custom ? 0 : 0.5
+            duration: 0.8,
+            ease: 'easeOut'
         }
-    })
+    }
 };
 
-const ProductItem = forwardRef(({imageLink, category, title, price, direction, id}: {
+export default function CategoryItem({imageLink, category, title, price, id}: {
     imageLink: string,
     category: string,
     title: string,
     price: number,
-    direction: number,
     id: string
-}, ref: ForwardedRef<HTMLDivElement>) => {
+}) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
         <motion.div
-            ref={ref}
             layout
-            custom={direction}
             variants={variants}
             initial='initial'
-            animate='animate'
-            exit='exit'
-            transition={{
-                duration: 0.5,
-                ease: 'easeOut'
-            }}
+            whileInView='visible'
+            viewport={{once: true}}
             className="gap-y-3 flex flex-col">
             <div onMouseEnter={() => setIsHovered(true)}
                  onMouseLeave={() => setIsHovered(false)}
@@ -77,8 +62,4 @@ const ProductItem = forwardRef(({imageLink, category, title, price, direction, i
             </div>
         </motion.div>
     );
-})
-
-ProductItem.displayName = 'ProductItem';
-
-export default ProductItem;
+}

@@ -66,6 +66,7 @@ model Product {
   id         String         @id @default(auto()) @map("_id") @db.ObjectId
   name       String
   category   Category       @relation(fields: [categoryId], references: [id])
+  categoryId String         @db.ObjectId
   price      Float
   quantity   Int
   images     String[]
@@ -75,7 +76,6 @@ model Product {
   userIDs    String[]       @db.ObjectId
   cartItems  CartItem[]
   reviews    Review[]
-  categoryId String         @db.ObjectId
 }
 
 model Order {
@@ -116,7 +116,7 @@ model Review {
 
 model Category {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
+  name     String    @unique
   products Product[]
 }
 
@@ -126,6 +126,12 @@ type UserVote {
 }
 
 type ProductColor {
+  name         String
+  hexColorCode String
+}
+
+model Color {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
   name         String
   hexColorCode String
 }
