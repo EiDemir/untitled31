@@ -3,8 +3,7 @@ import Image from "next/image";
 import patternImage from "../../../../../public/pattern.svg";
 import {prisma} from "@/libs/prisma";
 
-const dynamicParams = false;
-export {dynamicParams};
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
     const categories = await prisma.category.findMany({
