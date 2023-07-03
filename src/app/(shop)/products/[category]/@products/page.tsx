@@ -1,4 +1,4 @@
-import CategoryClient from "@/app/(shop)/products/[category]/CategoryClient";
+import CategoryClient from "./CategoryClient";
 import {prisma} from "@/libs/prisma";
 
 async function getCategoryProducts(categoryName: string, page: number) {
