@@ -13,7 +13,7 @@ async function getCategoryProducts(categoryName: string, page: number) {
                     name: true,
                     price: true,
                     id: true
-                }, take: 4,
+                }, take: 15,
                 skip: (page - 1) * 15
             }
         }
@@ -32,6 +32,6 @@ export default async function ProductsSection({params, searchParams}: {
     }
 
     return (
-        <CategoryClient products={products.products}/>
+        <CategoryClient initialProducts={products.products}/>
     );
 }
