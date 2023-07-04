@@ -8,7 +8,9 @@ async function doesCategoryExists(category: string) {
     return prisma.category.findUnique({
         where: {
             name: category
-        }, select: {}
+        }, select: {
+            name: true
+        }
     });
 }
 
