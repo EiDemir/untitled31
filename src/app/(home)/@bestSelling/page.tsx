@@ -29,7 +29,6 @@ export default async function BestSellingPage() {
             <div className='h-[calc(_calc(_calc(80vw_-_20px)_*_0.75018755)_+_74px)] sm:h-[calc(_calc(_calc(80vw_-_40px)_*_0.50012503)_+_76px)] lg:h-[calc(_calc(_calc(80vw_-_60px)_*_0.37509377)_+_77px)]'>
                 <BestSellingProducts products={products}/>
             </div>
-
         </div>
     );
 }

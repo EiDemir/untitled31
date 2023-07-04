@@ -7,6 +7,8 @@ import {
 import {useMediaQuery} from "usehooks-ts";
 import ProductItem from "@/components/product/ProductItem";
 
+export const revalidate = 60;
+
 export default function BestSellingProducts({products}: {
     products: {
         images: string[], category: { name: string }, name: string, price: number, id: string
