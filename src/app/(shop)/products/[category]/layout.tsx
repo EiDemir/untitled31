@@ -2,27 +2,26 @@ import {ReactNode} from "react";
 import Image from "next/image";
 import patternImage from "../../../../../public/pattern.svg";
 import {prisma} from "@/libs/prisma";
+import {notFound} from "next/navigation";
 
-const dynamicParams = false;
-export {dynamicParams};
-
-export async function generateStaticParams() {
-    const categories = await prisma.category.findMany({
-        select: {
-            name: true
-        }
+async function doesCategoryExists(category: string) {
+    return prisma.category.findUnique({
+        where: {
+            name: category
+        }, select: {}
     });
-
-    return categories.map(category => ({
-        category: category.name
-    }))
 }
 
-export default function ProductsLayout({params, searchOptions, products}: {
+export default async function ProductsLayout({params, searchOptions, products}: {
     params: { category: string },
     searchOptions: ReactNode,
     products: ReactNode
 }) {
+    const doesExist = await doesCategoryExists(params.category);
+
+    if (!doesExist)
+        notFound();
+
     return (
         <div className='my-3 gap-y-7 flex flex-col'>
             <div

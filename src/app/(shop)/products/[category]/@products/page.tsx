@@ -13,7 +13,7 @@ async function getCategoryProducts(categoryName: string, page: number) {
                     name: true,
                     price: true,
                     id: true
-                }, take: 15,
+                }, take: 4,
                 skip: (page - 1) * 15
             }
         }
@@ -22,9 +22,10 @@ async function getCategoryProducts(categoryName: string, page: number) {
 
 export default async function ProductsSection({params, searchParams}: {
     params: { category: string, page?: string },
-    searchParams?: { [key: string]: string | undefined }
+    searchParams?: { page?: string }
 }) {
-    const products = await getCategoryProducts(params.category, parseInt(!searchParams?.page ? '1' : searchParams.page));
+    const products = await getCategoryProducts(params.category,
+        searchParams !== undefined && searchParams.page !== undefined ? parseInt(searchParams.page) : 1);
 
     if (!products) {
         return <div>NO PRODUCTS WERE FOUND.</div>;
