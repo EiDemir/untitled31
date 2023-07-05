@@ -4,7 +4,6 @@ import {notFound} from "next/navigation";
 import CategoryHeader from "@/app/(shop)/products/[category]/CategoryHeader";
 
 async function doesCategoryExists(category: string) {
-    console.log('checked');
     return prisma.category.findUnique({
         where: {
             name: category

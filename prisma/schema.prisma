@@ -133,5 +133,5 @@ type ProductColor {
 model Color {
   id           String @id @default(auto()) @map("_id") @db.ObjectId
   name         String
-  hexColorCode String
+  hexColorCode String @unique
 }
