@@ -18,6 +18,7 @@ export default function SearchOptions({colors}: {
 
     const createQueryString = (name: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString());
+        params.delete('page');
         if (params.get(name))
             params.set((name), params.get(name) + ',' + value);
         else
