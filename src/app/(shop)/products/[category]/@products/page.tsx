@@ -2,12 +2,21 @@ import CategoryScroll from "./CategoryScroll";
 import {prisma} from "@/libs/prisma";
 import Category from "@/app/(shop)/products/[category]/@products/Category";
 
-async function getCategoryProducts(categoryName: string, page: number) {
+async function getCategoryProducts(categoryName: string, page: number, colors: string[]) {
     return prisma.category.findUnique({
         where: {
             name: categoryName
         }, select: {
             products: {
+                where: {
+                    AND: colors.map(color => ({
+                        colors: {
+                            some: {
+                                name: color
+                            }
+                        }
+                    }))
+                },
                 select: {
                     images: true,
                     category: true,
@@ -27,12 +36,12 @@ async function getCategoryProducts(categoryName: string, page: number) {
 
 export default async function ProductsSection({params, searchParams}: {
     params: { category: string, page?: string },
-    searchParams: { page?: string }
+    searchParams: { page?: string, color?: string }
 }) {
     const products = await getCategoryProducts(params.category,
-        searchParams !== undefined && searchParams.page !== undefined ? parseInt(searchParams.page) : 1);
+        searchParams !== undefined && searchParams.page !== undefined ? parseInt(searchParams.page) : 1, !searchParams.color ? [] : searchParams.color.split(','));
 
-    if (!products) {
+    if (!products || !products.products.length) {
         return <div>NO PRODUCTS WERE FOUND.</div>;
     }
 

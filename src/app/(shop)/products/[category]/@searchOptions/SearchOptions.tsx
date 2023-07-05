@@ -11,10 +11,10 @@ export default function SearchOptions({colors}: {
     const router = useRouter();
     let selectedColors: any[];
 
-    if (!searchParams.get('colors'))
+    if (!searchParams.get('color'))
         selectedColors = [];
     else {
-        selectedColors = searchParams.get('colors')!.split(',');
+        selectedColors = searchParams.get('color')!.split(',');
     }
 
     const createQueryString = useCallback((name: string, value: string) => {
@@ -41,13 +41,13 @@ export default function SearchOptions({colors}: {
                             whileTap={{scale: 0.9}}
                             animate={{
                                 scale: 1,
-                                border: selectedColors.includes(color.hexColorCode) ? '3px solid white' : '0px solid white'
+                                border: selectedColors.includes(color.name) ? '3px solid white' : '0px solid white'
                             }}
                             transition={{duration: 0.2, ease: 'easeIn'}}
-                            onClick={() => router.replace('?' + createQueryString('color', color.hexColorCode))}
+                            onClick={() => router.replace('?' + createQueryString('color', color.name))}
                             style={{background: '#' + color.hexColorCode}}
-                            className={`${selectedColors.includes(color.hexColorCode) ?
-                                'ring-2 ring-[#222222]' : ''} ${color.hexColorCode === 'FFFFFF' && !selectedColors.includes(color.hexColorCode) ? 'ring-1 ring-gray-400' : ''} rounded-full cursor-pointer h-5 w-5`}
+                            className={`${selectedColors.includes(color.name) ?
+                                'ring-2 ring-[#222222]' : ''} ${color.hexColorCode === 'FFFFFF' && !selectedColors.includes(color.name) ? 'ring-1 ring-gray-400' : ''} rounded-full cursor-pointer h-5 w-5`}
                             key={color.hexColorCode}/>
                         {color.name}
                     </div>)}
