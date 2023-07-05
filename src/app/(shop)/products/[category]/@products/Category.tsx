@@ -34,7 +34,7 @@ export default function Category({products}: {
                 <button disabled={currentPage === 0}
                         onClick={() => {
                             scrollTo(0, 0);
-                            router.push(`?page=${currentPage - 1}`, {scroll: false});
+                            router.replace(`?page=${currentPage - 1}`, {scroll: false});
                         }}
                         className=' font-medium text-sm text-[#222222] flex items-center
                 gap-x-2'>
@@ -46,7 +46,7 @@ export default function Category({products}: {
                             disabled={currentPage === num}
                             onClick={() => {
                                 scrollTo(0, 0);
-                                router.push(`?page=${num}`, {scroll: false})
+                                router.replace(`?page=${num}`, {scroll: false})
                             }}
                             className='text-center px-2 disabled:px-0'
                             key={num}>
@@ -57,7 +57,7 @@ export default function Category({products}: {
                 <button disabled={currentPage === Math.floor(products._count.products / 15)}
                         onClick={() => {
                             scrollTo(0, 0);
-                            router.push(`?page=${currentPage + 1}`, {scroll: false});
+                            router.replace(`?page=${currentPage + 1}`, {scroll: false});
                         }}
                         className='font-medium text-sm text-[#222222] flex gap-x-2 items-center'>
                     NEXT<ChevronRightIcon className='w-5 h-auto'/>
