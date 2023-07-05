@@ -23,7 +23,7 @@ export default function Category({products}: {
     const currentPage = parseInt(searchParams.get('page')!);
 
     return (
-        <div className='w-3/4'>
+        <div className='w-3/4 mt-20'>
             <div className='grid grid-cols-3 gap-7'>
                 {products.products.map(item =>
                     <CategoryItem key={item.id} imageLink={item.images[0]} category={item.category.name}
