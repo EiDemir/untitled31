@@ -32,9 +32,9 @@ export default function Category({products}: {
             </div>
             <motion.div className='flex justify-between py-5'>
                 <button disabled={currentPage === 1}
-                        className=' font-medium text-sm text-[#222222] flex items-center
-                gap-x-2'>
-                    <Link href={`?page=${currentPage - 1}`}>
+                        className=' font-medium text-sm text-[#222222]'>
+                    <Link href={`?page=${currentPage - 1}`} prefetch={false}
+                          className='flex gap-x-2 items-center'>
                         <ChevronLeftIcon className='w-5 h-auto'/>PREV
                     </Link>
                 </button>
@@ -44,15 +44,16 @@ export default function Category({products}: {
                             disabled={currentPage === num}
                             className='text-center px-2 disabled:px-0'
                             key={num}>
-                            <Link href={`?page=${num}`}>
+                            <Link href={`?page=${num}`} prefetch={false}>
                                 {num}
                                 {currentPage === num && <div className='h-0.5 bg-[#222222] w-6'/>}
                             </Link>
                         </button>)}
                 </div>
                 <button disabled={currentPage === Math.floor(products._count.products / 15)}
-                        className='font-medium text-sm text-[#222222] flex gap-x-2 items-center'>
-                    <Link href={`?page=${currentPage + 1}`}
+                        className='font-medium text-sm text-[#222222]'>
+                    <Link className='flex gap-x-2 items-center' href={`?page=${currentPage + 1}`}
+                          prefetch={false}
                     >NEXT<ChevronRightIcon className='w-5 h-auto'/>
                     </Link>
                 </button>
