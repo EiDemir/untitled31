@@ -31,6 +31,6 @@ export async function GET(request: Request, {params}: {
     });
 
     return NextResponse.json({
-        products: data!.products
+        products: data!.products,
     });
 }

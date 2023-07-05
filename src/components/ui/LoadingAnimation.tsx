@@ -27,13 +27,13 @@ export default function LoadingAnimation() {
                     style={{display: 'flex', columnGap: '4px'}}>
             <motion.span variants={dotVariants}
                          transition={{ease: 'easeInOut', duration: 0.5, repeatType: 'reverse', repeat: Infinity}}
-                         style={{width: '10px', height: '10px', background: '#222222', borderRadius: '50%'}}/>
+                         style={{width: '10px', height: '10px', background: '#E893CF', borderRadius: '50%'}}/>
             <motion.span variants={dotVariants}
                          transition={{ease: 'easeInOut', duration: 0.5, repeatType: 'reverse', repeat: Infinity}}
-                         style={{width: '10px', height: '10px', background: '#222222', borderRadius: '50%'}}/>
+                         style={{width: '10px', height: '10px', background: '#E893CF', borderRadius: '50%'}}/>
             <motion.span variants={dotVariants}
                          transition={{ease: 'easeInOut', duration: 0.5, repeatType: 'reverse', repeat: Infinity}}
-                         style={{width: '10px', height: '10px', background: '#222222', borderRadius: '50%'}}/>
+                         style={{width: '10px', height: '10px', background: '#E893CF', borderRadius: '50%'}}/>
         </motion.div>
     );
 }

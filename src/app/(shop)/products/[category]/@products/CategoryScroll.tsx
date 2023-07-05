@@ -6,7 +6,7 @@ import {motion} from "framer-motion";
 import axios from "axios";
 import LoadingAnimation from "@/components/ui/LoadingAnimation";
 
-export default function CategoryClient({initialProducts}: {
+export default function CategoryScroll({initialProducts}: {
     initialProducts: {
         images: string[],
         category: { id: string, name: string } & {},

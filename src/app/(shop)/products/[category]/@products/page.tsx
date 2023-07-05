@@ -1,5 +1,6 @@
-import CategoryClient from "./CategoryClient";
+import CategoryScroll from "./CategoryScroll";
 import {prisma} from "@/libs/prisma";
+import Category from "@/app/(shop)/products/[category]/@products/Category";
 
 async function getCategoryProducts(categoryName: string, page: number) {
     return prisma.category.findUnique({
@@ -14,7 +15,11 @@ async function getCategoryProducts(categoryName: string, page: number) {
                     price: true,
                     id: true
                 }, take: 15,
-                skip: (page - 1) * 15
+                skip: (page - 1) * 15,
+            }, _count: {
+                select: {
+                    products: true
+                }
             }
         }
     });
@@ -22,7 +27,7 @@ async function getCategoryProducts(categoryName: string, page: number) {
 
 export default async function ProductsSection({params, searchParams}: {
     params: { category: string, page?: string },
-    searchParams?: { page?: string }
+    searchParams: { page?: string }
 }) {
     const products = await getCategoryProducts(params.category,
         searchParams !== undefined && searchParams.page !== undefined ? parseInt(searchParams.page) : 1);
@@ -31,7 +36,10 @@ export default async function ProductsSection({params, searchParams}: {
         return <div>NO PRODUCTS WERE FOUND.</div>;
     }
 
+    if (searchParams.page)
+        return <Category products={products}/>
+
     return (
-        <CategoryClient initialProducts={products.products}/>
+        <CategoryScroll initialProducts={products.products}/>
     );
 }
