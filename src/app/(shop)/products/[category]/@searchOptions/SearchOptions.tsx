@@ -2,6 +2,7 @@
 
 import {motion} from "framer-motion";
 import {useRouter, useSearchParams} from "next/navigation";
+import {useCallback} from "react";
 
 export default function SearchOptions({colors}: {
     colors: ({ id: string, name: string, hexColorCode: string } & {})[]
@@ -16,17 +17,17 @@ export default function SearchOptions({colors}: {
         selectedColors = searchParams.get('colors')!.split(',');
     }
 
-    const createQueryString = (name: string, value: string) => {
+    const createQueryString = useCallback((name: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString());
         params.delete('page');
+        
         if (params.get(name))
             params.set((name), params.get(name) + ',' + value);
         else
             params.set(name, value);
 
-        console.log('kos');
         return params.toString();
-    }
+    }, [searchParams])
 
     return (
         <div className='w-1/4 sticky top-5'>
