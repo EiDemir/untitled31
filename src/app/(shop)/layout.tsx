@@ -9,7 +9,7 @@ export default async function ShopLayout({children}: { children: ReactNode }) {
             <header>
                 <Header startWithWhite={false}/>
             </header>
-            <main className='mt-14'>
+            <main className='pt-14'>
                 {children}
             </main>
             <footer>
