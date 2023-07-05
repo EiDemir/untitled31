@@ -3,8 +3,9 @@
 import CategoryItem from "@/components/product/CategoryItem";
 import {motion} from "framer-motion";
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/solid";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useSearchParams} from "next/navigation";
 import _ from 'lodash';
+import Link from "next/link";
 
 export default function Category({products}: {
     products: {
@@ -19,7 +20,6 @@ export default function Category({products}: {
     }
 }) {
     const searchParams = useSearchParams();
-    const router = useRouter();
     const currentPage = parseInt(searchParams.get('page')!);
 
     return (
@@ -32,32 +32,29 @@ export default function Category({products}: {
             </div>
             <motion.div className='flex justify-between py-5'>
                 <button disabled={currentPage === 1}
-                        onClick={() => {
-                            router.replace(`?page=${currentPage - 1}`);
-                        }}
                         className=' font-medium text-sm text-[#222222] flex items-center
                 gap-x-2'>
-                    <ChevronLeftIcon className='w-5 h-auto'/>PREV
+                    <Link href={`?page=${currentPage - 1}`}>
+                        <ChevronLeftIcon className='w-5 h-auto'/>PREV
+                    </Link>
                 </button>
                 <div className='font-medium flex gap-x-2'>
                     {_.range(1, products._count.products / 15)
                         .map(num => <button
                             disabled={currentPage === num}
-                            onClick={() => {
-                                router.replace(`?page=${num}`)
-                            }}
                             className='text-center px-2 disabled:px-0'
                             key={num}>
-                            {num}
-                            {currentPage === num && <div className='h-0.5 bg-[#222222] w-6'/>}
+                            <Link href={`?page=${num}`}>
+                                {num}
+                                {currentPage === num && <div className='h-0.5 bg-[#222222] w-6'/>}
+                            </Link>
                         </button>)}
                 </div>
                 <button disabled={currentPage === Math.floor(products._count.products / 15)}
-                        onClick={() => {
-                            router.replace(`?page=${currentPage + 1}`);
-                        }}
                         className='font-medium text-sm text-[#222222] flex gap-x-2 items-center'>
-                    NEXT<ChevronRightIcon className='w-5 h-auto'/>
+                    <Link href={`?page=${currentPage + 1}`}
+                    >NEXT<ChevronRightIcon className='w-5 h-auto'/>
+                    </Link>
                 </button>
             </motion.div>
         </div>
