@@ -5,7 +5,6 @@ import {motion} from "framer-motion";
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/solid";
 import {useRouter, useSearchParams} from "next/navigation";
 import _ from 'lodash';
-import Link from "next/link";
 
 export default function Category({products}: {
     products: {
@@ -32,7 +31,7 @@ export default function Category({products}: {
                                   price={item.price} id={item.id}/>)}
             </div>
             <motion.div className='flex justify-between py-5'>
-                <button disabled={currentPage === 0}
+                <button disabled={currentPage === 1}
                         onClick={() => {
                             scrollTo(0, 0);
                             router.replace(`?page=${currentPage - 1}`, {scroll: false});
@@ -54,7 +53,6 @@ export default function Category({products}: {
                             {num}
                             {currentPage === num && <div className='h-0.5 bg-[#222222] w-6'/>}
                         </button>)}
-                    <Link href='?page=2'>test</Link>
                 </div>
                 <button disabled={currentPage === Math.floor(products._count.products / 15)}
                         onClick={() => {
