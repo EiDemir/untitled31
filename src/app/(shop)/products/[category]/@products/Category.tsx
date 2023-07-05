@@ -33,8 +33,8 @@ export default function Category({products}: {
             <motion.div className='flex justify-between py-5'>
                 <button disabled={currentPage === 1}
                         onClick={() => {
-                            // scrollTo(0, 0);
-                            router.replace(`?page=${currentPage - 1}`);
+                            scrollTo(0, 0);
+                            router.replace(`?page=${currentPage - 1}`, {scroll: false});
                         }}
                         className=' font-medium text-sm text-[#222222] flex items-center
                 gap-x-2'>
@@ -45,8 +45,8 @@ export default function Category({products}: {
                         .map(num => <button
                             disabled={currentPage === num}
                             onClick={() => {
-                                // scrollTo(0, 0);
-                                router.replace(`?page=${num}`)
+                                scrollTo(0, 0);
+                                router.replace(`?page=${num}`, {scroll: false})
                             }}
                             className='text-center px-2 disabled:px-0'
                             key={num}>
@@ -56,8 +56,8 @@ export default function Category({products}: {
                 </div>
                 <button disabled={currentPage === Math.floor(products._count.products / 15)}
                         onClick={() => {
-                            // scrollTo(0, 0);
-                            router.replace(`?page=${currentPage + 1}`);
+                            scrollTo(0, 0);
+                            router.replace(`?page=${currentPage + 1}`, {scroll:false});
                         }}
                         className='font-medium text-sm text-[#222222] flex gap-x-2 items-center'>
                     NEXT<ChevronRightIcon className='w-5 h-auto'/>
