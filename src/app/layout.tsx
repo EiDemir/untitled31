@@ -11,7 +11,7 @@ const jost = Jost({subsets: ['latin']});
 export default function RootLayout({children}: { children: ReactNode }) {
     return (
         <html lang="en">
-        <body className={`${jost.className}`} style={{scrollBehavior: 'smooth'}}>
+        <body className={`${jost.className} scroll-smooth`}>
             <CartProvider>
                 <AuthProvider>
                     {children}
