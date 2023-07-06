@@ -1,3 +1,5 @@
+'use client';
+
 import _ from "lodash";
 import ProductItemLoading from "@/components/ui/loading/ProductItemLoading";
 

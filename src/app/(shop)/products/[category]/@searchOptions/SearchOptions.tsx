@@ -20,7 +20,7 @@ export default function SearchOptions({colors}: {
     const createQueryString = useCallback((name: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString());
         params.delete('page');
-        
+
         if (params.get(name))
             params.set((name), params.get(name) + ',' + value);
         else
@@ -44,7 +44,9 @@ export default function SearchOptions({colors}: {
                                 border: selectedColors.includes(color.name) ? '3px solid white' : '0px solid white'
                             }}
                             transition={{duration: 0.2, ease: 'easeIn'}}
-                            onClick={() => router.replace('?' + createQueryString('color', color.name))}
+                            onClick={() => {
+                                router.replace('?' + createQueryString('color', color.name));
+                            }}
                             style={{background: '#' + color.hexColorCode}}
                             className={`${selectedColors.includes(color.name) ?
                                 'ring-2 ring-[#222222]' : ''} ${color.hexColorCode === 'FFFFFF' && !selectedColors.includes(color.name) ? 'ring-1 ring-gray-400' : ''} rounded-full cursor-pointer h-5 w-5`}
