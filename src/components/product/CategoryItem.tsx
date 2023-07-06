@@ -29,7 +29,6 @@ export default function CategoryItem({imageLink, category, title, price, id}: {
 
     return (
         <motion.div
-            layout
             variants={variants}
             initial='initial'
             whileInView='visible'

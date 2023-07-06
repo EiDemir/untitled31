@@ -13,10 +13,10 @@ async function doesCategoryExists(category: string) {
     });
 }
 
-export default async function ProductsLayout({params, searchOptions, products}: {
+export default async function ProductsLayout({params, children, searchOptions}: {
     params: { category: string },
     searchOptions: ReactNode,
-    products: ReactNode
+    children: ReactNode
 }) {
     const doesExist = await doesCategoryExists(params.category);
 
@@ -28,7 +28,7 @@ export default async function ProductsLayout({params, searchOptions, products}: 
             <CategoryHeader category={params.category}/>
             <div className='flex gap-x-6 sm:mx-[5vw] lg:mx-[10vw]'>
                 {searchOptions}
-                {products}
+                {children}
             </div>
         </div>
     );

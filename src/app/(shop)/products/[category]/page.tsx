@@ -1,6 +1,6 @@
 import CategoryScroll from "./CategoryScroll";
 import {prisma} from "@/libs/prisma";
-import Category from "@/app/(shop)/products/[category]/@products/Category";
+import Category from "./Category";
 
 async function getCategoryProducts(categoryName: string, page: number, colors: string[]) {
     return prisma.category.findUnique({
