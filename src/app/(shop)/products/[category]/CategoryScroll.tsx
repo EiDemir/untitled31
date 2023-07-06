@@ -1,7 +1,7 @@
 'use client';
 
 import CategoryItem from "@/components/product/CategoryItem";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {motion} from "framer-motion";
 import axios from "axios";
 import LoadingAnimation from "@/components/ui/LoadingAnimation";
@@ -18,6 +18,10 @@ export default function CategoryScroll({initialProducts}: {
     const [products, setProducts] = useState(initialProducts);
     const [page, setPage] = useState(2);
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        setProducts(initialProducts);
+    }, [initialProducts]);
 
     const getProducts = () => {
         setIsLoading(true);
