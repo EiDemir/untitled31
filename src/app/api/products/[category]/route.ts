@@ -12,25 +12,49 @@ export async function GET(request: Request, {params}: {
     if (!take || !page || !params.category)
         return NextResponse.error();
 
+    const colors = url.searchParams.get('color') ? url.searchParams.get('color')!.split(',') : [];
+
     const data = await prisma.category.findUnique({
         where: {
             name: params.category
         }, select: {
             products: {
+                where: {
+                    AND: colors.map(color => ({
+                        colors: {
+                            some: {
+                                name: color
+                            }
+                        }
+                    })),
+                },
                 select: {
                     images: true,
                     category: true,
                     name: true,
                     price: true,
-                    id: true
-                },
-                take: 15,
-                skip: (parseInt(page) - 1) * parseInt(take)
+                    id: true,
+                }, take: 15,
+                skip: (parseInt(page) - 1) * 15,
+            }, _count: {
+                select: {
+                    products: {
+                        where: {
+                            AND: colors.map(color => ({
+                                colors: {
+                                    some: {
+                                        name: color
+                                    }
+                                }
+                            })),
+                        }
+                    }
+                }
             }
         }
     });
 
     return NextResponse.json({
-        products: data!.products,
+        products: data,
     });
 }

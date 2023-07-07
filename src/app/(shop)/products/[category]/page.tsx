@@ -15,19 +15,29 @@ async function getCategoryProducts(categoryName: string, page: number, colors: s
                                 name: color
                             }
                         }
-                    }))
+                    })),
                 },
                 select: {
                     images: true,
                     category: true,
                     name: true,
                     price: true,
-                    id: true
+                    id: true,
                 }, take: 15,
                 skip: (page - 1) * 15,
             }, _count: {
                 select: {
-                    products: true
+                    products: {
+                        where: {
+                            AND: colors.map(color => ({
+                                colors: {
+                                    some: {
+                                        name: color
+                                    }
+                                }
+                            })),
+                        }
+                    }
                 }
             }
         }
@@ -49,6 +59,6 @@ export default async function ProductsSection({params, searchParams}: {
         return <Category products={products}/>
 
     return (
-        <CategoryScroll initialProducts={products.products}/>
+        <CategoryScroll initialProducts={products}/>
     );
 }

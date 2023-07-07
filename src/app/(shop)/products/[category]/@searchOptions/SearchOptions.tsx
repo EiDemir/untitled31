@@ -3,6 +3,8 @@
 import {motion} from "framer-motion";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useCallback} from "react";
+import _ from 'lodash';
+import {ChevronDownIcon, ChevronUpIcon} from "@heroicons/react/24/solid";
 
 export default function SearchOptions({colors}: {
     colors: ({ id: string, name: string, hexColorCode: string } & {})[]
@@ -20,9 +22,16 @@ export default function SearchOptions({colors}: {
     const createQueryString = useCallback((name: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString());
         params.delete('page');
+        const colors = params.get(name);
 
-        if (params.get(name))
-            params.set((name), params.get(name) + ',' + value);
+        if (colors)
+            if (colors.split(',').includes(value))
+                if (colors.split(',').length === 1)
+                    params.delete(name);
+                else
+                    params.set(name, _.without(colors.split(','), value).join(','));
+            else
+                params.set(name, params.get(name) + ',' + value);
         else
             params.set(name, value);
 
@@ -31,17 +40,17 @@ export default function SearchOptions({colors}: {
 
     return (
         <div className='w-1/4 sticky top-5'>
-            <h1>PRODUCT CATEGORIES</h1>
-            <div>
-                <h1>COLORS</h1>
-                <div className='grid grid-cols-2'>
+            <div className='text-lg font-medium flex items-center justify-between'>PRODUCT CATEGORIES<ChevronDownIcon className='w-6 h-auto text-[#222222]'/></div>
+            <div className='flex flex-col gap-y-3 my-3'>
+                <div className='text-lg font-medium flex items-center justify-between'>COLORS<ChevronUpIcon className='w-6 h-auto text-[#222222]'/></div>
+                <div className='grid grid-cols-2 gap-y-3'>
                     {colors.map(color => <div className='flex gap-x-3 items-center bg-' key={color.name}>
                         <motion.span
                             initial={false}
                             whileTap={{scale: 0.9}}
                             animate={{
                                 scale: 1,
-                                border: selectedColors.includes(color.name) ? '3px solid white' : '0px solid white'
+                                border: selectedColors.includes(color.name) ? '4px solid white' : '0px solid white'
                             }}
                             transition={{duration: 0.2, ease: 'easeIn'}}
                             onClick={() => {
@@ -49,7 +58,7 @@ export default function SearchOptions({colors}: {
                             }}
                             style={{background: '#' + color.hexColorCode}}
                             className={`${selectedColors.includes(color.name) ?
-                                'ring-2 ring-[#222222]' : ''} ${color.hexColorCode === 'FFFFFF' && !selectedColors.includes(color.name) ? 'ring-1 ring-gray-400' : ''} rounded-full cursor-pointer h-5 w-5`}
+                                'ring-2 ring-[#222222]' : ''} ${color.hexColorCode === 'FFFFFF' && !selectedColors.includes(color.name) ? 'ring-1 ring-gray-400' : ''} rounded-full cursor-pointer h-8 w-8`}
                             key={color.hexColorCode}/>
                         {color.name}
                     </div>)}

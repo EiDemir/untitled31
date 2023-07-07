@@ -21,6 +21,8 @@ export default function Category({products}: {
 }) {
     const searchParams = useSearchParams();
     const currentPage = parseInt(searchParams.get('page')!);
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('page');
 
     return (
         <div className='w-3/4'>
@@ -32,27 +34,31 @@ export default function Category({products}: {
             </div>
             <motion.div className='flex justify-between py-5'>
                 <button disabled={currentPage === 1}
-                        className=' font-medium text-sm text-[#222222]'>
-                    <Link href={`?page=${currentPage - 1}`} prefetch={false}
-                          className='flex gap-x-2 items-center'>
+                        className='disabled:pointer-events-none font-medium text-sm text-[#222222]'>
+                    <Link
+                        href={`?${params.toString().length > 0 ? params.toString() + '&' : ''}page=${currentPage - 1}`}
+                        prefetch={false}
+                        className='flex gap-x-2 items-center'>
                         <ChevronLeftIcon className='w-5 h-auto'/>PREV
                     </Link>
                 </button>
                 <div className='font-medium flex gap-x-2'>
-                    {_.range(1, products._count.products / 15)
+                    {_.range(1, Math.floor(products._count.products / 15) + 2)
                         .map(num => <button
                             disabled={currentPage === num}
-                            className='text-center px-2 disabled:px-0'
+                            className=' text-center px-2 disabled:px-0'
                             key={num}>
-                            <Link href={`?page=${num}`} prefetch={false}>
+                            <Link href={`?${params.toString().length > 0 ? params.toString() + '&' : ''}page=${num}`}
+                                  prefetch={false}>
                                 {num}
                                 {currentPage === num && <div className='h-0.5 bg-[#222222] w-6'/>}
                             </Link>
                         </button>)}
                 </div>
-                <button disabled={currentPage === Math.floor(products._count.products / 15)}
-                        className='font-medium text-sm text-[#222222]'>
-                    <Link className='flex gap-x-2 items-center' href={`?page=${currentPage + 1}`}
+                <button disabled={currentPage === (Math.floor(products._count.products / 15) + 1)}
+                        className='disabled:pointer-events-none font-medium text-sm text-[#222222]'>
+                    <Link className='flex gap-x-2 items-center'
+                          href={`?${params.toString().length > 0 ? params.toString() + '&' : ''}page=${currentPage + 1}`}
                           prefetch={false}
                     >NEXT<ChevronRightIcon className='w-5 h-auto'/>
                     </Link>
