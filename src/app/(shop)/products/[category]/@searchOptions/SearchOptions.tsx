@@ -44,7 +44,7 @@ export default function SearchOptions({colors}: {
         <div className='w-1/5 sticky top-5'>
             <motion.div layout='position'
                         className='min-h-[40px] relative rounded-t-[19.8px] my-3 flex flex-col gap-y-1.5 drop-shadow-sm overflow-hidden'>
-                <div onClick={() => setIsOpen(prevState => [!prevState[0], prevState[1]])}
+                <div onClick={() => setIsOpen(prevState => [!prevState[0], prevState[1], prevState[2]])}
                      className='z-10 cursor-pointer search-option-header'>PRODUCT CATEGORIES
                     <motion.span animate={{
                         rotate: isOpen[0] ? 180 : 0
@@ -60,7 +60,7 @@ export default function SearchOptions({colors}: {
             </motion.div>
             <motion.div layout='position'
                         className='min-h-[40px] relative rounded-t-[19.8px] my-3 flex flex-col gap-y-1.5 drop-shadow-sm overflow-hidden'>
-                <div onClick={() => setIsOpen(prevState => [prevState[0], !prevState[1]])}
+                <div onClick={() => setIsOpen(prevState => [prevState[0], !prevState[1], prevState[2]])}
                      className='z-10 cursor-pointer search-option-header'>COLORS
                     <motion.span animate={{
                         rotate: isOpen[1] ? 180 : 0
