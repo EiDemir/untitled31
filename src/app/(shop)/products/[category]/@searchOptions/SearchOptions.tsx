@@ -41,30 +41,29 @@ export default function SearchOptions({colors}: {
     }, [searchParams])
 
     return (
-        <div className='w-1/5 sticky top-5'>
-            <motion.div layout='position'
-                        className='min-h-[40px] relative rounded-t-[19.8px] my-3 flex flex-col gap-y-1.5 drop-shadow-sm overflow-hidden'>
+        <div className='w-1/5 sticky top-20 h-max'>
+            <div className='drop-shadow-sm overflow-hidden'>
                 <div onClick={() => setIsOpen(prevState => [!prevState[0], prevState[1], prevState[2]])}
-                     className='z-10 cursor-pointer search-option-header'>PRODUCT CATEGORIES
+                     className='z-10 cursor-pointer search-option-header mb-2'>PRODUCT CATEGORIES
                     <motion.span animate={{
                         rotate: isOpen[0] ? 180 : 0
-                    }}><ChevronDownIcon
+                    }} transition={{duration: isOpen[0] ? 0.5 : 0.3}}><ChevronDownIcon
                         className='chevron'/></motion.span>
                 </div>
                 <AnimatePresence>
                     {isOpen[0] ? <SearchOptionBody className='z-0 search-option-body' key='category'>
                         <>
+                            <h1 className='text-black pt-10'>KOSKESH</h1>
                         </>
                     </SearchOptionBody> : null}
                 </AnimatePresence>
-            </motion.div>
-            <motion.div layout='position'
-                        className='min-h-[40px] relative rounded-t-[19.8px] my-3 flex flex-col gap-y-1.5 drop-shadow-sm overflow-hidden'>
+            </div>
+            <div className='drop-shadow-sm overflow-hidden'>
                 <div onClick={() => setIsOpen(prevState => [prevState[0], !prevState[1], prevState[2]])}
-                     className='z-10 cursor-pointer search-option-header'>COLORS
+                     className='z-10 cursor-pointer search-option-header my-2'>COLORS
                     <motion.span animate={{
                         rotate: isOpen[1] ? 180 : 0
-                    }}><ChevronDownIcon
+                    }} transition={{duration: isOpen[1] ? 0.5 : 0.3}}><ChevronDownIcon
                         className='chevron'/></motion.span>
                 </div>
                 <AnimatePresence>
@@ -90,23 +89,23 @@ export default function SearchOptions({colors}: {
                         </div>)}
                     </SearchOptionBody> : null}
                 </AnimatePresence>
-            </motion.div>
-            <motion.div layout='position'
-                        className='min-h-[40px] relative rounded-t-[19.8px] my-3 flex flex-col gap-y-1.5 drop-shadow-sm overflow-hidden'>
+            </div>
+            <div className='drop-shadow-sm overflow-hidden'>
                 <div onClick={() => setIsOpen(prevState => [prevState[0], prevState[1], !prevState[2]])}
-                     className='z-10 cursor-pointer search-option-header'>SIZES
+                     className='z-10 cursor-pointer search-option-header mt-2'>SIZES
                     <motion.span animate={{
                         rotate: isOpen[2] ? 180 : 0
-                    }}><ChevronDownIcon
+                    }} transition={{duration: isOpen[2] ? 0.5 : 0.3}}><ChevronDownIcon
                         className='chevron'/></motion.span>
                 </div>
                 <AnimatePresence>
                     {isOpen[2] ? <SearchOptionBody className='z-0 search-option-body' key='category'>
                         <>
+                            <h1 className='text-black pt-10'>KOSKESH</h1>
                         </>
                     </SearchOptionBody> : null}
                 </AnimatePresence>
-            </motion.div>
+            </div>
         </div>
     );
 }

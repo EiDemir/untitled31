@@ -64,7 +64,6 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
         }).catch().finally();
     };
 
-    // @ts-ignore
     return (
         <div>
             <div className='text-[#222222] w-full mb-3'><p className='text-xl align-text-top font-medium'>Reviews</p>
