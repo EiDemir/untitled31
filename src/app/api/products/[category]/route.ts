@@ -34,8 +34,8 @@ export async function GET(request: Request, {params}: {
                     name: true,
                     price: true,
                     id: true,
-                }, take: 15,
-                skip: (parseInt(page) - 1) * 15,
+                }, take: parseInt(take),
+                skip: (parseInt(page) - 1) * parseInt(take),
             }, _count: {
                 select: {
                     products: {

@@ -82,5 +82,17 @@ textarea::-webkit-scrollbar {
 }
 
 .toast {
-    @apply tracking-wide rounded-full flex py-4 pr-1 items-center justify-center gap-x-3 backdrop-blur-md text-white
+    @apply tracking-wide rounded-full flex py-4 pr-1 items-center justify-center gap-x-3 backdrop-blur-md text-white;
+}
+
+.search-option-header {
+    @apply absolute w-full rounded-3xl bg-[#222222] tracking-wide text-white px-4 py-2 font-medium flex items-center justify-between;
+}
+
+.search-option-body {
+    @apply grid grid-cols-4 pt-14 pb-4 gap-y-4 ring-inset rounded-2xl border border-[#222222];
+}
+
+.chevron {
+    @apply w-6 h-auto text-white;
 }

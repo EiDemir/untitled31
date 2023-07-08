@@ -23,8 +23,8 @@ async function getCategoryProducts(categoryName: string, page: number, colors: s
                     name: true,
                     price: true,
                     id: true,
-                }, take: 15,
-                skip: (page - 1) * 15,
+                }, take: 24,
+                skip: (page - 1) * 24,
             }, _count: {
                 select: {
                     products: {

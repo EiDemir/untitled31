@@ -31,7 +31,7 @@ export default function CategoryScroll({initialProducts}: {
 
     const getProducts = () => {
         setIsLoading(true);
-        axios.get(`/api/products/${products[0].category.name}?take=15&page=${page + 1}${searchParams.get('color') ? `&color=${searchParams.get('color')}` : ''}`).then((res) => {
+        axios.get(`/api/products/${products[0].category.name}?take=24&page=${page + 1}${searchParams.get('color') ? `&color=${searchParams.get('color')}` : ''}`).then((res) => {
             setProducts(prevState => [...prevState, ...res.data.products.products]);
             setIsLoading(false);
             setPage(prevState => prevState + 1);
@@ -39,8 +39,8 @@ export default function CategoryScroll({initialProducts}: {
     };
 
     return (
-        <div className='w-3/4'>
-            <div className='grid grid-cols-3 gap-7'>
+        <div className='w-4/5'>
+            <div className='grid grid-cols-4 gap-5'>
                 {products.map((item) =>
                     <CategoryItem key={item.id} imageLink={item.images[0]} category={item.category.name}
                                   title={item.name}

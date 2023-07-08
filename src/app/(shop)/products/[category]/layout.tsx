@@ -26,7 +26,7 @@ export default async function ProductsLayout({params, children, searchOptions}: 
     return (
         <div className='my-3 gap-y-7 flex flex-col relative'>
             <CategoryHeader category={params.category}/>
-            <div className='flex gap-x-6 sm:mx-[5vw] lg:mx-[10vw]'>
+            <div className='flex gap-x-6 mx-[3.6vw] sm:mx-[5vw] md:mx-[60px]'>
                 {searchOptions}
                 {children}
             </div>

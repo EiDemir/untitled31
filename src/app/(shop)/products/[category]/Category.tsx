@@ -25,8 +25,8 @@ export default function Category({products}: {
     params.delete('page');
 
     return (
-        <div className='w-3/4'>
-            <div className='grid grid-cols-3 gap-7'>
+        <div className='w-4/5'>
+            <div className='grid grid-cols-4 gap-7'>
                 {products.products.map(item =>
                     <CategoryItem key={item.id} imageLink={item.images[0]} category={item.category.name}
                                   title={item.name}
@@ -46,7 +46,7 @@ export default function Category({products}: {
                     {_.range(1, Math.floor(products._count.products / 15) + 2)
                         .map(num => <button
                             disabled={currentPage === num}
-                            className=' text-center px-2 disabled:px-0'
+                            className='text-center px-2 disabled:px-0'
                             key={num}>
                             <Link href={`?${params.toString().length > 0 ? params.toString() + '&' : ''}page=${num}`}
                                   prefetch={false}>
