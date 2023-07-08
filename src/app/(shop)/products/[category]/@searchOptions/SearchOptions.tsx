@@ -101,7 +101,7 @@ export default function SearchOptions({colors}: {
                         className='chevron'/></motion.span>
                 </div>
                 <AnimatePresence>
-                    {isOpen[0] ? <SearchOptionBody className='z-0 search-option-body' key='category'>
+                    {isOpen[2] ? <SearchOptionBody className='z-0 search-option-body' key='category'>
                         <>
                         </>
                     </SearchOptionBody> : null}
