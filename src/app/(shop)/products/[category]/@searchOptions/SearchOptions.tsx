@@ -4,7 +4,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useCallback, useState} from "react";
 import _ from 'lodash';
-import {ChevronUpIcon} from "@heroicons/react/24/solid";
+import {ChevronDownIcon} from "@heroicons/react/24/solid";
 import SearchOptionBody from "@/app/(shop)/products/[category]/@searchOptions/SearchOptionBody";
 
 export default function SearchOptions({colors}: {
@@ -12,7 +12,7 @@ export default function SearchOptions({colors}: {
 }) {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [isOpen, setIsOpen] = useState([false, false]);
+    const [isOpen, setIsOpen] = useState([false, false, false]);
     let selectedColors: any[];
 
     if (!searchParams.get('color'))
@@ -47,8 +47,8 @@ export default function SearchOptions({colors}: {
                 <div onClick={() => setIsOpen(prevState => [!prevState[0], prevState[1]])}
                      className='z-10 cursor-pointer search-option-header'>PRODUCT CATEGORIES
                     <motion.span animate={{
-                        rotate: isOpen[0] ? 0 : 180
-                    }}><ChevronUpIcon
+                        rotate: isOpen[0] ? 180 : 0
+                    }}><ChevronDownIcon
                         className='chevron'/></motion.span>
                 </div>
                 <AnimatePresence>
@@ -63,8 +63,8 @@ export default function SearchOptions({colors}: {
                 <div onClick={() => setIsOpen(prevState => [prevState[0], !prevState[1]])}
                      className='z-10 cursor-pointer search-option-header'>COLORS
                     <motion.span animate={{
-                        rotate: isOpen[1] ? 0 : 180
-                    }}><ChevronUpIcon
+                        rotate: isOpen[1] ? 180 : 0
+                    }}><ChevronDownIcon
                         className='chevron'/></motion.span>
                 </div>
                 <AnimatePresence>
@@ -93,11 +93,11 @@ export default function SearchOptions({colors}: {
             </motion.div>
             <motion.div layout='position'
                         className='min-h-[40px] relative rounded-t-[19.8px] my-3 flex flex-col gap-y-1.5 drop-shadow-sm overflow-hidden'>
-                <div onClick={() => setIsOpen(prevState => [!prevState[0], prevState[1]])}
+                <div onClick={() => setIsOpen(prevState => [prevState[0], prevState[1], !prevState[2]])}
                      className='z-10 cursor-pointer search-option-header'>SIZES
                     <motion.span animate={{
-                        rotate: isOpen[0] ? 0 : 180
-                    }}><ChevronUpIcon
+                        rotate: isOpen[2] ? 180 : 0
+                    }}><ChevronDownIcon
                         className='chevron'/></motion.span>
                 </div>
                 <AnimatePresence>
