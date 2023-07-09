@@ -135,3 +135,8 @@ model Color {
   name         String @unique
   hexColorCode String @unique
 }
+
+model Size {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  size String @unique
+}

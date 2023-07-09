@@ -86,11 +86,11 @@ textarea::-webkit-scrollbar {
 }
 
 .search-option-header {
-    @apply w-full rounded-3xl bg-[#222222] tracking-wide text-white px-4 py-2 font-medium flex items-center justify-between;
+    @apply w-full rounded-xl bg-[#222222] tracking-wide text-white px-3 py-2 font-medium flex items-center justify-between;
 }
 
 .search-option-body {
-    @apply grid grid-cols-4 gap-y-4 ring-inset rounded-2xl;
+    @apply grid grid-cols-4 gap-y-4 rounded-2xl;
 }
 
 .chevron {
