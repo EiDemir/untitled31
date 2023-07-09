@@ -1,8 +1,8 @@
 'use client';
 
-import {AnimatePresence, motion} from "framer-motion";
+import {AnimatePresence, motion, useMotionTemplate, useMotionValue} from "framer-motion";
 import {useRouter, useSearchParams} from "next/navigation";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import _ from 'lodash';
 import {ChevronDownIcon} from "@heroicons/react/24/solid";
 import SearchOptionBody from "@/app/(shop)/products/[category]/@searchOptions/SearchOptionBody";
@@ -13,9 +13,17 @@ export default function SearchOptions({colors, sizes}: {
 }) {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [isOpen, setIsOpen] = useState([false, false, false]);
+    const x = useMotionValue(0);
+    const x2 = useMotionValue(0);
+    const width = useMotionTemplate`${x} ${x2}`;
+    const ref = useRef<HTMLDivElement>(null);
+    const [isOpen, setIsOpen] = useState([false, false, false, false]);
     let selectedColors: any[];
     let selectedSizes: any[];
+
+    useEffect(() => {
+        console.log(width);
+    }, [width])
 
     if (!searchParams.get('color'))
         selectedColors = [];
@@ -51,8 +59,9 @@ export default function SearchOptions({colors, sizes}: {
     return (
         <div className='w-1/5 sticky top-20 h-max'>
             <div className='drop-shadow-sm overflow-hidden'>
-                <div onClick={() => setIsOpen(prevState => [!prevState[0], prevState[1], prevState[2]])}
-                     className='z-10 cursor-pointer search-option-header mb-2'>PRODUCT CATEGORIES
+                <div
+                    onClick={() => setIsOpen(prevState => prevState.map((value, index) => index === 0 ? !value : value))}
+                    className='z-10 cursor-pointer search-option-header mb-2.5'>PRODUCT CATEGORIES
                     <motion.span animate={{
                         rotate: isOpen[0] ? 180 : 0
                     }} transition={{duration: isOpen[0] ? 0.5 : 0.3}}><ChevronDownIcon
@@ -67,15 +76,16 @@ export default function SearchOptions({colors, sizes}: {
                 </AnimatePresence>
             </div>
             <div className='drop-shadow-sm overflow-hidden'>
-                <div onClick={() => setIsOpen(prevState => [prevState[0], !prevState[1], prevState[2]])}
-                     className='z-10 cursor-pointer search-option-header my-2'>COLORS
+                <div
+                    onClick={() => setIsOpen(prevState => prevState.map((value, index) => index === 1 ? !value : value))}
+                    className='z-10 cursor-pointer search-option-header my-2.5'>COLORS
                     <motion.span animate={{
                         rotate: isOpen[1] ? 180 : 0
                     }} transition={{duration: isOpen[1] ? 0.5 : 0.3}}><ChevronDownIcon
                         className='chevron'/></motion.span>
                 </div>
                 <AnimatePresence>
-                    {isOpen[1] ? <SearchOptionBody className='search-option-body' key='color'>
+                    {isOpen[1] ? <SearchOptionBody className='search-option-body grid grid-cols-4 gap-y-4' key='color'>
                         {colors.map(color => <div className='capitalize flex flex-col gap-y-2 items-center'
                                                   key={color.name}>
                             <motion.span
@@ -98,15 +108,17 @@ export default function SearchOptions({colors, sizes}: {
                 </AnimatePresence>
             </div>
             <div className='drop-shadow-sm overflow-hidden'>
-                <div onClick={() => setIsOpen(prevState => [prevState[0], prevState[1], !prevState[2]])}
-                     className='z-10 cursor-pointer search-option-header my-2'>SIZES
+                <div
+                    onClick={() => setIsOpen(prevState => prevState.map((value, index) => index === 2 ? !value : value))}
+                    className='z-10 cursor-pointer search-option-header my-2.5'>SIZES
                     <motion.span animate={{
                         rotate: isOpen[2] ? 180 : 0
                     }} transition={{duration: isOpen[2] ? 0.5 : 0.3}}><ChevronDownIcon
                         className='chevron'/></motion.span>
                 </div>
                 <AnimatePresence>
-                    {isOpen[2] ? <SearchOptionBody className='search-option-body' key='size'>
+                    {isOpen[2] ? <SearchOptionBody className='search-option-body grid grid-cols-4 gap-y-3 gap-x-2 px-2'
+                                                   key='size'>
                         {sizes.map(item => <motion.span
                             whileTap={{scale: 0.9}}
                             transition={{duration: 0.2, ease: 'easeIn'}}
@@ -114,8 +126,41 @@ export default function SearchOptions({colors, sizes}: {
                                 router.replace('?' + createQueryString('size', _.toUpper(item.size)));
                             }}
                             className={`${selectedSizes.includes(_.toUpper(item.size)) ?
-                                'ring-[#222222] ring-2' : 'ring-[#E4E4E4] ring-1'} uppercase ring-inset rounded-full bg-transparent transition-colors cursor-pointer py-1.5 w-14 text-center`}
+                                'ring-[#222222] ring-2' : 'ring-[#E4E4E4] ring-1'} uppercase ring-inset rounded-full bg-transparent transition-colors cursor-pointer py-1.5 text-center`}
                             key={item.size}>{item.size}</motion.span>)}
+                    </SearchOptionBody> : null}
+                </AnimatePresence>
+            </div>
+            <div className='drop-shadow-sm overflow-hidden'>
+                <div
+                    onClick={() => setIsOpen(prevState => prevState.map((value, index) => index === 3 ? !value : value))}
+                    className='z-10 cursor-pointer search-option-header mt-2.5 mb-4'>PRICE
+                    <motion.span animate={{
+                        rotate: isOpen[3] ? 180 : 0
+                    }} transition={{duration: isOpen[3] ? 0.5 : 0.3}}><ChevronDownIcon
+                        className='chevron'/></motion.span>
+                </div>
+                <AnimatePresence>
+                    {isOpen[3] ? <SearchOptionBody className='relative search-option-body mx-2 py-4'
+                                                   key='size'>
+                        <div ref={ref} className='absolute h-1.5 w-full bg-[#E4E4E4] rounded-full'/>
+                        <motion.div className='absolute h-1.5 bg-[#222222] rounded-full'/>
+                        <motion.div drag='x'
+                                    style={{x}}
+                                    dragConstraints={ref}
+                                    dragElastic={0}
+                                    transition={{
+                                        bounce: 0
+                                    }}
+                                    className='absolute top-2.5 bg-white w-[18px] h-[18px] rounded-full ring-2 ring-[#222222] ring-inset'/>
+                        <motion.div drag='x'
+                                    style={{x: x2}}
+                                    dragConstraints={ref}
+                                    dragElastic={0}
+                                    transition={{
+                                        bounce: 0
+                                    }}
+                                    className='absolute top-2.5 right-1/2 bg-blue-500 w-[18px] h-[18px] rounded-full ring-2 ring-[#222222] ring-inset'/>
                     </SearchOptionBody> : null}
                 </AnimatePresence>
             </div>
