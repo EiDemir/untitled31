@@ -1,21 +1,28 @@
 import CategoryScroll from "./CategoryScroll";
 import {prisma} from "@/libs/prisma";
 import Category from "./Category";
+import _ from 'lodash';
 
-async function getCategoryProducts(categoryName: string, page: number, colors: string[]) {
+async function getCategoryProducts(categoryName: string, page: number, colors: string[], sizes: string[]) {
     return prisma.category.findUnique({
         where: {
             name: categoryName
         }, select: {
             products: {
                 where: {
-                    AND: colors.map(color => ({
-                        colors: {
-                            some: {
-                                name: color
+                    AND: [
+                        {
+                            sizes: {
+                                hasEvery: sizes.map(item => _.toLower(item))
                             }
-                        }
-                    })),
+                        }, ...colors.map(color => ({
+                            colors: {
+                                some: {
+                                    name: color
+                                }
+                            }
+                        }))
+                    ]
                 },
                 select: {
                     images: true,
@@ -29,13 +36,19 @@ async function getCategoryProducts(categoryName: string, page: number, colors: s
                 select: {
                     products: {
                         where: {
-                            AND: colors.map(color => ({
-                                colors: {
-                                    some: {
-                                        name: color
+                            AND: [
+                                {
+                                    sizes: {
+                                        hasEvery: sizes.map(item => _.toLower(item))
                                     }
-                                }
-                            })),
+                                }, ...colors.map(color => ({
+                                    colors: {
+                                        some: {
+                                            name: color
+                                        }
+                                    }
+                                }))
+                            ]
                         }
                     }
                 }
@@ -46,10 +59,10 @@ async function getCategoryProducts(categoryName: string, page: number, colors: s
 
 export default async function ProductsSection({params, searchParams}: {
     params: { category: string, page?: string },
-    searchParams: { page?: string, color?: string }
+    searchParams: { page?: string, color?: string, size?: string }
 }) {
     const products = await getCategoryProducts(params.category,
-        searchParams !== undefined && searchParams.page !== undefined ? parseInt(searchParams.page) : 1, !searchParams.color ? [] : searchParams.color.split(','));
+        searchParams !== undefined && searchParams.page !== undefined ? parseInt(searchParams.page) : 1, !searchParams.color ? [] : searchParams.color.split(','), !searchParams.size ? [] : searchParams.size.split(','));
 
     if (!products || !products.products.length) {
         return <div>NO PRODUCTS WERE FOUND.</div>;

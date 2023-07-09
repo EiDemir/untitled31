@@ -90,7 +90,7 @@ textarea::-webkit-scrollbar {
 }
 
 .search-option-body {
-    @apply grid grid-cols-4 gap-y-4 rounded-2xl;
+
 }
 
 .chevron {
