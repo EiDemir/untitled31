@@ -30,7 +30,7 @@ export default function WishlistItem(
                     onClick={() => deleteHandler(id)}
                     onMouseEnter={() => setIsHovered(false)}
                     onMouseLeave={() => setIsHovered(true)}
-                    className='disabled:bg-gray-400 absolute top-2 left-2 w-10 p-1.5 bg-white rounded-xl'>
+                    className='disabled:bg-gray-400 absolute top-2 left-2 w-10 p-1.5 bg-white rounded-md'>
                     <XMarkIcon className='text-black '/>
                 </button>
                 <Image className="aspect-[3/4] object-cover rounded-md" src={imageLink} alt="Product's picture" width={400}

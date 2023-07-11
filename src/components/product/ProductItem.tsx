@@ -52,7 +52,7 @@ const ProductItem = forwardRef(({imageLink, category, title, price, direction, i
             className="gap-y-3 flex flex-col">
             <div onMouseEnter={() => setIsHovered(true)}
                  onMouseLeave={() => setIsHovered(false)}
-                 className='relative overflow-hidden rounded-xl'>
+                 className='relative overflow-hidden rounded-md'>
                 <Link prefetch={false} href={'/product/' + id}>
                     <Image className="rounded-md" src={imageLink} alt="Product's picture" width={1333}
                            height={2000}/>
