@@ -131,7 +131,7 @@ export default function ProductDetail({productDetail, user}: {
                                 transition={{duration: 0.2, ease: 'easeIn'}}
                                 onClick={() => setSelectedOptions(prevState =>
                                     ({...prevState, size}))} className={`${selectedOptions.size === size ?
-                                'ring-[#222222] ring-2' : 'ring-[#E4E4E4] ring-1'} uppercase ring-inset rounded-full bg-transparent transition-colors cursor-pointer py-1.5 w-14 text-center`}
+                                'ring-[#222222] ring-2' : 'ring-[#E4E4E4] ring-1'} uppercase ring-inset rounded-lg bg-transparent transition-colors cursor-pointer py-1.5 w-14 text-center`}
                                 key={size}>{size}</motion.span>)}
                     </div>
                 </div>

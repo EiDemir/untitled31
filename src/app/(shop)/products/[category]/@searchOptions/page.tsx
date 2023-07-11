@@ -5,8 +5,22 @@ async function getColors(category: string) {
     return prisma.color.findMany();
 }
 
-async function getSizes(size: string) {
+async function getSizes(category: string) {
     return prisma.size.findMany();
+}
+
+async function getMinAndMaxPrices(category: string) {
+    return prisma.product.aggregate({
+        where: {
+            category: {
+                name: category
+            }
+        }, _min: {
+            price: true
+        }, _max: {
+            price: true
+        }
+    })
 }
 
 export default async function SearchOptionsSection({params}: {
@@ -14,8 +28,9 @@ export default async function SearchOptionsSection({params}: {
 }) {
     const colorsPromise = getColors(params.category);
     const sizesPromise = getSizes(params.category);
+    const minMaxPromise = getMinAndMaxPrices(params.category);
 
-    const [colors, sizes] = await Promise.all([colorsPromise, sizesPromise]);
+    const [colors, sizes, minMaxPrices] = await Promise.all([colorsPromise, sizesPromise, minMaxPromise]);
 
-    return <SearchOptions colors={colors} sizes={sizes}/>;
+    return <SearchOptions colors={colors} sizes={sizes} minMaxPrices={minMaxPrices}/>;
 }

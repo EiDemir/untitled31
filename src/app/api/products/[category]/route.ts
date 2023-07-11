@@ -1,18 +1,22 @@
 import {prisma} from "@/libs/prisma";
 import {NextResponse} from "next/server";
+import _ from "lodash";
 
 export async function GET(request: Request, {params}: {
     params: { category: string }
 }) {
-    7
     const url = new URL(request.url);
     const take = url.searchParams.get('take');
-    const page = url.searchParams.get('page');
+    const cursorId = url.searchParams.get('id');
 
-    if (!take || !page || !params.category)
+    if (!take || !cursorId || !params.category)
         return NextResponse.error();
 
     const colors = url.searchParams.get('color') ? url.searchParams.get('color')!.split(',') : [];
+    const sizes = url.searchParams.get('size') ? url.searchParams.get('size')!.split(',') : [];
+    const minPrice = url.searchParams.get('minPrice') ? parseFloat(url.searchParams.get('minPrice')!) : null;
+    const maxPrice = url.searchParams.get('maxPrice') ? parseFloat(url.searchParams.get('maxPrice')!) : null;
+    const sort = url.searchParams.get('sort') ?? null;
 
     const data = await prisma.category.findUnique({
         where: {
@@ -20,14 +24,27 @@ export async function GET(request: Request, {params}: {
         }, select: {
             products: {
                 where: {
-                    AND: colors.map(color => ({
-                        colors: {
-                            some: {
-                                name: color
+                    AND: [
+                        {
+                            sizes: {
+                                hasEvery: sizes.map(item => _.toLower(item))
+                            },
+                            price: (minPrice && maxPrice) ? {
+                                gte: minPrice,
+                                lte: maxPrice
+                            } : {},
+                        }, ...colors.map(color => ({
+                            colors: {
+                                some: {
+                                    name: color
+                                }
                             }
-                        }
-                    })),
+                        }))
+                    ]
                 },
+                orderBy: sort ? {
+                    price: sort === 'htl' ? 'desc' : 'asc'
+                } : {},
                 select: {
                     images: true,
                     category: true,
@@ -35,18 +52,31 @@ export async function GET(request: Request, {params}: {
                     price: true,
                     id: true,
                 }, take: parseInt(take),
-                skip: (parseInt(page) - 1) * parseInt(take),
+                skip: 1,
+                cursor: {
+                    id: cursorId
+                }
             }, _count: {
                 select: {
                     products: {
                         where: {
-                            AND: colors.map(color => ({
-                                colors: {
-                                    some: {
-                                        name: color
+                            AND: [
+                                {
+                                    sizes: {
+                                        hasEvery: sizes.map(item => _.toLower(item))
+                                    },
+                                    price: (minPrice && maxPrice) ? {
+                                        gte: minPrice,
+                                        lte: maxPrice
+                                    } : {},
+                                }, ...colors.map(color => ({
+                                    colors: {
+                                        some: {
+                                            name: color
+                                        }
                                     }
-                                }
-                            })),
+                                }))
+                            ]
                         }
                     }
                 }

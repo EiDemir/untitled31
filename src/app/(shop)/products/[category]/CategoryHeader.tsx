@@ -7,7 +7,7 @@ import {motion} from "framer-motion";
 export default function CategoryHeader({category}: { category: string }) {
     return (
         <div
-            className='rounded-xl flex items-center relative bg-[#F5E6E0] h-96 mx-[3.6vw] sm:mx-[5vw] md:mx-[60px]'>
+            className='flex items-center relative ring-8 ring-white rounded-sm ring-offset-2 ring-inset ring-offset-[#F5E6E0] bg-[#F5E6E0] h-96 mx-[3.6vw] sm:mx-[5vw] md:mx-[60px]'>
             <div className='z-0'>
                 <Image className='rounded-xl absolute object-cover h-full inset-0' src={patternImage}
                        alt='Background image'/>

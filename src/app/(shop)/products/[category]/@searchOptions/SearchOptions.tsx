@@ -1,41 +1,38 @@
 'use client';
 
-import {AnimatePresence, motion, useMotionTemplate, useMotionValue} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 import {useRouter, useSearchParams} from "next/navigation";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import _ from 'lodash';
 import {ChevronDownIcon} from "@heroicons/react/24/solid";
 import SearchOptionBody from "@/app/(shop)/products/[category]/@searchOptions/SearchOptionBody";
+import {Slider} from "@mui/base";
 
-export default function SearchOptions({colors, sizes}: {
+export default function SearchOptions({colors, sizes, minMaxPrices}: {
     colors: ({ id: string, name: string, hexColorCode: string } & {})[],
-    sizes: ({ id: string, size: string } & {})[]
+    sizes: ({ id: string, size: string } & {})[],
+    minMaxPrices: { _max: { price: number | null }, _min: { price: number | null } }
 }) {
     const searchParams = useSearchParams();
-    const router = useRouter();
-    const x = useMotionValue(0);
-    const x2 = useMotionValue(0);
-    const width = useMotionTemplate`${x} ${x2}`;
-    const ref = useRef<HTMLDivElement>(null);
+    const router = useRouter()
+    const [value, setValue] = useState({isTouched: false, values: [minMaxPrices._min.price!, minMaxPrices._max.price!]})
     const [isOpen, setIsOpen] = useState([false, false, false, false]);
     let selectedColors: any[];
     let selectedSizes: any[];
 
     useEffect(() => {
-        console.log(width);
-    }, [width])
+        if (value.isTouched) {
+            const timeout = setTimeout(() => {
+                const params = new URLSearchParams(searchParams.toString());
+                params.delete('page');
+                params.set('minPrice', value.values[0].toString());
+                params.set('maxPrice', value.values[1].toString())
+                router.replace('?' + params);
+            }, 1000);
 
-    if (!searchParams.get('color'))
-        selectedColors = [];
-    else {
-        selectedColors = searchParams.get('color')!.split(',');
-    }
-
-    if (!searchParams.get('size'))
-        selectedSizes = [];
-    else {
-        selectedSizes = searchParams.get('size')!.split(',');
-    }
+            return () => clearTimeout(timeout);
+        }
+    }, [value])
 
     const createQueryString = useCallback((name: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString());
@@ -55,6 +52,18 @@ export default function SearchOptions({colors, sizes}: {
 
         return params.toString();
     }, [searchParams])
+
+    if (!searchParams.get('color'))
+        selectedColors = [];
+    else {
+        selectedColors = searchParams.get('color')!.split(',');
+    }
+
+    if (!searchParams.get('size'))
+        selectedSizes = [];
+    else {
+        selectedSizes = searchParams.get('size')!.split(',');
+    }
 
     return (
         <div className='w-1/5 sticky top-20 h-max'>
@@ -126,7 +135,7 @@ export default function SearchOptions({colors, sizes}: {
                                 router.replace('?' + createQueryString('size', _.toUpper(item.size)));
                             }}
                             className={`${selectedSizes.includes(_.toUpper(item.size)) ?
-                                'ring-[#222222] ring-2' : 'ring-[#E4E4E4] ring-1'} uppercase ring-inset rounded-full bg-transparent transition-colors cursor-pointer py-1.5 text-center`}
+                                'ring-[#222222] ring-2' : 'ring-[#E4E4E4] ring-1'} uppercase ring-inset rounded-lg bg-transparent transition-colors cursor-pointer py-1.5 text-center`}
                             key={item.size}>{item.size}</motion.span>)}
                     </SearchOptionBody> : null}
                 </AnimatePresence>
@@ -141,26 +150,31 @@ export default function SearchOptions({colors, sizes}: {
                         className='chevron'/></motion.span>
                 </div>
                 <AnimatePresence>
-                    {isOpen[3] ? <SearchOptionBody className='relative search-option-body mx-2 py-4'
+                    {isOpen[3] ? <SearchOptionBody className='relative search-option-body'
                                                    key='size'>
-                        <div ref={ref} className='absolute h-1.5 w-full bg-[#E4E4E4] rounded-full'/>
-                        <motion.div className='absolute h-1.5 bg-[#222222] rounded-full'/>
-                        <motion.div drag='x'
-                                    style={{x}}
-                                    dragConstraints={ref}
-                                    dragElastic={0}
-                                    transition={{
-                                        bounce: 0
-                                    }}
-                                    className='absolute top-2.5 bg-white w-[18px] h-[18px] rounded-full ring-2 ring-[#222222] ring-inset'/>
-                        <motion.div drag='x'
-                                    style={{x: x2}}
-                                    dragConstraints={ref}
-                                    dragElastic={0}
-                                    transition={{
-                                        bounce: 0
-                                    }}
-                                    className='absolute top-2.5 right-1/2 bg-blue-500 w-[18px] h-[18px] rounded-full ring-2 ring-[#222222] ring-inset'/>
+                        <div className='px-3.5'>
+                            <Slider
+                                min={minMaxPrices._min.price!}
+                                max={minMaxPrices._max.price!}
+                                onChange={(event, newValue) => setValue({
+                                    isTouched: true,
+                                    values: newValue as number[]
+                                })}
+                                slotProps={{
+                                    root: {className: 'cursor-pointer inline-block relative w-full h-1.5'},
+                                    track: {className: 'absolute h-1.5 bg-[#222222]'},
+                                    rail: {className: 'absolute h-1.5 bg-[#E4E4E4] w-full rounded-full'},
+                                    thumb: {className: 'hover:scale-125 transition -ml-[9px] -mt-1.5 bg-white absolute w-[18px] h-[18px] ring-2 ring-[#222222] rounded-full'}
+                                }}
+                                value={value.values}/>
+                        </div>
+                        <div className='flex justify-between mt-3 mx-1'>
+                            <p className='text-[#767676] text-sm'>Min Price: <span
+                                className='text-[#222222]'>${value.values[0]}</span>
+                            </p>
+                            <p className='text-[#767676] text-sm'>Max Price: <span
+                                className='text-[#222222]'>${value.values[1]}</span></p>
+                        </div>
                     </SearchOptionBody> : null}
                 </AnimatePresence>
             </div>

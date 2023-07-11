@@ -24,7 +24,7 @@ export default async function ProductsLayout({params, children, searchOptions}: 
         notFound();
 
     return (
-        <div className='my-3 gap-y-7 flex flex-col'>
+        <div className='my-3 gap-y-10 flex flex-col'>
             <CategoryHeader category={params.category}/>
             <div className='relative flex gap-x-6 mx-[3.6vw] sm:mx-[5vw] md:mx-[60px]'>
                 {searchOptions}
