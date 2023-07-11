@@ -81,8 +81,8 @@ export default function CategoryScroll({initialProducts}: {
                 </Menu>
             </div>
             <div className='grid grid-cols-4 gap-5'>
-                {products.map((item, index) =>
-                    <CategoryItem key={index} imageLink={item.images[0]} category={item.category.name}
+                {products.map((item) =>
+                    <CategoryItem key={item.id} imageLink={item.images[0]} category={item.category.name}
                                   title={item.name}
                                   price={item.price} id={item.id}/>)}
             </div>
