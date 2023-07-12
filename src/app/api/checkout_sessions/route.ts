@@ -20,8 +20,8 @@ export async function POST(request: Request) {
                     price: 'price_1NSqg1KwvhWlYEOICFgRNWxe'
                 }
             ],
-            success_url: `${request.headers.get('origin')}/result?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${request.headers.get('origin')}/result?session_id={CHECKOUT_SESSION_ID}`,
+            success_url: `${request.headers.get('origin')}/checkout/result?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${request.headers.get('origin')}/checkout/result?session_id={CHECKOUT_SESSION_ID}`,
         };
         const checkoutSession: Stripe.Checkout.Session =
             await stripe.checkout.sessions.create(params);

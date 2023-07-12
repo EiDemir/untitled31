@@ -30,13 +30,13 @@ export default function WishlistItem(
                     onClick={() => deleteHandler(id)}
                     onMouseEnter={() => setIsHovered(false)}
                     onMouseLeave={() => setIsHovered(true)}
-                    className='disabled:bg-gray-400 absolute top-2 left-2 w-10 p-1.5 bg-white rounded-md'>
+                    className='disabled:bg-gray-400 absolute top-2 left-2 w-10 p-1.5 bg-white rounded-xl'>
                     <XMarkIcon className='text-black '/>
                 </button>
-                <Image className="aspect-[3/4] object-cover rounded-md" src={imageLink} alt="Product's picture" width={400}
+                <Image className="aspect-[3/4] object-cover rounded-xl" src={imageLink} alt="Product's picture" width={400}
                        height={485}/>
                 <motion.div
-                    className='rounded-md flex text-white divide-x divide-[#222222] text-xs absolute inset-x-0 bg-[#222222]/50 backdrop-blur-lg h-10 bottom-1 mx-1'
+                    className='rounded-xl flex text-white divide-x divide-[#222222] text-xs absolute inset-x-0 bg-[#222222]/50 backdrop-blur-lg h-10 bottom-1 mx-1'
                     initial={false}
                     animate={{
                         opacity: isHovered ? 1 : 0,
