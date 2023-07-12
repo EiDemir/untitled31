@@ -12,6 +12,7 @@ import {CartItem} from "@/types";
 import {fetchCardLocalStorage} from "@/utils/localStorage";
 import {CartItemsNumberContext} from "@/store/CartItemsNumberContext";
 import Link from "next/link";
+import getStripe from "@/utils/get-stripejs";
 
 export const variants = {
     initial: {
@@ -104,6 +105,19 @@ export default function Cart({cartItems}: {
                 prevItems.filter((item, index) => index !== itemIndex));
         }
     };
+
+    const checkoutButtonHandler = () => {
+        axios.post('/api/checkout_sessions', {
+            amount: '19.99'
+        }).then(async (res) => {
+            const stripe = await getStripe();
+            const {error} = await stripe!.redirectToCheckout({
+                sessionId: res.data.id,
+            });
+        }).catch((res) => {
+            console.error(res.message)
+        });
+    }
 
     return (
         <div className='relative mx-[3.6vw] sm:mx-[5vw] lg:mx-[10vw] my-20 flex flex-col gap-y-12'>
@@ -292,8 +306,7 @@ export default function Cart({cartItems}: {
                             </div>
                         </div>
                     </div>
-                    <button disabled={!items.length} onClick={() => {
-                    }} type='button'
+                    <button disabled={!items.length} onClick={checkoutButtonHandler} type='button'
                             className='hover:bg-black disabled:bg-[#E4E4E4] disabled:drop-shadow-none drop-shadow-lg rounded-full h-14 bg-[#222222] font-medium text-sm text-white'>
                         PROCEED TO CHECKOUT
                     </button>

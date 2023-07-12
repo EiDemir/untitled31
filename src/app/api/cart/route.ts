@@ -20,7 +20,7 @@ export async function POST(request: Request) {
             productId,
             userId: currentUser.id,
             quantity,
-            color: color === 'null' ? null : color,
+            color: color === 'null' ? null : color.hexColorCode,
             size: size === 'null' ? null : size
         }
     });
