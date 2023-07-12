@@ -1,5 +1,5 @@
 import getCurrentUser from "@/actions/getCurrentUser";
-import Cart from "@/app/(shop)/cart/Cart";
+import Cart from "@/app/(shop)/(cartAndCheckout)/cart/Cart";
 
 async function getCardItems() {
     const user = await getCurrentUser();
