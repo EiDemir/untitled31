@@ -3,7 +3,7 @@ import {Suspense} from "react";
 import PersonalInfo from "@/app/(shop)/dashboard/PersonalInfo";
 
 
-export default async function AccountDetailsPage() {
+export default async function Page() {
 
     const personalInfoLoading = <div className='w-full pr-6 flex flex-col gap-y-10'>
         <p className='text-lg font-semibold'>Personal information</p>

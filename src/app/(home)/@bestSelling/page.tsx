@@ -18,7 +18,7 @@ async function getBestSellingProducts() {
     });
 }
 
-export default async function BestSellingPage() {
+export default async function Page() {
     const products = await getBestSellingProducts();
 
     return (

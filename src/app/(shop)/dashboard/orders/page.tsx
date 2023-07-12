@@ -16,7 +16,7 @@ async function getUserOrders(userEmail: string) {
     }
 }
 
-export default async function OrdersPage() {
+export default async function Page() {
     const user = await getCurrentUser();
     const orders = await getUserOrders(user!.email);
 

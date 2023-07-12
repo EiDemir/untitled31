@@ -1,6 +1,6 @@
 import {range} from "lodash";
 
-export default function WishlistLoading() {
+export default function Loading() {
     return (
         <div className='flex gap-x-5 animate-pulse'>
             {range(3).map(item =>

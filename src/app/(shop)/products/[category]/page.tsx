@@ -68,7 +68,7 @@ async function getCategoryProducts(categoryName: string, page: number, colors: s
     });
 }
 
-export default async function ProductsSection({params, searchParams}: {
+export default async function Section({params, searchParams}: {
     params: { category: string, page?: string },
     searchParams: { page?: string, color?: string, size?: string, minPrice?: string, maxPrice?: string, sort?: string }
 }) {

@@ -6,7 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: '2022-11-15'
 });
 
-export default async function CheckoutResultPage({searchParams}: {
+export default async function Page({searchParams}: {
     searchParams: {
         session_id?: string
     }
@@ -14,12 +14,18 @@ export default async function CheckoutResultPage({searchParams}: {
     if (!searchParams.session_id || !searchParams.session_id.startsWith('cs_'))
         notFound();
 
-    const checkout_session: Stripe.Checkout.Session = await
-        stripe.checkout.sessions.retrieve(searchParams.session_id, {
-            expand: ['payment_intent']
-        });
+    let checkout_session: Stripe.Checkout.Session;
 
-    console.log(checkout_session);
+    try {
+        checkout_session = await
+            stripe.checkout.sessions.retrieve(searchParams.session_id, {
+                expand: ['payment_intent']
+            });
+    } catch (e) {
+        notFound();
+    }
+
+    console.log(checkout_session.payment_status);
 
     return (
         <div className='text-center flex flex-col justify-center gap-y-9 w-full'>

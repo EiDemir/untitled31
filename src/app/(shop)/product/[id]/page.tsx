@@ -34,7 +34,7 @@ async function getProduct(productId?: string) {
     }
 }
 
-export default async function ProductPage({params}: { params: { id: string } }) {
+export default async function Page({params}: { params: { id: string } }) {
     const productData = getProduct(params.id);
     const userData = getCurrentUser();
 

@@ -5,7 +5,7 @@ import {motion} from "framer-motion";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 
-export default function AuthLayout({children}: { children: ReactNode }) {
+export default function Layout({children}: { children: ReactNode }) {
     const pathname = usePathname();
 
     return (

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import ProductItemLoading from "@/components/ui/loading/ProductItemLoading";
 
-export default function BestSellingLoading() {
+export default function Loading() {
     return (
         <div className='flex flex-col py-16 gap-y-16 w-full'>
             <div className='mx-auto font-bold text-4xl'>

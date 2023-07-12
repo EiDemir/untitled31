@@ -6,6 +6,7 @@ import {usePathname} from "next/navigation";
 
 export default function PageLayout({children}: { children: ReactNode }) {
     const pathname = usePathname();
+    const checkoutResultPage = pathname.startsWith('/checkout/result');
 
     return (
         <div className='relative mx-[3.6vw] sm:mx-[5vw] lg:mx-[10vw] my-20 flex flex-col gap-y-12'>
@@ -22,16 +23,16 @@ export default function PageLayout({children}: { children: ReactNode }) {
                         </div>
                     </div>
                     <div className='w-1/3 flex gap-x-2.5'>
-                        <span className='text-[#767676] text-lg font-medium'>02</span>
+                        <span className={`text-[#${checkoutResultPage ? '2222222' : '767676'}] text-lg font-medium`}>02</span>
                         <div>
-                            <h1 className='text-[#767676] text-lg font-medium'>SHIPPING AND CHECKOUT</h1>
+                            <h1 className={`text-[#${checkoutResultPage ? '2222222' : '767676'}] text-lg font-medium`}>SHIPPING AND CHECKOUT</h1>
                             <p className='text-[#767676] text-sm'>Checkout Your Items List</p>
                         </div>
                     </div>
                     <div className='w-1/3 flex gap-x-2.5'>
-                        <span className='text-[#767676] text-lg font-medium'>03</span>
+                        <span className={`text-[#${checkoutResultPage ? '2222222' : '767676'}] text-lg font-medium`}>03</span>
                         <div>
-                            <h1 className='text-[#767676] text-lg font-medium'>CONFIRMATION</h1>
+                            <h1 className={`text-[#${checkoutResultPage ? '2222222' : '767676'}] text-lg font-medium`}>CONFIRMATION</h1>
                             <p className='text-[#767676] text-sm'>Review and Submit Your Order</p>
                         </div>
                     </div>

@@ -2,7 +2,7 @@ import React, {ReactNode} from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
-export default async function ShopLayout({children}: { children: ReactNode }) {
+export default async function Layout({children}: { children: ReactNode }) {
 
     return (
         <>

@@ -4,7 +4,7 @@ import {usePathname, useRouter} from "next/navigation";
 import {motion} from "framer-motion";
 import {useRef, MouseEvent, ReactNode} from "react";
 
-export default function AuthLayout({children}: { children: ReactNode }) {
+export default function Layout({children}: { children: ReactNode }) {
     const pathname = usePathname();
     const router = useRouter();
     const ref = useRef<HTMLDivElement>(null)

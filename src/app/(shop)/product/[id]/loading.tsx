@@ -1,4 +1,4 @@
-export default function ProductLoading() {
+export default function Loading() {
     return (
         <main className='sm:px-[5vw] lg:px-[10vw] animate-pulse'>
             <div className='flex sm:flex-row flex-col gap-y-10 gap-x-10 my-5'>

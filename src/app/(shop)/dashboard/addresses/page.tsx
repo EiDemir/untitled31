@@ -19,7 +19,7 @@ async function getUserAddresses(userEmail: string) {
     }
 }
 
-export default async function AddressesPage() {
+export default async function Page() {
     const user = await getCurrentUser();
     const addresses = await getUserAddresses(user!.email);
     const billingAddress = addresses!.billingAddress as JsonObject;

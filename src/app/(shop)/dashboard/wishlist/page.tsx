@@ -17,7 +17,7 @@ async function getUserWishlist(userEmail: string) {
     }
 }
 
-export default async function WishlistPage() {
+export default async function Page() {
     const user = await getCurrentUser();
     const wishlist = await getUserWishlist(user!.email);
 

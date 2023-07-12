@@ -13,7 +13,7 @@ async function doesCategoryExists(category: string) {
     });
 }
 
-export default async function ProductsLayout({params, children, searchOptions}: {
+export default async function Layout({params, children, searchOptions}: {
     params: { category: string },
     searchOptions: ReactNode,
     children: ReactNode
