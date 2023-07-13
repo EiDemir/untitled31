@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import {ReactNode, Suspense} from "react";
 import {notFound} from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
 
@@ -13,7 +13,9 @@ export default async function Layout({children}: { children: ReactNode }) {
     return (
         <div className='flex gap-x-8'>
             <div className='flex flex-col gap-y-7 w-2/3'>
-                {children}
+                <Suspense fallback={<p>Loading</p>}>
+                    {children}
+                </Suspense>
             </div>
             <div className='w-1/3 sticky top-0 flex flex-col gap-y-5'>
                 <div
