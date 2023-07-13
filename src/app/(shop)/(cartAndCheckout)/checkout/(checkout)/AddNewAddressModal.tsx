@@ -6,9 +6,11 @@ import {motion} from "framer-motion";
 import Input from "@/components/ui/Input";
 import {XMarkIcon} from "@heroicons/react/24/outline";
 import {addShippingAddress} from "@/app/actions";
+import {experimental_useFormStatus as useFormStatus} from 'react-dom'
 
 export default function AddNewAddressModal() {
     const router = useRouter();
+    const {pending} = useFormStatus();
     const ref = useRef<HTMLDivElement>(null)
 
     const handleOutsideClick = (event: MouseEvent) => {
@@ -292,8 +294,9 @@ export default function AddNewAddressModal() {
                         <label htmlFor='checkbox1'>Add to My Billing Addresses Too</label>
                     </div>
                     <button type='submit'
+                            disabled={pending}
                             className='hover:bg-black disabled:bg-[#E4E4E4] disabled:drop-shadow-none drop-shadow-lg rounded-full h-14 bg-[#222222] font-medium text-white'>
-                        SUBMIT
+                        {pending? 'SUBMITTING' : 'SUBMIT'}
                     </button>
                 </form>
             </motion.div>
