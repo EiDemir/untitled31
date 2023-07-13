@@ -289,7 +289,7 @@ export default function AddNewAddressModal() {
                     <Input label='State/Province *' name='stateOrProvince' required/>
                     <Input type='number' label='Phone Number *' name='phoneNumber' required/>
                     <div className='flex gap-x-2 text-sm items-center font-medium pl-1'>
-                        <input id='checkbox1' type='checkbox' className='rounded-sm'/>
+                        <input id='checkbox1' type='checkbox' name='billingAddress' className='rounded-sm'/>
                         <label htmlFor='checkbox1'>Add to My Billing Addresses Too</label>
                     </div>
                     <SubmitButton/>

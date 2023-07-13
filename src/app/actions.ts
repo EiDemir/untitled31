@@ -2,12 +2,12 @@
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import {prisma} from "@/libs/prisma";
-import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
 
 export async function addShippingAddress(data: FormData) {
     const user = await getCurrentUser();
 
+    console.log(data.get('billingAddress'));
     if (user) {
         await prisma.user.update({
             where: {
@@ -29,7 +29,6 @@ export async function addShippingAddress(data: FormData) {
             }
         });
 
-        revalidatePath('/checkout');
         redirect('/checkout');
     }
 }
