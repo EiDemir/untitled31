@@ -12,7 +12,9 @@ export default async function Layout({children}: { children: ReactNode }) {
 
     return (
         <div className='flex gap-x-8'>
-            {children}
+            <div className='flex flex-col gap-y-7 w-2/3'>
+                {children}
+            </div>
             <div className='w-1/3 sticky top-0 flex flex-col gap-y-5'>
                 <div
                     className='p-8 h-min rounded-3xl ring-1 ring-inset ring-[#222222] bg-white/50 backdrop-blur-md'>
