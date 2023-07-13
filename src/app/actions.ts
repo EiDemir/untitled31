@@ -2,8 +2,8 @@
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import {prisma} from "@/libs/prisma";
-import {redirect} from "next/navigation";
 import {revalidatePath} from "next/cache";
+import {redirect} from "next/navigation";
 
 export async function addShippingAddress(data: FormData) {
     const user = await getCurrentUser();
@@ -31,5 +31,5 @@ export async function addShippingAddress(data: FormData) {
     }
 
     revalidatePath('/checkout')
-    redirect('/checkout');
+    redirect('/checkout', 'replace');
 }
