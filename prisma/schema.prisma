@@ -47,8 +47,8 @@ model User {
   wishlistIDs     String[]   @db.ObjectId
   cart            CartItem[]
   reviews         Review[]
-  billingAddress  Json?
-  shippingAddress Json?
+  billingAddress  Json[]
+  shippingAddress Json[]
   accounts        Account[]
   sessions        Session[]
 }

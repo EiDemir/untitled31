@@ -76,8 +76,6 @@ export default function Login() {
 
                                         </span>
                 </div>
-
-
                 <div className="flex justify-between mx-4">
                     <div className="flex gap-x-2 items-center">
                         <input id="remember" type="checkbox"

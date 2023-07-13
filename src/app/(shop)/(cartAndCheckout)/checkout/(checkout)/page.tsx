@@ -1,12 +1,9 @@
-import axios from "axios";
-import getStripe from "@/utils/get-stripejs";
 import getCurrentUser from "@/actions/getCurrentUser";
 import {notFound} from "next/navigation";
 import {prisma} from "@/libs/prisma";
 import JsonObject = Prisma.JsonObject;
 import {Prisma} from ".prisma/client";
 import Link from "next/link";
-import _ from "lodash";
 import AddNewAddressModal from "./AddNewAddressModal";
 
 async function getCardItems() {
@@ -46,8 +43,8 @@ export default async function Page({searchParams}: {
     }
 
     const addresses = await getUserAddresses(user?.email);
-    const billingAddress = addresses!.billingAddress as JsonObject;
-    const shippingAddress = addresses!.shippingAddress as JsonObject;
+    const billingAddresses = addresses!.billingAddress as JsonObject[];
+    const shippingAddresses = addresses!.shippingAddress as JsonObject[];
 
 
     return (
@@ -61,12 +58,12 @@ export default async function Page({searchParams}: {
                         <div
                             className='pl-5 pr-1.5 bg-[#E4E4E4] drop-shadow-sm h-12 font-medium text-lg rounded-3xl flex justify-between items-center'>
                             SHIPPING ADDRESS
-                            {shippingAddress && <Link href=''
-                                                      className='py-2 px-4 text-sm rounded-3xl ring-1 ring-inset ring-[#222222] hover:bg-[#222222] hover:text-white'>
+                            {shippingAddresses.length && <Link href=''
+                                                               className='cursor-pointer py-2 px-4 text-sm rounded-3xl ring-1 ring-inset ring-[#222222] hover:bg-[#222222] hover:text-white'>
                                 ADD NEW ADDRESS
                             </Link>}
                         </div>
-                        {_.isEmpty(shippingAddress) ?
+                        {shippingAddresses.length === 0 ?
                             <div className='text-center my-14 flex flex-col gap-y-2'>You have no shipping address yet!
                                 <Link href='?addNewShippingAddress=true'
                                       className='py-2 px-4 text-sm text-white rounded-3xl w-max mx-auto hover:bg-black bg-[#222222]'>
@@ -74,11 +71,14 @@ export default async function Page({searchParams}: {
                                 </Link>
                             </div> :
                             <>
-                                <p>{shippingAddress.name!.toString()}</p>
-                                <p>{shippingAddress.noAndSt!.toString()}, {shippingAddress.province!.toString()} {shippingAddress.zipCode!.toString()}</p>
-                                <p>{shippingAddress.country!.toString()}</p><br/>
-                                <p>{shippingAddress.email!!.toString()}</p>
-                                <p>{shippingAddress.phoneNumber!.toString()}</p>
+                                {shippingAddresses.map((shippingAddress, index) =>
+                                    <div key={index}>
+                                        <p>{shippingAddress.firstName!.toString()}</p>
+                                        <p>{shippingAddress.streetAddress!.toString()}, {shippingAddress.stateOrProvince!.toString()} {shippingAddress.postalCode!.toString()}</p>
+                                        <p>{shippingAddress.country!.toString()}</p><br/>
+                                        <p>{shippingAddress.phoneNumber!.toString()}</p>
+                                    </div>)
+                                }
                             </>
                         }
                     </div>
@@ -86,24 +86,28 @@ export default async function Page({searchParams}: {
                         <div
                             className='pl-5 pr-1.5 bg-[#E4E4E4] drop-shadow-sm h-12 font-medium text-lg rounded-3xl flex justify-between items-center'>
                             BILLING ADDRESS
-                            {billingAddress && <Link href=''
-                                                     className='py-2 px-4 text-sm rounded-3xl ring-1 ring-[#222222] ring-inset hover:bg-[#222222] hover:text-white'>
+                            {billingAddresses.length && <Link href=''
+                                                              className='py-2 px-4 text-sm rounded-3xl ring-1 ring-[#222222] ring-inset hover:bg-[#222222] hover:text-white'>
                                 ADD NEW ADDRESS
                             </Link>}
                         </div>
-                        {_.isEmpty(billingAddress) ?
+                        {billingAddresses.length === 0 ?
                             <div className='text-center my-14 flex flex-col gap-y-2'>You have no billing address yet!
                                 <Link href='?addNewBillingAddress=true'
-                                      className='py-2 px-4 text-sm text-white rounded-3xl w-max mx-auto hover:bg-black bg-[#222222]'>
+                                      className='cursor-pointer py-2 px-4 text-sm text-white rounded-3xl w-max mx-auto hover:bg-black bg-[#222222]'>
                                     ADD ONE
                                 </Link>
                             </div> :
                             <>
-                                <p>{billingAddress.name!.toString()}</p>
-                                <p>{billingAddress.noAndSt!.toString()}, {billingAddress.province!.toString()} {billingAddress.zipCode!.toString()}</p>
-                                <p>{billingAddress.country!.toString()}</p><br/>
-                                <p>{billingAddress.email!!.toString()}</p>
-                                <p>{billingAddress.phoneNumber!.toString()}</p>
+                                {billingAddresses.map((billingAddress, index) =>
+                                    <div key={index}>
+                                        <p>{billingAddress.firstName!.toString()}</p>
+                                        <p>{billingAddress.noAndSt!.toString()}, {billingAddress.stateOrProvince!.toString()} {billingAddress.postalCode!.toString()}</p>
+                                        <p>{billingAddress.country!.toString()}</p><br/>
+                                        <p>{billingAddress.email!!.toString()}</p>
+                                        <p>{billingAddress.phoneNumber!.toString()}</p>
+                                    </div>)
+                                }
                             </>
                         }
                     </div>

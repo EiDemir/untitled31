@@ -1,5 +1,4 @@
 import {prisma} from "@/libs/prisma";
-import _ from 'lodash';
 import getCurrentUser from "@/actions/getCurrentUser";
 import {Prisma} from ".prisma/client";
 import JsonObject = Prisma.JsonObject;
@@ -22,35 +21,42 @@ async function getUserAddresses(userEmail: string) {
 export default async function Page() {
     const user = await getCurrentUser();
     const addresses = await getUserAddresses(user!.email);
-    const billingAddress = addresses!.billingAddress as JsonObject;
-    const shippingAddress = addresses!.shippingAddress as JsonObject;
+    const billingAddresses = addresses!.billingAddress as JsonObject[];
+    const shippingAddresses = addresses!.shippingAddress as JsonObject[];
 
     return (
         <>
             <div className='w-full h-full flex gap-x-5'>
                 <div className='rounded-3xl h-full w-full ring-1 ring-[#E4E4E4] ring-inset p-4'>
                     <p className='pb-3 font-medium text-lg'>BILLING ADDRESS</p>
-                    {_.isEmpty(billingAddress) ?
+                    {billingAddresses.length === 0 ?
                         <p className='text-center mt-14'>No Billing Address</p> :
                         <>
-                            <p>{billingAddress.name!.toString()}</p>
-                            <p>{billingAddress.noAndSt!.toString()}, {billingAddress.province!.toString()} {billingAddress.zipCode!.toString()}</p>
-                            <p>{billingAddress.country!.toString()}</p><br/>
-                            <p>{billingAddress.email!!.toString()}</p>
-                            <p>{billingAddress.phoneNumber!.toString()}</p>
+                            {billingAddresses.map((billingAddress, index) =>
+                                <div key={index}>
+                                    <p>{billingAddress.firstName!.toString()}</p>
+                                    <p>{billingAddress.noAndSt!.toString()}, {billingAddress.province!.toString()} {billingAddress.zipCode!.toString()}</p>
+                                    <p>{billingAddress.country!.toString()}</p><br/>
+                                    <p>{billingAddress.email!!.toString()}</p>
+                                    <p>{billingAddress.phoneNumber!.toString()}</p>
+                                </div>)
+                            }
                         </>
                     }
                 </div>
                 <div className='rounded-3xl h-full w-full ring-1 ring-[#E4E4E4] ring-inset p-4'>
                     <p className='pb-3 font-medium text-lg'>SHIPPING ADDRESS</p>
-                    {_.isEmpty(shippingAddress) ?
+                    {shippingAddresses.length === 0 ?
                         <p className='text-center mt-14'>No Shipping Address</p> :
                         <>
-                            <p>{shippingAddress.name!.toString()}</p>
-                            <p>{shippingAddress.noAndSt!.toString()}, {shippingAddress.province!.toString()} {shippingAddress.zipCode!.toString()}</p>
-                            <p>{shippingAddress.country!.toString()}</p><br/>
-                            <p>{shippingAddress.email!!.toString()}</p>
-                            <p>{shippingAddress.phoneNumber!.toString()}</p>
+                            {shippingAddresses.map((shippingAddress, index) =>
+                                <div key={index}>
+                                    <p>{shippingAddress.firstName!.toString()}</p>
+                                    <p>{shippingAddress.streetName!.toString()}, {shippingAddress.province!.toString()} {shippingAddress.zipCode!.toString()}</p>
+                                    <p>{shippingAddress.country!.toString()}</p><br/>
+                                    <p>{shippingAddress.phoneNumber!.toString()}</p>
+                                </div>)
+                            }
                         </>
                     }
                 </div>
