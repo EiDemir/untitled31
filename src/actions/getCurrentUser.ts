@@ -1,8 +1,9 @@
 import {getServerSession} from "next-auth/next";
 import {prisma} from "@/libs/prisma";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import {cache} from 'react';
 
-export default async function getCurrentUser() {
+const getCurrentUser = cache(async () => {
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.email) return null;
@@ -38,4 +39,6 @@ export default async function getCurrentUser() {
         favorites: user.wishlistIDs,
         cart: user.cart
     }
-}
+});
+
+export default getCurrentUser;
