@@ -3,7 +3,7 @@
 import getCurrentUser from "@/actions/getCurrentUser";
 import {prisma} from "@/libs/prisma";
 import {redirect} from "next/navigation";
-import {cookies} from "next/headers";
+import {revalidatePath} from "next/cache";
 
 export async function addShippingAddress(data: FormData) {
     const user = await getCurrentUser();
@@ -30,5 +30,6 @@ export async function addShippingAddress(data: FormData) {
         });
     }
 
+    revalidatePath('/checkout')
     redirect('/checkout');
 }
