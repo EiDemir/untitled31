@@ -1,7 +1,7 @@
-import ProductsSection from "./ProductsSection";
 import {Suspense} from "react";
 import ProductItemLoading from "@/components/ui/loading/ProductItemLoading";
 import _ from 'lodash';
+import ProductsSection from "./ProductsSection";
 
 export default function Page({params, searchParams}: {
     params: { category: string, page?: string },
