@@ -261,7 +261,7 @@ export default function Cart({cartItems}: {
                 </div>
                 <button disabled={!items.length} type='button'
                         className='hover:bg-black disabled:bg-[#E4E4E4] disabled:drop-shadow-none drop-shadow-lg rounded-full h-14 bg-[#222222] font-medium text-sm text-white'>
-                    <Link href='/checkout'>
+                    <Link href='/checkout' prefetch={false}>
                         PROCEED TO CHECKOUT
                     </Link>
                 </button>
