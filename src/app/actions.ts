@@ -31,5 +31,6 @@ export async function addShippingAddress(data: FormData) {
     }
 
     revalidatePath('/checkout')
+    // @ts-ignore
     redirect('/checkout', 'replace');
 }
