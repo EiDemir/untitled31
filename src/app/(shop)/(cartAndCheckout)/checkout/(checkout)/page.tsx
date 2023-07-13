@@ -58,7 +58,7 @@ export default async function Page({searchParams}: {
                         <div
                             className='pl-5 pr-1.5 bg-[#E4E4E4] drop-shadow-sm h-12 font-medium text-lg rounded-3xl flex justify-between items-center'>
                             SHIPPING ADDRESS
-                            {shippingAddresses.length && <Link href=''
+                            {shippingAddresses.length && <Link href='?addNewShippingAddress=true'
                                                                className='cursor-pointer py-2 px-4 text-sm rounded-3xl ring-1 ring-inset ring-[#222222] hover:bg-[#222222] hover:text-white'>
                                 ADD NEW ADDRESS
                             </Link>}
