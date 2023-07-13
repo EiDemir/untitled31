@@ -1,13 +1,11 @@
 'use client';
 
 import CategoryItem from "@/components/product/CategoryItem";
-import {Fragment, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {motion} from "framer-motion";
 import axios from "axios";
 import LoadingAnimation from "@/components/ui/LoadingAnimation";
-import {useRouter, useSearchParams} from "next/navigation";
-import {ChevronDownIcon} from "@heroicons/react/24/solid";
-import {Menu, Transition} from "@headlessui/react";
+import {useSearchParams} from "next/navigation";
 import _ from 'lodash';
 
 export default function CategoryScroll({initialProducts}: {
@@ -25,7 +23,6 @@ export default function CategoryScroll({initialProducts}: {
     const [products, setProducts] = useState(initialProducts.products);
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
-    const router = useRouter();
     const searchParams = useSearchParams();
 
     useEffect(() => {
@@ -43,43 +40,7 @@ export default function CategoryScroll({initialProducts}: {
     };
 
     return (
-        <div className='w-4/5'>
-            <div
-                className='w-full justify-end flex text-sm font-medium mb-7'>
-                <Menu as='div' className='relative inline-block z-10'>
-                    <Menu.Button className='inline-flex items-center gap-x-2 hover:text-[#E893CF] text-[#222222]'>
-                        DEFAULT SORTING
-                        <ChevronDownIcon className='w-4 h-auto text-[#222222'/>
-                    </Menu.Button>
-                    <Transition
-                        as={Fragment}
-                        enter='transition duration-500'
-                        enterFrom='transform opacity-0 -translate-y-2'
-                        enterTo='transform opacity-100 translate-y-0'
-                        leave='transition duration-200'
-                        leaveFrom='transform opacity-100 translate-y-0'
-                        leaveTo='transform opacity-0 -translate-y-2'
-                    >
-                        <Menu.Items
-                            className='flex flex-col w-max text-sm absolute right-0 mt-2 divide-y divide-gray-100 ring-1 ring-gray-100 rounded-sm bg-white'>
-                            <Menu.Item as='button' onClick={() => {
-                                const params = new URLSearchParams(searchParams.toString());
-                                params.set('sort', 'htl');
-                                router.replace('?' + params.toString());
-                            }} className='px-4 py-3 my-1 hover:text-[#E893CF] text-[#222222]'>
-                                Price: High to Low
-                            </Menu.Item>
-                            <Menu.Item as='button' onClick={() => {
-                                const params = new URLSearchParams(searchParams.toString());
-                                params.set('sort', 'lth');
-                                router.replace('?' + params.toString());
-                            }} className='px-4 py-3 my-1 hover:text-[#E893CF] text-[#222222]'>
-                                Price: Low to High
-                            </Menu.Item>
-                        </Menu.Items>
-                    </Transition>
-                </Menu>
-            </div>
+        <>
             <div className='grid grid-cols-4 gap-5'>
                 {products.map((item) =>
                     <CategoryItem key={item.id} imageLink={item.images[0]} category={item.category.name}
@@ -92,6 +53,6 @@ export default function CategoryScroll({initialProducts}: {
                 </motion.div> : <h1 className='flex justify-center py-5'>You've reached the end.</h1>}
             {/*<h1>{_.clamp(page * 15, initialProducts._count.products)} out*/}
             {/*    of {initialProducts._count.products}</h1>*/}
-        </div>
+        </>
     );
 }

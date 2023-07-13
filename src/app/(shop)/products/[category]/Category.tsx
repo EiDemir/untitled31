@@ -2,12 +2,10 @@
 
 import CategoryItem from "@/components/product/CategoryItem";
 import {motion} from "framer-motion";
-import {ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/solid";
+import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/solid";
 import {useSearchParams} from "next/navigation";
 import _ from 'lodash';
 import Link from "next/link";
-import {Menu, Transition} from "@headlessui/react";
-import {Fragment} from "react";
 
 export default function Category({products}: {
     products: {
@@ -27,35 +25,7 @@ export default function Category({products}: {
     params.delete('page');
 
     return (
-        <div className='w-4/5'>
-            <div
-                className='w-full justify-end flex text-sm font-medium mb-7'>
-                <Menu as='div' className='relative inline-block z-10'>
-                    <Menu.Button className='inline-flex items-center gap-x-2 hover:text-[#E893CF] text-[#222222]'>
-                        DEFAULT SORTING
-                        <ChevronDownIcon className='w-4 h-auto text-[#222222'/>
-                    </Menu.Button>
-                    <Transition
-                        as={Fragment}
-                        enter='transition duration-500'
-                        enterFrom='transform opacity-0 -translate-y-2'
-                        enterTo='transform opacity-100 translate-y-0'
-                        leave='transition duration-200'
-                        leaveFrom='transform opacity-100 translate-y-0'
-                        leaveTo='transform opacity-0 -translate-y-2'
-                    >
-                        <Menu.Items
-                            className='flex flex-col w-max text-sm absolute right-0 mt-2 divide-y divide-gray-100 ring-1 ring-gray-100 rounded-sm bg-white'>
-                            <Menu.Item as={Link} href='/' className='px-4 py-3 my-1 hover:text-[#E893CF] text-[#222222]'>
-                                Price: High to Low
-                            </Menu.Item>
-                            <Menu.Item as={Link} href='/' className='px-4 py-3 my-1 hover:text-[#E893CF] text-[#222222]'>
-                                Price: Low to High
-                            </Menu.Item>
-                        </Menu.Items>
-                    </Transition>
-                </Menu>
-            </div>
+        <>
             <div className='grid grid-cols-4 gap-7'>
                 {products.products.map(item =>
                     <CategoryItem key={item.id} imageLink={item.images[0]} category={item.category.name}
@@ -94,6 +64,6 @@ export default function Category({products}: {
                     </Link>
                 </button>
             </motion.div>
-        </div>
+        </>
     );
 }
