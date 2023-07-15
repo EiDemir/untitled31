@@ -25,7 +25,7 @@ export default async function Page({searchParams}: {
         notFound();
     }
 
-    console.log(checkout_session.payment_status);
+    console.log(checkout_session);
 
     return (
         <div className='text-center flex flex-col justify-center gap-y-9 w-full'>

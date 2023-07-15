@@ -31,8 +31,7 @@ export async function addShippingAddress(data: FormData) {
     }
 
     revalidatePath('/checkout')
-    // @ts-ignore
-    redirect('/checkout', 'replace');
+    redirect('/checkout');
 }
 
 export async function addBillingAddress(data: FormData) {
@@ -61,6 +60,5 @@ export async function addBillingAddress(data: FormData) {
     }
 
     revalidatePath('/checkout')
-    // @ts-ignore
-    redirect('/checkout', 'replace');
+    redirect('/checkout');
 }

@@ -1,6 +1,7 @@
 import {ReactNode} from "react";
 import {notFound} from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
+import PaymentButton from "@/app/(shop)/(cartAndCheckout)/checkout/(checkout)/PaymentButton";
 
 export default async function Layout({children}: { children: ReactNode }) {
     const user = await getCurrentUser();
@@ -58,10 +59,7 @@ export default async function Layout({children}: { children: ReactNode }) {
                         </div>
                     </div>
                 </div>
-                <button type='button'
-                        className='hover:bg-black disabled:bg-[#E4E4E4] disabled:drop-shadow-none drop-shadow-lg rounded-full h-14 bg-[#222222] font-medium text-sm text-white'>
-                    PROCEED TO PAYMENT
-                </button>
+                <PaymentButton/>
             </div>
         </div>
     );
