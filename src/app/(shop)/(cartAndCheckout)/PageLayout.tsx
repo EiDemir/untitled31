@@ -41,10 +41,10 @@ export default function PageLayout({children}: { children: ReactNode }) {
                         </div>
                     </div>
                 </div>
-                <div className='relative w-full h-0.5 bg-[#E4E4E4]'>
+                <div className='relative w-full h-0.5 bg-[#E4E4E4] rounded-full'>
                     <motion.div initial={{width: '0'}}
                                 animate={{width: isCheckoutResultPage ? '100%' : isCheckoutPage ? '66.66%' : '33%'}}
-                                className='absolute h-0.5 bg-[#222222]'/>
+                                className='absolute h-0.5 bg-[#222222] rounded-full'/>
                 </div>
             </div>
             {children}

@@ -5,10 +5,10 @@ import {MouseEvent, useRef} from "react";
 import {motion} from "framer-motion";
 import Input from "@/components/ui/Input";
 import {XMarkIcon} from "@heroicons/react/24/outline";
-import {addShippingAddress} from "@/app/actions";
+import {addBillingAddress, addShippingAddress} from "@/app/actions";
 import SubmitButton from "@/app/(shop)/(cartAndCheckout)/checkout/(checkout)/SubmitButton";
 
-export default function AddNewAddressModal() {
+export default function AddNewAddressModal({type}: { type: string }) {
     const router = useRouter();
     const ref = useRef<HTMLDivElement>(null)
 
@@ -25,13 +25,14 @@ export default function AddNewAddressModal() {
             <motion.div ref={ref} initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1}}
                         className='fixed rounded-xl w-1/2 z-40 bg-white'>
                 <div className='flex justify-between px-5 py-4 bg-[#E4E4E4] rounded-t-xl text-lg'>
-                    <h3>Enter a New Shipping Address</h3>
+                    <h3>Enter a New {type === 'shipping' ? 'Shipping' : 'Billing'} Address</h3>
                     <XMarkIcon onClick={() => {
                         document.body.style.overflowY = 'scroll';
                         router.back();
                     }} className='cursor-pointer h-6 w-auto text-[#222222]'/>
                 </div>
-                <form className='flex flex-col gap-y-4 px-10 py-4' action={addShippingAddress}>
+                <form className='flex flex-col gap-y-4 px-10 py-4'
+                      action={type === 'shipping' ? addShippingAddress : addBillingAddress}>
                     <div className='grid grid-cols-2 gap-x-4'>
                         <Input label='First Name *' name='firstName' required/>
                         <Input label='Last Name *' name='lastName' required/>
@@ -288,10 +289,10 @@ export default function AddNewAddressModal() {
                     <Input label='Postal Code *' name='postalCode' required/>
                     <Input label='State/Province *' name='stateOrProvince' required/>
                     <Input type='number' label='Phone Number *' name='phoneNumber' required/>
-                    <div className='flex gap-x-2 text-sm items-center font-medium pl-1'>
+                    {type === 'shipping' && <div className='flex gap-x-2 text-sm items-center font-medium pl-1'>
                         <input id='checkbox1' type='checkbox' className='rounded-sm'/>
                         <label htmlFor='checkbox1'>Add to My Billing Addresses Too</label>
-                    </div>
+                    </div>}
                     <SubmitButton/>
                 </form>
             </motion.div>

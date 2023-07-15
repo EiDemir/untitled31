@@ -4,6 +4,7 @@ import JsonObject = Prisma.JsonObject;
 import {Prisma} from ".prisma/client";
 import Link from "next/link";
 import AddNewAddressModal from "./AddNewAddressModal";
+import AddressRadioGroup from "@/app/(shop)/(cartAndCheckout)/checkout/(checkout)/AddressRadioGroup";
 
 async function getUserAddresses(userEmail: string) {
     try {
@@ -34,14 +35,17 @@ export default async function Addresses({searchParams}: {
     return (
         <>
             {searchParams.addNewShippingAddress && searchParams.addNewShippingAddress === 'true' &&
-                <AddNewAddressModal/>
+                <AddNewAddressModal type='shipping'/>
+            }
+            {searchParams.addNewBillingAddress && searchParams.addNewBillingAddress === 'true' &&
+                <AddNewAddressModal type='billing'/>
             }
             <div className='rounded-3xl w-full ring-1 ring-[#E4E4E4] ring-inset'>
                 <div
-                    className='pl-5 pr-1.5 bg-[#E4E4E4] drop-shadow-sm h-12 font-medium text-lg rounded-3xl flex justify-between items-center'>
+                    className='pl-5 pr-1.5 bg-[#E4E4E4] drop-shadow-sm h-12 font-medium text-[#222222] text-lg rounded-3xl flex justify-between items-center'>
                     SHIPPING ADDRESS
                     {shippingAddresses.length && <Link href='?addNewShippingAddress=true'
-                                                       className='cursor-pointer py-2 px-4 text-sm rounded-3xl ring-1 ring-inset ring-[#222222] hover:bg-[#222222] hover:text-white'>
+                                                       className='cursor-pointer py-2 px-5 text-sm rounded-3xl ring-1 ring-inset ring-[#222222] hover:bg-[#222222] hover:text-white'>
                         ADD NEW ADDRESS
                     </Link>}
                 </div>
@@ -52,21 +56,15 @@ export default async function Addresses({searchParams}: {
                             ADD ONE
                         </Link>
                     </div> :
-                    <>
-                        {shippingAddresses.map((shippingAddress, index) =>
-                            <div key={index}>
-                                <p>{shippingAddress.firstName!.toString()}</p>
-                            </div>)
-                        }
-                    </>
+                    <AddressRadioGroup addresses={shippingAddresses}/>
                 }
             </div>
             <div className='rounded-3xl w-full ring-1 ring-[#E4E4E4] ring-inset'>
                 <div
-                    className='pl-5 pr-1.5 bg-[#E4E4E4] drop-shadow-sm h-12 font-medium text-lg rounded-3xl flex justify-between items-center'>
+                    className='pl-5 pr-1.5 bg-[#E4E4E4] drop-shadow-sm h-12 font-medium text-[#222222] text-lg rounded-3xl flex justify-between items-center'>
                     BILLING ADDRESS
-                    {billingAddresses.length && <Link href=''
-                                                      className='py-2 px-4 text-sm rounded-3xl ring-1 ring-[#222222] ring-inset hover:bg-[#222222] hover:text-white'>
+                    {billingAddresses.length > 0 && <Link href='?addNewBillingAddress=true'
+                                                          className='py-2 px-4 text-sm rounded-3xl ring-1 ring-[#222222] ring-inset hover:bg-[#222222] hover:text-white'>
                         ADD NEW ADDRESS
                     </Link>}
                 </div>
@@ -76,18 +74,8 @@ export default async function Addresses({searchParams}: {
                               className='cursor-pointer py-2 px-4 text-sm text-white rounded-3xl w-max mx-auto hover:bg-black bg-[#222222]'>
                             ADD ONE
                         </Link>
-                    </div> :
-                    <>
-                        {billingAddresses.map((billingAddress, index) =>
-                            <div key={index}>
-                                <p>{billingAddress.firstName!.toString()}</p>
-                                <p>{billingAddress.noAndSt!.toString()}, {billingAddress.stateOrProvince!.toString()} {billingAddress.postalCode!.toString()}</p>
-                                <p>{billingAddress.country!.toString()}</p><br/>
-                                <p>{billingAddress.email!!.toString()}</p>
-                                <p>{billingAddress.phoneNumber!.toString()}</p>
-                            </div>)
-                        }
-                    </>
+                    </div>
+                    : <AddressRadioGroup addresses={billingAddresses}/>
                 }
             </div>
         </>
