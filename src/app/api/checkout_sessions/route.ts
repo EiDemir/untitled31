@@ -9,36 +9,24 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 export async function POST(request: Request) {
-    const user = await getCurrentUser();
+    const user = await getCurrentUser(true);
 
     if (!user) {
         return NextResponse.error();
     }
 
-    const userCart = await prisma.user.findUnique({
-        where: {
-            id: user.id
-        }, select: {
-            cart: {
-                include: {
-                    product: true
-                }
-            }
-        }
-    });
-
     const order = await prisma.order.create({
         data: {
             userId: user.id,
             items: {
-                set: userCart!.cart.map(item => ({
+                set: user.cart.map(item => ({
                     quantity: item.quantity,
-                    productId: item.productId as string,
+                    productId: item.product!.id,
                     color: item.color,
                     size: item.size,
                     price: item.product!.price
                 }))
-            }, status: ''
+            }, status: 'pending'
         }
     });
     await prisma.user.update({
@@ -55,7 +43,7 @@ export async function POST(request: Request) {
         const params: Stripe.Checkout.SessionCreateParams = {
             payment_method_types: ['card'],
             mode: 'payment',
-            line_items: userCart!.cart.map(item => ({
+            line_items: user.cart.map(item => ({
                 quantity: item.quantity,
                 price: item.product!.stripePriceID!
             })),
