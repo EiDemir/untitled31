@@ -238,7 +238,7 @@ export default function Cart({cartItems}: {
                 </div>
             }
             <div className='w-1/3 sticky top-0 flex flex-col gap-y-5'>
-                <div className='p-8 h-min rounded-3xl ring-1 ring-[#222222] bg-white/50 backdrop-blur-md'>
+                <div className='p-8 h-min rounded-3xl ring-1 ring-inset ring-[#222222] bg-white/50 backdrop-blur-md'>
                     <h1 className='font-medium mb-6'>CART TOTALS</h1>
                     <div className='divide-y'>
                         <div className='font-medium py-4 text-sm grid grid-cols-2'>

@@ -3,7 +3,7 @@ import {prisma} from "@/libs/prisma";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {cache} from 'react';
 
-const getCurrentUser = cache(async () => {
+const getCurrentUser = cache(async (includeStripeId = false) => {
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.email) return null;
@@ -20,7 +20,8 @@ const getCurrentUser = cache(async () => {
                             name: true,
                             price: true,
                             quantity: true,
-                            id: true
+                            id: true,
+                            stripePriceID: includeStripeId
                         }
                     }, color: true,
                     size: true,
