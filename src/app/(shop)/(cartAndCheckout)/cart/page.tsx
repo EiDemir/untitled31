@@ -1,7 +1,7 @@
 import getCurrentUser from "@/actions/getCurrentUser";
 import Cart from "@/app/(shop)/(cartAndCheckout)/cart/Cart";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 1;
 
 async function getCardItems() {
     const user = await getCurrentUser();
