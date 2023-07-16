@@ -1,7 +1,5 @@
 import getCurrentUser from "@/actions/getCurrentUser";
-import Cart from "@/app/(shop)/(cartAndCheckout)/cart/Cart";
-
-export const revalidate = 1;
+import Cart from "./Cart";
 
 async function getCardItems() {
     const user = await getCurrentUser();
