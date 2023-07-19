@@ -16,7 +16,8 @@ async function getBestSellingProducts() {
                     name: true
                 }
             }, id: true
-        }
+        }, take: 8,
+        skip: 4
     });
 }
 
@@ -28,7 +29,8 @@ export default async function Page() {
             <div className='mx-auto font-bold text-4xl'>
                 Best Selling
             </div>
-            <div className='h-[calc(_calc(_calc(80vw_-_20px)_*_0.75018755)_+_74px)] sm:h-[calc(_calc(_calc(80vw_-_40px)_*_0.50012503)_+_76px)] lg:h-[calc(_calc(_calc(80vw_-_60px)_*_0.37509377)_+_77px)]'>
+            <div
+                className='h-[calc(_calc(_calc(80vw_-_20px)_*_0.75018755)_+_74px)] sm:h-[calc(_calc(_calc(80vw_-_40px)_*_0.50012503)_+_76px)] lg:h-[calc(_calc(_calc(80vw_-_60px)_*_0.37509377)_+_77px)]'>
                 <BestSellingProducts products={products}/>
             </div>
         </div>
