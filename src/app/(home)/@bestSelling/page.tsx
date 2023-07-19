@@ -1,6 +1,8 @@
 import {prisma} from "@/libs/prisma";
 import dynamic from "next/dynamic";
 
+export const revalidate = 3600;
+
 const BestSellingProducts = dynamic(() => import('./BestSellingProducts'), {ssr: false});
 
 async function getBestSellingProducts() {

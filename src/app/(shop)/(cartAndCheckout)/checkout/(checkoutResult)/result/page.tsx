@@ -1,10 +1,19 @@
 import {notFound} from "next/navigation";
 import {CheckCircleIcon} from "@heroicons/react/24/solid";
 import Stripe from "stripe";
+import {prisma} from "@/libs/prisma";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: '2022-11-15'
 });
+
+async function getOrder(stripeSessionID: string) {
+    return prisma.order.findUnique({
+        where: {
+            stripeSessionID
+        }
+    });
+}
 
 export default async function Page({searchParams}: {
     searchParams: {
@@ -14,18 +23,27 @@ export default async function Page({searchParams}: {
     if (!searchParams.session_id || !searchParams.session_id.startsWith('cs_'))
         notFound();
 
+    const order = await getOrder(searchParams.session_id);
+    if (!order) notFound();
+    if (order.status === 'paid') notFound();
+
     let checkout_session: Stripe.Checkout.Session;
 
     try {
         checkout_session = await
-            stripe.checkout.sessions.retrieve(searchParams.session_id, {
-                expand: ['payment_intent']
+            stripe.checkout.sessions.retrieve(searchParams.session_id);
+
+        if (checkout_session.payment_status === 'paid')
+            await prisma.order.update({
+                where: {
+                    id: order.id
+                }, data: {
+                    status: 'paid'
+                }
             });
     } catch (e) {
         notFound();
     }
-
-    console.log(checkout_session);
 
     return (
         <div className='text-center flex flex-col justify-center gap-y-9 w-full'>

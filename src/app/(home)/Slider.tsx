@@ -8,7 +8,7 @@ import Image, {StaticImageData} from "next/image";
 const sliderVariants = {
     initial: {
         opacity: 0,
-        y: 10
+        y: 15
     },
     animate: {
         opacity: 1,
@@ -16,7 +16,7 @@ const sliderVariants = {
     },
     exit: {
         opacity: 0,
-        y: -10
+        y: -15
     }
 };
 
@@ -40,9 +40,7 @@ export default function Slider({details}: {
     const [active, setActive] = useState(0);
     const ref = useRef(null);
     const {scrollY} = useScroll({target: ref});
-    const y = useTransform(scrollY, [0, 500], [0, -120]);
-    const dotsY = useTransform(scrollY, [0, 500], [0, -120]);
-    const imageY = useTransform(scrollY, [500, 1000], [0, 200]);
+    const imageY = useTransform(scrollY, [0, 1000], [0, 500]);
 
     const dotClickHandler = (dotNumber: number) => {
         if (!areButtonsDisabled) {
@@ -70,8 +68,7 @@ export default function Slider({details}: {
 
 
     const dots = (
-        <motion.div style={{y: dotsY}}
-                    className='absolute left-[3.6vw] sm:left-[5vw] md:left-[60px] flex flex-col gap-y-4'>
+        <motion.div className='absolute left-[3.6vw] sm:left-[5vw] md:left-[60px] flex flex-col gap-y-4'>
             {range(details.length).map(i =>
                 <motion.div
                     initial={false}
@@ -98,8 +95,8 @@ export default function Slider({details}: {
                     className='absolute inset-0 overflow-hidden'
                     variants={sliderVariants}
                     transition={{
-                        duration: 0.3,
-                        delayChildren: 0.5
+                        duration: 0.7,
+                        delayChildren: 1.2
                     }}
                     initial='initial'
                     animate='animate'
@@ -109,8 +106,7 @@ export default function Slider({details}: {
                     <div className='relative items-center flex'>
                         <motion.div
                             variants={textVariants}
-                            style={{y}}
-                            className='uppercase text-[#E893CF] text-left absolute right-4 left-[10vw]'>
+                            className='uppercase text-[#E893CF] text-left absolute right-4 left-[10vw] z-10'>
                             <div className='ml-1 flex flex-row items-center gap-x-2'>
                                 <div className='h-0.5 w-10 bg-white'/>
                                 <p className='text-sm font-medium'>{details[active].date}</p>

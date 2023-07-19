@@ -62,7 +62,7 @@ export default function BestSellingProducts({products}: {
                 </svg>
             </button>
             <div
-                className="flex w-[80vw] gap-x-5 z-0">
+                className="flex w-[80vw] gap-x-6 z-0">
                 <AnimatePresence initial={false} mode='popLayout' custom={direction}>
                     {currentProducts.map(i => {
                             const {

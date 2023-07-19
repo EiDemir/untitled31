@@ -15,30 +15,6 @@ export async function POST(request: Request) {
         return NextResponse.error();
     }
 
-    await prisma.order.create({
-        data: {
-            userId: user.id,
-            items: {
-                set: user.cart.map(item => ({
-                    quantity: item.quantity,
-                    productId: item.product!.id,
-                    color: item.color,
-                    size: item.size,
-                    price: item.product!.price
-                }))
-            }, status: 'pending'
-        }
-    });
-    await prisma.user.update({
-        where: {
-            id: user.id
-        }, data: {
-            cart: {
-                deleteMany: {}
-            }
-        }
-    });
-
     try {
         const params: Stripe.Checkout.SessionCreateParams = {
             payment_method_types: ['card'],
@@ -52,6 +28,31 @@ export async function POST(request: Request) {
         };
         const checkoutSession: Stripe.Checkout.Session =
             await stripe.checkout.sessions.create(params);
+
+        await prisma.order.create({
+            data: {
+                userId: user.id,
+                items: {
+                    set: user.cart.map(item => ({
+                        quantity: item.quantity,
+                        productId: item.product!.id,
+                        color: item.color,
+                        size: item.size,
+                        price: item.product!.price
+                    }))
+                }, status: 'pending',
+                stripeSessionID: checkoutSession.id
+            }
+        });
+        await prisma.user.update({
+            where: {
+                id: user.id
+            }, data: {
+                cart: {
+                    deleteMany: {}
+                }
+            }
+        });
 
         return NextResponse.json(checkoutSession);
     } catch (err) {
