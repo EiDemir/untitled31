@@ -4,37 +4,38 @@ import Image from "next/image";
 import {motion} from "framer-motion";
 import {ForwardedRef, forwardRef, useState} from "react";
 import Link from "next/link";
-import {useWindowSize} from "usehooks-ts";
 
 const variants = {
-    initial: (custom: number[]) => ({
-        x: custom[0] === 1 ? custom[1] : custom[0] === -1 ? -custom[1] : 0,
+    initial: (custom: number) => ({
+        x: custom === 1 ? -20 : custom === -1 ? 20 : 0,
         opacity: 0,
+        scale: 0.5,
         zIndex: -10,
     }),
     animate: {
         x: 0,
         opacity: 1,
+        scale: 1,
         zIndex: 0,
     },
-    exit: (custom: number[]) => ({
-        x: custom[0] === 1 ? -custom[1] : custom[0] === -1 ? custom[1] : 0,
-        opacity: !custom[0] ? 1 : 0,
+    exit: (custom: number) => ({
+        x: custom === 1 ? 20 : custom === -1 ? -20 : 0,
+        opacity: !custom ? 1 : 0,
         zIndex: -10,
+        scale: 0.5,
         transition: {
             duration: !custom ? 0 : 0.5
         }
     })
 };
 
-const ProductItem = forwardRef(({imageLink, category, title, price, direction, id, width}: {
+const ProductItem = forwardRef(({imageLink, category, title, price, direction, id}: {
     imageLink: string,
     category: string,
     title: string,
     price: number,
     direction: number,
-    id: string,
-    width: number
+    id: string
 }, ref: ForwardedRef<HTMLDivElement>) => {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -42,14 +43,14 @@ const ProductItem = forwardRef(({imageLink, category, title, price, direction, i
         <motion.div
             ref={ref}
             layout
-            custom={[direction, width]}
+            custom={direction}
             variants={variants}
             initial='initial'
             animate='animate'
             exit='exit'
             transition={{
-                duration: 0.5,
-                ease: 'easeOut'
+                type: 'spring',
+                stiffness: 50
             }}
             className="gap-y-3 flex flex-col">
             <div onMouseEnter={() => setIsHovered(true)}
