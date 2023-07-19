@@ -16,23 +16,23 @@ export default function Countdown({endDate}: { endDate: Date }) {
     }, [count, endDate])
 
     return (
-        <div className='flex gap-x-3' suppressHydrationWarning>
+        <div className='flex gap-x-3'>
             <div className='flex flex-col gap-y-1'>
-                <p className='text-lg font-medium text-[#222222]'>{days.toString().padStart(2, '0')}</p>
+                <p className='text-lg font-medium text-[#222222]' suppressHydrationWarning>{days.toString().padStart(2, '0')}</p>
                 <p className='text-sm text-[#767676]'>DAYS</p>
             </div>
             <div className='flex flex-col gap-y-1'>
-                <p className='text-lg font-medium text-[#222222]'><span
+                <p className='text-lg font-medium text-[#222222]' suppressHydrationWarning><span
                     className='font-normal'>:</span> {hours.toString().padStart(2, '0')}</p>
                 <p className='text-sm pl-2 text-[#767676]'>HOURS</p>
             </div>
             <div className='flex flex-col gap-y-1'>
-                <p className='text-lg font-medium text-[#222222]'><span
+                <p className='text-lg font-medium text-[#222222]' suppressHydrationWarning><span
                     className='font-normal'>:</span> {minutes.toString().padStart(2, '0')}</p>
                 <p className='text-sm pl-2 text-[#767676]'>MINS</p>
             </div>
             <div className='flex flex-col gap-y-1'>
-                <p className='text-lg font-medium text-[#222222] w-max'><span
+                <p className='text-lg font-medium text-[#222222] w-max' suppressHydrationWarning><span
                     className='font-normal'>:</span> {seconds.toString().padStart(2, '0')}</p>
                 <p className='text-sm pl-2 text-[#767676]'>SEC</p>
             </div>
