@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {
     AnimatePresence
 } from "framer-motion";
-import {useMediaQuery} from "usehooks-ts";
+import {useMediaQuery, useWindowSize} from "usehooks-ts";
 import ProductItem from "@/components/product/ProductItem";
 
 export const revalidate = 60;
@@ -14,9 +14,10 @@ export default function BestSellingProducts({products}: {
         images: string[], category: { name: string }, name: string, price: number, id: string
     }[]
 }) {
+    const { width } = useWindowSize();
     const windowWidth = [useMediaQuery('(min-width: 640px)'), useMediaQuery('(min-width: 1024px)')];
     const [[currentProducts, direction], setCurrentProducts] = useState<[number[], number]>([
-        windowWidth[1] ? [0, 1, 2, 3] : windowWidth[0] ? [0, 1, 2] : [0, 1]
+        windowWidth[1] ? [0, 1, 2, 3, 4] : windowWidth[0] ? [0, 1, 2, 3] : [0, 1, 2]
         , 0]);
     const [areButtonsDisabled, setAreButtonsDisabled] = useState(false);
 
@@ -43,8 +44,8 @@ export default function BestSellingProducts({products}: {
 
     useEffect(() => setCurrentProducts(prevState => {
         const sec = prevState[0][1];
-        const newArray = windowWidth[1] ? [...prevState[0].slice(0, 2), sec + 1, sec + 2] :
-            windowWidth[0] ? [...prevState[0].slice(0, 2), sec + 1] : prevState[0].slice(0, 2);
+        const newArray = windowWidth[1] ? [...prevState[0].slice(0, 2), sec + 1, sec + 2, sec + 3] :
+            windowWidth[0] ? [...prevState[0].slice(0, 2), sec + 1, sec + 2] : [...prevState[0].slice(0, 2), sec + 1];
         return [newArray, 0];
     }), [...windowWidth]);
 
@@ -62,7 +63,7 @@ export default function BestSellingProducts({products}: {
                 </svg>
             </button>
             <div
-                className="flex w-[80vw] gap-x-6 z-0">
+                className="flex w-[80vw] gap-x-4 z-0">
                 <AnimatePresence initial={false} mode='popLayout' custom={direction}>
                     {currentProducts.map(i => {
                             const {
@@ -73,6 +74,7 @@ export default function BestSellingProducts({products}: {
                                 id
                             } = products[(i % products.length + products.length) % products.length];
                             return <ProductItem
+                                width={width / 6.8}
                                 direction={direction}
                                 key={i} imageLink={images[0]}
                                 category={category.name}

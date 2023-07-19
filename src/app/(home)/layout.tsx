@@ -1,11 +1,12 @@
 import React, {ReactNode} from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import Slider from "@/app/(home)/Slider";
+import Slider from "./Slider";
 import slide1 from "../../../public/slide1.webp";
 import slide2 from "../../../public/slide2.webp";
 import slide3 from "../../../public/slide3.webp";
 import slide4 from "../../../public/slide4.webp";
+import MainCategories from "./MainCategories";
 
 const sliderDetails = [
     {
@@ -42,6 +43,7 @@ export default async function Layout({bestSelling, mainCategories}: { bestSellin
                 <Slider details={sliderDetails}/>
             </header>
             <main>
+                <MainCategories/>
                 {bestSelling}
                 {mainCategories}
             </main>

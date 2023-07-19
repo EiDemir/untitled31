@@ -4,10 +4,11 @@ import Image from "next/image";
 import {motion} from "framer-motion";
 import {ForwardedRef, forwardRef, useState} from "react";
 import Link from "next/link";
+import {useWindowSize} from "usehooks-ts";
 
 const variants = {
-    initial: (custom: number) => ({
-        x: custom === 1 ? 300 : custom === -1 ? -300 : 0,
+    initial: (custom: number[]) => ({
+        x: custom[0] === 1 ? custom[1] : custom[0] === -1 ? -custom[1] : 0,
         opacity: 0,
         zIndex: -10,
     }),
@@ -16,9 +17,9 @@ const variants = {
         opacity: 1,
         zIndex: 0,
     },
-    exit: (custom: number) => ({
-        x: custom === 1 ? -300 : custom === -1 ? 300 : 0,
-        opacity: !custom ? 1 : 0,
+    exit: (custom: number[]) => ({
+        x: custom[0] === 1 ? -custom[1] : custom[0] === -1 ? custom[1] : 0,
+        opacity: !custom[0] ? 1 : 0,
         zIndex: -10,
         transition: {
             duration: !custom ? 0 : 0.5
@@ -26,13 +27,14 @@ const variants = {
     })
 };
 
-const ProductItem = forwardRef(({imageLink, category, title, price, direction, id}: {
+const ProductItem = forwardRef(({imageLink, category, title, price, direction, id, width}: {
     imageLink: string,
     category: string,
     title: string,
     price: number,
     direction: number,
-    id: string
+    id: string,
+    width: number
 }, ref: ForwardedRef<HTMLDivElement>) => {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -40,7 +42,7 @@ const ProductItem = forwardRef(({imageLink, category, title, price, direction, i
         <motion.div
             ref={ref}
             layout
-            custom={direction}
+            custom={[direction, width]}
             variants={variants}
             initial='initial'
             animate='animate'
