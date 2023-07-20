@@ -74,7 +74,6 @@ export default function BestSellingProducts({products}: {
                                 id
                             } = products[(i % products.length + products.length) % products.length];
                             return <ProductItem
-                                width={width / 6.8}
                                 direction={direction}
                                 key={i} imageLink={images[0]}
                                 category={category.name}
