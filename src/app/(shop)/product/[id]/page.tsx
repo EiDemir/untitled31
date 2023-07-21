@@ -70,8 +70,7 @@ export default async function Page({params}: { params: { id: string } }) {
                     colors: product.colors,
                     sizes: product.sizes,
                     category: product.categories[0].name
-                }}
-                               user={userInfo}/>
+                }} user={userInfo}/>
             </div>
             <ProductSections
                 isAuthenticated={userInfo !== null}
