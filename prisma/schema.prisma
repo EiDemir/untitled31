@@ -65,8 +65,8 @@ model VerificationToken {
 model Product {
   id            String         @id @default(auto()) @map("_id") @db.ObjectId
   name          String
-  category      Category       @relation(fields: [categoryId], references: [id])
-  categoryId    String         @db.ObjectId
+  categories    Category[]     @relation(fields: [categoryIDs], references: [id])
+  categoryIDs   String[]       @db.ObjectId
   price         Float
   quantity      Int
   images        String[]
@@ -118,9 +118,10 @@ model Review {
 }
 
 model Category {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  name     String    @unique
-  products Product[]
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String    @unique
+  products    Product[] @relation(fields: [productsIDs], references: [id])
+  productsIDs String[]  @db.ObjectId
 }
 
 type UserVote {

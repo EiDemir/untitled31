@@ -47,7 +47,7 @@ export async function GET(request: Request, {params}: {
                 } : {},
                 select: {
                     images: true,
-                    category: true,
+                    categories: true,
                     name: true,
                     price: true,
                     id: true,

@@ -11,7 +11,7 @@ async function getBestSellingProducts() {
             images: true,
             name: true,
             price: true,
-            category: {
+            categories: {
                 select: {
                     name: true
                 }

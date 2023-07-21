@@ -11,7 +11,7 @@ export const revalidate = 60;
 
 export default function BestSellingProducts({products}: {
     products: {
-        images: string[], category: { name: string }, name: string, price: number, id: string
+        images: string[], categories: { name: string }[], name: string, price: number, id: string
     }[]
 }) {
     const { width } = useWindowSize();
@@ -68,7 +68,7 @@ export default function BestSellingProducts({products}: {
                     {currentProducts.map(i => {
                             const {
                                 images,
-                                category,
+                                categories,
                                 name,
                                 price,
                                 id
@@ -76,7 +76,7 @@ export default function BestSellingProducts({products}: {
                             return <ProductItem
                                 direction={direction}
                                 key={i} imageLink={images[0]}
-                                category={category.name}
+                                category={categories[0].name}
                                 title={name}
                                 price={price}
                                 id={id}/>;

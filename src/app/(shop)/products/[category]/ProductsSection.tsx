@@ -33,7 +33,7 @@ async function getCategoryProducts(categoryName: string, page: number, colors: s
                 } : {},
                 select: {
                     images: true,
-                    category: true,
+                    categories: true,
                     name: true,
                     price: true,
                     id: true

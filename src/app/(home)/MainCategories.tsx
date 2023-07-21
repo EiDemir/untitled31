@@ -2,11 +2,14 @@
 
 import {motion} from "framer-motion";
 import Image from "next/image";
+import {useRouter} from "next/navigation";
 
 export default function MainCategories() {
+    const router = useRouter();
+
     return (
         <div className='flex gap-x-4 h-[500px] mt-16 mx-[10vw]'>
-            <motion.div whileHover={{scale: 1.1, zIndex: 10}} transition={{
+            <motion.div onClick={() => router.push('/products/women')} whileHover={{scale: 1.1, zIndex: 10}} transition={{
                 duration: 0.2
             }} className='cursor-pointer w-1/2 bg-[#E7E6E4] rounded-xl h-full relative drop-shadow-sm overflow-hidden'>
                 <div className='absolute bottom-7 left-7 flex flex-col gap-y-1 text-[#222222] z-10'>

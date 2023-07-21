@@ -5,14 +5,14 @@ import {useEffect, useState} from "react";
 import {motion} from "framer-motion";
 import axios from "axios";
 import LoadingAnimation from "@/components/ui/LoadingAnimation";
-import {useSearchParams} from "next/navigation";
+import {usePathname, useSearchParams} from "next/navigation";
 import _ from 'lodash';
 
 export default function CategoryScroll({initialProducts}: {
     initialProducts: {
         products: {
             images: string[],
-            category: { id: string, name: string } & {},
+            categories: ({ id: string, name: string } & {})[],
             name: string,
             price: number,
             id: string
@@ -23,6 +23,7 @@ export default function CategoryScroll({initialProducts}: {
     const [products, setProducts] = useState(initialProducts.products);
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
+    const pathname = usePathname();
     const searchParams = useSearchParams();
 
     useEffect(() => {
@@ -32,7 +33,7 @@ export default function CategoryScroll({initialProducts}: {
 
     const getProducts = () => {
         setIsLoading(true);
-        axios.get(`/api/products/${products[0].category.name}?take=24&id=${_.last(products)!.id}${searchParams.get('color') ? `&color=${searchParams.get('color')}` : ''}${searchParams.get('minPrice') ? `&minPrice=${searchParams.get('minPrice')}` : ''}${searchParams.get('maxPrice') ? `&maxPrice=${searchParams.get('maxPrice')}` : ''}${searchParams.get('sort') ? `&sort=${searchParams.get('sort')}` : ''}`).then((res) => {
+        axios.get(`/api/products/${pathname.split('/')[2]}?take=24&id=${_.last(products)!.id}${searchParams.get('color') ? `&color=${searchParams.get('color')}` : ''}${searchParams.get('minPrice') ? `&minPrice=${searchParams.get('minPrice')}` : ''}${searchParams.get('maxPrice') ? `&maxPrice=${searchParams.get('maxPrice')}` : ''}${searchParams.get('sort') ? `&sort=${searchParams.get('sort')}` : ''}`).then((res) => {
             setProducts(prevState => [...prevState, ...res.data.products.products]);
             setIsLoading(false);
             setPage(prevState => prevState + 1);
@@ -43,7 +44,7 @@ export default function CategoryScroll({initialProducts}: {
         <>
             <div className='grid grid-cols-4 gap-5'>
                 {products.map((item) =>
-                    <CategoryItem key={item.id} imageLink={item.images[0]} category={item.category.name}
+                    <CategoryItem key={item.id} imageLink={item.images[0]} categories={item.categories}
                                   title={item.name}
                                   price={item.price} id={item.id}/>)}
             </div>

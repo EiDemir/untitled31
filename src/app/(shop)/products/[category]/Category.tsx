@@ -11,7 +11,7 @@ export default function Category({products}: {
     products: {
         products: {
             images: string[],
-            category: { id: string, name: string } & {},
+            categories: ({ id: string, name: string } & {})[],
             name: string,
             price: number,
             id: string
@@ -28,7 +28,7 @@ export default function Category({products}: {
         <>
             <div className='grid grid-cols-4 gap-7'>
                 {products.products.map(item =>
-                    <CategoryItem key={item.id} imageLink={item.images[0]} category={item.category.name}
+                    <CategoryItem key={item.id} imageLink={item.images[0]} categories={item.categories}
                                   title={item.name}
                                   price={item.price} id={item.id}/>)}
             </div>

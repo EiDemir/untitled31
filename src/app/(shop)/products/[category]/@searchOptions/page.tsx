@@ -14,8 +14,10 @@ async function getSizes(category: string) {
 async function getMinAndMaxPrices(category: string) {
     return prisma.product.aggregate({
         where: {
-            category: {
-                name: category
+            categories: {
+                some: {
+                    name: category
+                }
             }
         }, _min: {
             price: true

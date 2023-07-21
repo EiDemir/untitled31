@@ -18,9 +18,9 @@ const variants = {
     }
 };
 
-export default function CategoryItem({imageLink, category, title, price, id}: {
+export default function CategoryItem({imageLink, categories, title, price, id}: {
     imageLink: string,
-    category: string,
+    categories: { name: string }[],
     title: string,
     price: number,
     id: string
@@ -55,7 +55,7 @@ export default function CategoryItem({imageLink, category, title, price, id}: {
                 </motion.div>
             </div>
             <div className='flex flex-col font-normal'>
-                <p className="text-[#B9A16B] text-sm">{category}</p>
+                <p className="text-[#B9A16B] text-sm">{categories[0].name}</p>
                 <p className="text-base">{title}</p>
                 <p className="text-[#767676] text-base">${price}</p>
             </div>

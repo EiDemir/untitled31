@@ -35,7 +35,10 @@ const sliderDetails = [
     }
 ];
 
-export default async function Layout({bestSelling, mainCategories}: { bestSelling: ReactNode, mainCategories: ReactNode }) {
+export default async function Layout({bestSelling, mainCategories}: {
+    bestSelling: ReactNode,
+    mainCategories: ReactNode
+}) {
     return (
         <>
             <header className='overflow-hidden h-screen bg-[#222222]'>
