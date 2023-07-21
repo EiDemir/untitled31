@@ -22,7 +22,7 @@ async function getProduct(productId?: string) {
                     select: {
                         reviews: true
                     }
-                }, category: {
+                }, categories: {
                     select: {
                         name: true
                     }
@@ -69,7 +69,7 @@ export default async function Page({params}: { params: { id: string } }) {
                     maxQuantity: product.quantity,
                     colors: product.colors,
                     sizes: product.sizes,
-                    category: product.category.name
+                    category: product.categories[0].name
                 }}
                                user={userInfo}/>
             </div>
