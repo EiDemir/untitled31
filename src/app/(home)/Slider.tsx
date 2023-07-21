@@ -106,7 +106,7 @@ export default function Slider({details}: {
                     <div className='relative items-center flex'>
                         <motion.div
                             variants={textVariants}
-                            className='uppercase text-[#E893CF] text-left absolute right-4 left-[10vw] z-10'>
+                            className='uppercase text-white text-left absolute right-4 left-[10vw] z-10'>
                             <div className='ml-1 flex flex-row items-center gap-x-2'>
                                 <div className='h-0.5 w-10 bg-white'/>
                                 <p className='text-sm font-medium'>{details[active].date}</p>
@@ -122,7 +122,8 @@ export default function Slider({details}: {
                             </motion.button>
                         </motion.div>
                         <motion.div style={{y: imageY}}>
-                            <Image priority className='h-screen overflow-hidden object-cover' src={details[active].imageLink}
+                            <Image priority className='h-screen overflow-hidden object-cover'
+                                   src={details[active].imageLink}
                                    alt='Slider image'/>
                         </motion.div>
                     </div>
