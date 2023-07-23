@@ -73,22 +73,41 @@ export default function Header({startWithWhite}: {
                         animate={isOpen ? "open" : 'closed'}
                         custom={height}
                         ref={containerRef}>
-                <motion.div className="background z-40" variants={{
+                <motion.div className="background z-40 p-14" variants={{
                     open: (height = 1000) => ({
                         clipPath: `circle(${height * 2 + 200}px at 0px 0px)`,
                         transition: {
                             ease: 'easeInOut',
-                            duration: 1
+                            duration: 0.5
                         }
                     }),
                     closed: {
                         clipPath: `circle(0px at 0px 0px)`,
                         transition: {
                             type: 'easeInOut',
-                            duration: 0.7
+                            duration: 0.3
                         }
                     }
-                }}/>
+                }}>
+                    <motion.div className='text-[#222222]' initial={{opacity: 0}} animate={{
+                        opacity: 1,
+                        transition: {
+                            staggerChildren: 0.2,
+                            delay: 0.5
+                        }
+                    }}>
+                        <SearchBox className='block sm:hidden w-full'/>
+                        <motion.h1 className='text-3xl' initial={{opacity: 0, x: -10}}
+                                   animate={{opacity: 1, x: 0}}>CATEGORIES
+                        </motion.h1>
+                        <motion.p className='text-lg' initial={{opacity: 0, x: -10}}
+                                  animate={{opacity: 1, x: 0}}>DRESSES
+                        </motion.p>
+                        <motion.p className='text-lg' initial={{opacity: 0, x: -10}}
+                                  animate={{opacity: 1, x: 0}}>WOMEN
+                        </motion.p>
+                    </motion.div>
+                </motion.div>
                 <MenuToggle color={isLight ? 'white' : '#222222'} toggle={menuHandler}/>
             </motion.div>
 
@@ -114,7 +133,7 @@ export default function Header({startWithWhite}: {
                         </ul>
                     </div>
                     <div className="flex justify-self-end justify-between items-center gap-x-4 md:2/3 lg:w-1/2">
-                        <SearchBox/>
+                        <SearchBox className='hidden sm:block'/>
                         {
                             status === 'loading' &&
                             <>

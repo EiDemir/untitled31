@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 
-export default function SearchBox() {
+export default function SearchBox({className}: {className?: string}) {
     const [value, setValue] = useState('');
     const [results, setResults] = useState<{
         products: { name: string, id: string, images: string[], price: number }[],
@@ -32,7 +32,7 @@ export default function SearchBox() {
     }, [value])
 
     return (
-        <Popover className='w-3/4 relative'>
+        <Popover className={'w-3/4 relative ' + className}>
             <Popover.Button
                 className='rounded-full text-left pl-12 z-10 cursor-text text-black w-full min-w-[300px] bg-gray-200/50 backdrop-blur-md py-3'>
                 <MagnifyingGlassIcon
