@@ -116,7 +116,7 @@ export default function Slider({details}: {
                             <motion.button whileHover={{
                                 scale: 1.1
                             }} type='button'
-                                           className='rounded-full mt-5 bg-white text-sm font-medium px-11 py-[18px] flex items-center gap-x-2.5'>
+                                           className='rounded-full mt-5 bg-white text-black text-sm font-medium px-11 py-[18px] flex items-center gap-x-2.5'>
                                 <div className='h-0.5 w-5 bg-black'/>
                                 DISCOVER NOW
                             </motion.button>

@@ -30,7 +30,6 @@ export default function Header({startWithWhite}: {
     const {height} = useDimensions(containerRef);
     const scroll = useScroll();
 
-    const [isHovered1, setIsHovered1] = useState(false);
     const [isHovered2, setIsHovered2] = useState(false);
     const [isHovered3, setIsHovered3] = useState(false);
     const [isHovered4, setIsHovered4] = useState(false);
