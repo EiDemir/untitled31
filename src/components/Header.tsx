@@ -107,10 +107,10 @@ export default function Header({startWithWhite}: {
                         {/*<div className='w-[25px] h-[25px]'/>*/}
                         <ul className="lg:flex lg:gap-x-7 hidden lg:visible">
                             <li><Link href='/'>HOME</Link></li>
-                            <li><Link href='/shop'>SHOP</Link></li>
-                            <li><Link href='/collection'>COLLECTION</Link></li>
-                            <li><Link href='/journal'>JOURNAL</Link></li>
-                            <li><Link href='/lookbook'>LOOKBOOK</Link></li>
+                            <li><Link href='/products/dresses'>SHOP</Link></li>
+                            <li><Link href='/'>COLLECTION</Link></li>
+                            <li><Link href='/'>JOURNAL</Link></li>
+                            <li><Link href='/'>LOOKBOOK</Link></li>
                         </ul>
                     </div>
                     <div className="flex justify-self-end justify-between items-center gap-x-4 md:2/3 lg:w-1/2">
