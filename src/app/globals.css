@@ -64,7 +64,8 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #222222;
+    border-radius: 10px;
+    background-color: transparent;
 }
 
 textarea::-webkit-scrollbar {
