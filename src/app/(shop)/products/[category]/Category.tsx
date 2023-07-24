@@ -26,7 +26,7 @@ export default function Category({products}: {
 
     return (
         <>
-            <div className='grid grid-cols-4 gap-7'>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-7'>
                 {products.products.map(item =>
                     <CategoryItem key={item.id} imageLink={item.images[0]} categories={item.categories}
                                   title={item.name}
