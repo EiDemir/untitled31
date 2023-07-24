@@ -106,9 +106,9 @@ export default function Cart({cartItems}: {
     };
 
     return (
-        <div className='flex gap-x-8'>
+        <div className='flex flex-col md:flex-row gap-x-8'>
             {items.length ?
-                <div className='flex flex-col gap-y-7 w-2/3'>
+                <div className='flex flex-col gap-y-7 md:w-2/3'>
                     <table
                         className='h-min rounded-3xl table-auto text-sm ring-1 ring-[#E4E4E4] ring-inset'>
                         <thead className='bg-[#E4E4E4] drop-shadow-sm h-12'>
@@ -237,7 +237,7 @@ export default function Cart({cartItems}: {
                     Your Cart is Empty.
                 </div>
             }
-            <div className='w-1/3 sticky top-0 flex flex-col gap-y-5'>
+            <div className='md:w-1/3 md:sticky top-0 flex flex-col gap-y-5'>
                 <div className='p-8 h-min rounded-3xl ring-1 ring-inset ring-[#222222] bg-white/50 backdrop-blur-md'>
                     <h1 className='font-medium mb-6'>CART TOTALS</h1>
                     <div className='divide-y'>
