@@ -66,7 +66,7 @@ export default function SearchOptions({colors, sizes, minMaxPrices}: {
     }
 
     return (
-        <div className='w-1/5 sticky top-20 h-max'>
+        <div className='md:w-1/5 sticky top-20 h-max'>
             <div className='drop-shadow-sm overflow-hidden'>
                 <div
                     onClick={() => setIsOpen(prevState => prevState.map((value, index) => index === 0 ? !value : value))}
