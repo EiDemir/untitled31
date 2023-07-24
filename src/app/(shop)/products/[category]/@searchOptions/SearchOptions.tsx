@@ -79,7 +79,7 @@ export default function SearchOptions({colors, sizes, minMaxPrices}: {
                 <AnimatePresence>
                     {isOpen[0] ? <SearchOptionBody className='search-option-body' key='category'>
                         <>
-                            <h1 className='text-black pt-10'>KOSKESH</h1>
+                            <h1 className='text-black pt-10'></h1>
                         </>
                     </SearchOptionBody> : null}
                 </AnimatePresence>
