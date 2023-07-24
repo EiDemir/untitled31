@@ -42,7 +42,7 @@ export default function CategoryScroll({initialProducts}: {
 
     return (
         <>
-            <div className='grid grid-cols-4 gap-5'>
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                 {products.map((item) =>
                     <CategoryItem key={item.id} imageLink={item.images[0]} categories={item.categories}
                                   title={item.name}
