@@ -14,7 +14,7 @@ export default function CategoryHeader({category}: { category: string }) {
             </div>
             <div className='px-[1.4vw] sm:px-0 md:px-[calc(5vw_-_60px)] lg:px-[calc(10vw_-_60px)] z-10'>
                 <motion.h1 initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{duration: 0.2}} key={category}
-                           className='uppercase text-8xl font-bold text-black'>{category}</motion.h1>
+                           className='uppercase text-4xl md:text-8xl font-bold text-black'>{category}</motion.h1>
             </div>
         </div>
     );
