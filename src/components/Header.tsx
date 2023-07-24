@@ -1,6 +1,6 @@
 'use client';
 
-import {motion, useMotionValueEvent, useScroll} from "framer-motion";
+import {AnimatePresence, motion, useMotionValueEvent, useScroll} from "framer-motion";
 import {MenuToggle} from "@/components/MenuToggle";
 import {useContext, useEffect, useRef, useState} from "react";
 import {useDimensions} from "@/hooks/use-dimensions";
@@ -16,6 +16,33 @@ import {usePathname} from "next/navigation";
 import {getCartItemsNumber} from "@/utils/localStorage";
 import {CartItemsNumberContext} from "@/store/CartItemsNumberContext";
 import SearchBox from "@/components/SearchBox";
+import SidebarLink from "@/components/ui/SidebarLink";
+
+const item = {
+    hidden: {opacity: 0, x: -20},
+    show: {opacity: 1, x: 0},
+    exit: {
+        opacity: 0,
+        x: -20
+    }
+};
+
+const list = {
+    hidden: {
+        opacity: 0
+    }, show: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.2,
+            delayChildren: 0.3
+        }
+    }, exit: {
+        transition: {
+            staggerDirection: -1,
+            staggerChildren: 0.1
+        }
+    }
+};
 
 export default function Header({startWithWhite}: {
     startWithWhite: boolean
@@ -73,40 +100,40 @@ export default function Header({startWithWhite}: {
                         animate={isOpen ? "open" : 'closed'}
                         custom={height}
                         ref={containerRef}>
-                <motion.div className="background z-40 p-14" variants={{
+                <motion.div className="background z-40 p-16" variants={{
                     open: (height = 1000) => ({
                         clipPath: `circle(${height * 2 + 200}px at 0px 0px)`,
                         transition: {
                             ease: 'easeInOut',
-                            duration: 0.5
+                            duration: 0.7,
                         }
                     }),
                     closed: {
                         clipPath: `circle(0px at 0px 0px)`,
                         transition: {
                             type: 'easeInOut',
-                            duration: 0.3
+                            duration: 0.5
                         }
                     }
                 }}>
-                    <motion.div className='text-[#222222]' initial={{opacity: 0}} animate={{
-                        opacity: 1,
-                        transition: {
-                            staggerChildren: 0.2,
-                            delay: 0.5
-                        }
-                    }}>
-                        <SearchBox className='block sm:hidden w-full'/>
-                        <motion.h1 className='text-3xl' initial={{opacity: 0, x: -10}}
-                                   animate={{opacity: 1, x: 0}}>CATEGORIES
-                        </motion.h1>
-                        <motion.p className='text-lg' initial={{opacity: 0, x: -10}}
-                                  animate={{opacity: 1, x: 0}}>DRESSES
-                        </motion.p>
-                        <motion.p className='text-lg' initial={{opacity: 0, x: -10}}
-                                  animate={{opacity: 1, x: 0}}>WOMEN
-                        </motion.p>
-                    </motion.div>
+                    <AnimatePresence>
+                        {isOpen &&
+                            <motion.div className='text-[#222222]' variants={list} exit='exit' initial='hidden'
+                                        animate='show'>
+                                <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{
+                                    delay: 0.5
+                                }}>
+                                    <SearchBox className='block sm:hidden w-full mb-5'/>
+                                </motion.div>
+                                <motion.h1 className='text-3xl font-bold mb-4' variants={item}>CATEGORIES
+                                </motion.h1>
+                                <div className='flex flex-col gap-y-3'>
+                                    <SidebarLink href='/products/dresses'>DRESSES</SidebarLink>
+                                    <SidebarLink href='/products/women'>WOMEN</SidebarLink>
+                                    <SidebarLink href='/products/shoes'>SHOES</SidebarLink>
+                                </div>
+                            </motion.div>}
+                    </AnimatePresence>
                 </motion.div>
                 <MenuToggle color={isLight ? 'white' : '#222222'} toggle={menuHandler}/>
             </motion.div>
