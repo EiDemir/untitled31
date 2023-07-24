@@ -100,7 +100,7 @@ export default function Header({startWithWhite}: {
                         animate={isOpen ? "open" : 'closed'}
                         custom={height}
                         ref={containerRef}>
-                <motion.div className="background z-40 p-16" variants={{
+                <motion.div className="background z-40 px-8 md:px-16 py-16" variants={{
                     open: (height = 1000) => ({
                         clipPath: `circle(${height * 2 + 200}px at 0px 0px)`,
                         transition: {
@@ -118,21 +118,21 @@ export default function Header({startWithWhite}: {
                 }}>
                     <AnimatePresence>
                         {isOpen &&
-                            <motion.div className='text-[#222222]' variants={list} exit='exit' initial='hidden'
-                                        animate='show'>
-                                <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{
-                                    delay: 0.5
-                                }}>
-                                    <SearchBox className='block sm:hidden w-full mb-5'/>
+                            <>
+                                <SearchBox className='block sm:hidden w-full mb-5'/>
+                                <motion.div className='text-[#222222]' variants={list} exit='exit' initial='hidden'
+                                            animate='show'>
+                                    <motion.h1 className='text-3xl font-bold mb-4' variants={item}>
+                                        CATEGORIES
+                                    </motion.h1>
+                                    <div className='flex flex-col gap-y-3'>
+                                        <SidebarLink href='/products/dresses'>DRESSES</SidebarLink>
+                                        <SidebarLink href='/products/women'>WOMEN</SidebarLink>
+                                        <SidebarLink href='/products/shoes'>SHOES</SidebarLink>
+                                    </div>
                                 </motion.div>
-                                <motion.h1 className='text-3xl font-bold mb-4' variants={item}>CATEGORIES
-                                </motion.h1>
-                                <div className='flex flex-col gap-y-3'>
-                                    <SidebarLink href='/products/dresses'>DRESSES</SidebarLink>
-                                    <SidebarLink href='/products/women'>WOMEN</SidebarLink>
-                                    <SidebarLink href='/products/shoes'>SHOES</SidebarLink>
-                                </div>
-                            </motion.div>}
+                            </>
+                        }
                     </AnimatePresence>
                 </motion.div>
                 <MenuToggle color={isLight ? 'white' : '#222222'} toggle={menuHandler}/>
