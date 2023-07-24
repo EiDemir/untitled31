@@ -9,7 +9,7 @@ export default function Page({params, searchParams}: {
     searchParams: { page?: string, color?: string, size?: string, minPrice?: string, maxPrice?: string, sort?: string }
 }) {
     return (
-        <div className='w-4/5'>
+        <div className='md:w-4/5'>
             <SortingOptions searchParams={searchParams}/>
             <Suspense key={JSON.stringify(searchParams)} fallback={
                 <div className='grid grid-cols-4 gap-5'>
