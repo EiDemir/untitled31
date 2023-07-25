@@ -105,7 +105,7 @@ export default function Header({startWithWhite}: {
                         clipPath: `circle(${height * 2 + 200}px at 0px 0px)`,
                         transition: {
                             ease: 'easeInOut',
-                            duration: 0.7,
+                            duration: 1,
                         }
                     }),
                     closed: {
