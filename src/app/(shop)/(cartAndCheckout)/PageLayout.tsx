@@ -19,25 +19,25 @@ export default function PageLayout({children}: { children: ReactNode }) {
                     <div className='w-1/3 flex gap-x-2.5'>
                         <span className='text-[#222222] text-base md:text-lg font-medium'>01</span>
                         <div>
-                            <h1 className='text-[#222222] text-base md:text-lg font-medium'>SHOPPING BAG</h1>
-                            <p className='text-[#767676] mdtext-sm'>Manage Your Items List</p>
+                            <h1 className='text-[#222222] text-sm sm:text-base md:text-lg font-medium'>SHOPPING BAG</h1>
+                            <p className='text-[#767676] text-xs sm:text-sm'>Manage Your Items List</p>
                         </div>
                     </div>
                     <div className='w-1/3 flex gap-x-2.5'>
                         <span
                             className={`text-[#${isCheckoutPage ? '2222222' : '767676'}] text-base md:text-lg font-medium`}>02</span>
                         <div>
-                            <h1 className={`text-[#${isCheckoutPage ? '2222222' : '767676'}] text-base md:text-lg font-medium`}>SHIPPING
+                            <h1 className={`text-[#${isCheckoutPage ? '2222222' : '767676'}] text-sm sm:text-base md:text-lg font-medium`}>SHIPPING
                                 AND CHECKOUT</h1>
-                            <p className='text-[#767676] text-sm'>Checkout Your Items List</p>
+                            <p className='text-[#767676] text-xs sm:text-sm'>Checkout Your Items List</p>
                         </div>
                     </div>
                     <div className='w-1/3 flex gap-x-2.5'>
                         <span
                             className={`text-[#${isCheckoutResultPage ? '2222222' : '767676'}] text-base md:text-lg font-medium`}>03</span>
                         <div>
-                            <h1 className={`text-[#${isCheckoutResultPage ? '2222222' : '767676'}] text-base md:text-lg font-medium`}>CONFIRMATION</h1>
-                            <p className='text-[#767676] text-sm'>Review and Submit Your Order</p>
+                            <h1 className={`text-[#${isCheckoutResultPage ? '2222222' : '767676'}] text-sm sm:text-base md:text-lg font-medium`}>CONFIRMATION</h1>
+                            <p className='text-[#767676] text-xs sm:text-sm'>Your order gets received</p>
                         </div>
                     </div>
                 </div>
