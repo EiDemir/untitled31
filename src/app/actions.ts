@@ -5,6 +5,18 @@ import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
 import {prisma} from "@/libs/prisma";
 
+const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
+
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: process.env.EMAIL_FROM,
+        pass: process.env.EMAIL_PASSWORD
+    }
+});
+
 export async function addShippingAddress(data: FormData) {
     const user = await getCurrentUser();
 
@@ -61,4 +73,44 @@ export async function addBillingAddress(data: FormData) {
 
     revalidatePath('/checkout')
     redirect('/checkout');
+}
+
+export async function addNewUser(data: FormData) {
+    const [email, password, repPassword, name] =
+        [data.get('email') as string, data.get('password') as string, data.get('repPassword') as string, data.get('name') as string];
+
+    if (password !== repPassword)
+        throw new Error('Passwords do not match.');
+
+    const user = await prisma.user.findUnique({
+        where: {
+            email: email
+        }
+    });
+
+    if (user)
+        redirect('/auth/register?alreadyExists=1');
+
+    const hash = await bcrypt.hash(password, 10);
+
+    const newUser = await prisma.user.create({
+        data: {
+            email,
+            name,
+            hashedPassword: hash,
+            verificationToken: crypto.randomBytes(128).toString('hex')
+        }, select: {
+            verificationToken: true
+        }
+    });
+
+    await transporter.sendMail({
+        from: process.env.EMAIL_FROM,
+        to: email,
+        subject: 'Confirm Your Email',
+        text: 'Please click the link below to confirm your email.',
+        html: `<p>Please click <a href='https://untitled32.vercel.app/auth/verify-email?email=${email}&hash=${newUser.verificationToken}'>this link</a> below to confirm your email.</p>`
+    });
+
+    redirect('/auth/login?confirmEmail=1');
 }
