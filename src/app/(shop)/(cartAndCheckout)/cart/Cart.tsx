@@ -233,7 +233,7 @@ export default function Cart({cartItems}: {
                         </button>
                     </motion.div>
                 </div> :
-                <div className='md:w-2/3 md:my-4 flex items-center justify-center text-xl font-medium'>
+                <div className='md:w-2/3 my-24 md:my-0 flex items-center justify-center text-xl font-medium'>
                     Your Cart is Empty.
                 </div>
             }
