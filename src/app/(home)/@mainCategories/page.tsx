@@ -23,7 +23,7 @@ export default async function Page() {
     const products = await getBestSellingProducts();
 
     return (
-        <div className='flex flex-col gap-y-6 px-[10vw] py-10 bg-[#F5E6E0]'>
+        <div className='flex flex-col gap-y-6 md:px-[10vw] px-[3.6vw] sm:px-[5vw] py-10 bg-[#F5E6E0]'>
             <h3 className='text-4xl font-bold text-center'>HOT DEALS</h3>
             <div className='flex md:flex-row flex-col gap-y-10 gap-x-10 items-center'>
                 <div className='transition-transform translate-y-4'>
