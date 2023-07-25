@@ -1,6 +1,6 @@
 'use client';
 
-import {AnimatePresence, motion, useMotionValueEvent, useScroll} from "framer-motion";
+import {motion, useMotionValueEvent, useScroll} from "framer-motion";
 import {MenuToggle} from "@/components/MenuToggle";
 import {useContext, useEffect, useRef, useState} from "react";
 import {useDimensions} from "@/hooks/use-dimensions";
@@ -19,21 +19,42 @@ import SearchBox from "@/components/SearchBox";
 import SidebarLink from "@/components/ui/SidebarLink";
 
 const item = {
-    hidden: {opacity: 0, x: -20},
-    show: {opacity: 1, x: 0}
+    closed: {opacity: 0, x: -30},
+    open: {opacity: 1, x: 0}
 };
 
 const list = {
-    hidden: {
-        opacity: 0
-    }, show: {
-        opacity: 1,
+    closed: {
         transition: {
-            staggerChildren: 0.2,
-            delayChildren: 0.3
+            staggerChildren: 0.05, staggerDirection: -1
+        }
+    }, open: {
+        transition: {
+            staggerChildren: 0.07,
+            delayChildren: 0.2
         }
     }
 };
+
+const sidebar = {
+    open: (height = 1000) => ({
+        clipPath: `circle(${height * 2 + 200}px at 0px 0px)`,
+        transition: {
+            type: "spring",
+            stiffness: 20,
+            restDelta: 2
+        }
+    }),
+    closed: {
+        clipPath: `circle(0px at 0px 0px)`,
+        transition: {
+            delay: 0.5,
+            type: "spring",
+            stiffness: 400,
+            damping: 40
+        }
+    }
+}
 
 export default function Header({startWithWhite}: {
     startWithWhite: boolean
@@ -88,43 +109,20 @@ export default function Header({startWithWhite}: {
                 className={`${isOpen ? 'opacity-100 visible' : 'opacity-0 hidden'} duration-500 transition-opacity backdrop-blur-none bg-black/50 fixed inset-0 z-30`}/>
 
             <motion.div initial={false}
-                        animate={isOpen ? "open" : 'closed'}
+                        animate={isOpen ? 'open' : 'closed'}
                         custom={height}
                         ref={containerRef}>
-                <motion.div className="background z-40 px-8 md:px-16 py-16" variants={{
-                    open: (height = 1000) => ({
-                        clipPath: `circle(${height * 2 + 200}px at 0px 0px)`,
-                        transition: {
-                            ease: 'easeInOut',
-                            duration: 1,
-                        }
-                    }),
-                    closed: {
-                        clipPath: `circle(0px at 0px 0px)`,
-                        transition: {
-                            type: 'easeInOut',
-                            duration: 0.5
-                        }
-                    }
-                }}>
-                    <AnimatePresence>
-                        {isOpen &&
-                            <>
-                                <SearchBox className='block sm:hidden w-full mb-5'/>
-                                <motion.div className='text-[#222222]' variants={list} initial='hidden'
-                                            animate='show'>
-                                    <motion.h1 className='text-3xl font-bold mb-4' variants={item}>
-                                        CATEGORIES
-                                    </motion.h1>
-                                    <div className='flex flex-col gap-y-3'>
-                                        <SidebarLink href='/products/dresses'>DRESSES</SidebarLink>
-                                        <SidebarLink href='/products/women'>WOMEN</SidebarLink>
-                                        <SidebarLink href='/products/shoes'>SHOES</SidebarLink>
-                                    </div>
-                                </motion.div>
-                            </>
-                        }
-                    </AnimatePresence>
+                <motion.div className="background z-40" variants={sidebar}/>
+                <SearchBox className='block sm:hidden w-full mb-5'/>
+                <motion.div className='text-[#222222] absolute z-50 p-20' variants={list}>
+                    <motion.h1 className='text-3xl font-bold mb-4' variants={item}>
+                        CATEGORIES
+                    </motion.h1>
+                    <div className='flex flex-col gap-y-3'>
+                        <SidebarLink href='/products/dresses'>DRESSES</SidebarLink>
+                        <SidebarLink href='/products/women'>WOMEN</SidebarLink>
+                        <SidebarLink href='/products/shoes'>SHOES</SidebarLink>
+                    </div>
                 </motion.div>
                 <MenuToggle color={isLight ? 'white' : '#222222'} toggle={menuHandler}/>
             </motion.div>
@@ -221,5 +219,6 @@ export default function Header({startWithWhite}: {
                 </nav>
             </div>
         </motion.div>
-    );
+    )
+        ;
 }

@@ -3,12 +3,8 @@ import {motion} from "framer-motion";
 import {ReactNode, useState} from "react";
 
 const item = {
-    hidden: {opacity: 0, x: -20},
-    show: {opacity: 1, x: 0},
-    exit: {
-        opacity: 0,
-        x: -20
-    }
+    closed: {opacity: 0, x: -30},
+    open: {opacity: 1, x: 0}
 };
 
 export default function SidebarLink({href, children}: { href: string, children: ReactNode }) {
