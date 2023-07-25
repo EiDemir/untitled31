@@ -113,8 +113,19 @@ export default function Header({startWithWhite}: {
                         custom={height}
                         ref={containerRef}>
                 <motion.div className="background z-40" variants={sidebar}/>
-                <SearchBox className='block sm:hidden w-full mb-5'/>
-                <motion.div className='text-[#222222] absolute z-50 p-20' variants={list}>
+                <motion.div className='absolute z-[100] my-20 w-full px-10 md:px-14' variants={{
+                    open: {
+                        opacity: 1,
+                        transition: {
+                            delay: 0.2
+                        }
+                    }, closed: {
+                        opacity: 0
+                    }
+                }}>
+                    <SearchBox className='block sm:hidden w-full'/>
+                </motion.div>
+                <motion.div className='absolute text-[#222222] z-50 px-10 md:px-14 sm:pt-20 pt-40' variants={list}>
                     <motion.h1 className='text-3xl font-bold mb-4' variants={item}>
                         CATEGORIES
                     </motion.h1>
