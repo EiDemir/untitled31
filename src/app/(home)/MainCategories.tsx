@@ -9,7 +9,7 @@ export default function MainCategories() {
 
     return (
         <div
-            className='flex md:flex-row flex-col gap-x-4 gap-y-4 h-[700px] md:h-[500px] mt-16 md:mx-[10vw] mx-[3.6vw] sm:mx-[5vw]'>
+            className='flex md:flex-row flex-col gap-x-4 gap-y-4 h-[700px] md:h-[500px] my-16 md:mx-[10vw] mx-[3.6vw] sm:mx-[5vw]'>
             <motion.div onClick={() => router.push('/products/women')} whileHover={{scale: 1.1, zIndex: 10}}
                         transition={{
                             duration: 0.2
