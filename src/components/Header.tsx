@@ -116,7 +116,7 @@ export default function Header({startWithWhite}: {
                         ref={containerRef}>
                 <motion.div className="background z-40" variants={sidebar}/>
                 <motion.div
-                    className={`absolute z-[100] my-20 w-full px-10 md:px-14 pointer-events-auto ${isOpen ? '' : 'pointer-events-none'}`}
+                    className={`absolute z-[100] my-20 w-full px-10 md:px-14 ${isOpen ? '' : 'pointer-events-none'}`}
                     variants={{
                         open: {
                             opacity: 1,
