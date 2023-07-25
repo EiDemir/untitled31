@@ -80,7 +80,7 @@ export async function addNewUser(data: FormData) {
         [data.get('email') as string, data.get('password') as string, data.get('repPassword') as string, data.get('name') as string];
 
     if (password !== repPassword)
-        throw new Error('Passwords do not match.');
+        redirect('/auth/register?passwordsDontMatch=1');
 
     const user = await prisma.user.findUnique({
         where: {

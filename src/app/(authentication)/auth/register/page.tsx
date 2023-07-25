@@ -2,10 +2,10 @@ import {redirect} from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
 import {
     LockClosedIcon as LockSolid,
-    EnvelopeIcon as EnvelopeSolid, ExclamationCircleIcon,
+    EnvelopeIcon as EnvelopeSolid,
     UserIcon as UserSolid
 } from "@heroicons/react/24/solid";
-import {EnvelopeIcon, LockClosedIcon, UserIcon} from "@heroicons/react/24/outline";
+import {EnvelopeIcon, LockClosedIcon, UserIcon, ExclamationCircleIcon} from "@heroicons/react/24/outline";
 import AuthInput from "@/app/(authentication)/auth/AuthInput";
 import {addNewUser} from "@/app/actions";
 
@@ -23,8 +23,9 @@ export default async function Page({searchParams}: {
     return <div
         className='max-w-[450px] px-5 sm:px-0 mx-auto mt-10 text-sm font-medium'>
         {searchParams.alreadyExists === '1' &&
-            <h1 className='text-red-500 mb-4 flex gap-x-1 items-center'><ExclamationCircleIcon className='h-6 w-auto'/>A
-                user with the given email is already registered.</h1>}
+            <h1 className='mb-5 w-full rounded-lg p-3 bg-red-500 text-white flex gap-x-3 items-center'>
+                <ExclamationCircleIcon className='h-8 w-auto'/>
+                A user with the given email is already registered.</h1>}
         <form className='flex flex-col gap-y-5' action={addNewUser} autoComplete='off'>
             <AuthInput type='text' name='name' labelText='Full Name *'
                        enabledIcon={<UserSolid className="h-7 w-7"/>}
