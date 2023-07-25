@@ -56,7 +56,9 @@ export default async function Addresses({searchParams}: {
                             ADD ONE
                         </Link>
                     </div> :
-                    <AddressRadioGroup addresses={shippingAddresses}/>
+                    <div className='p-5'>
+                        <AddressRadioGroup addresses={shippingAddresses}/>
+                    </div>
                 }
             </div>
             <div className='rounded-3xl w-full ring-1 ring-[#E4E4E4] ring-inset'>
@@ -75,7 +77,10 @@ export default async function Addresses({searchParams}: {
                             ADD ONE
                         </Link>
                     </div>
-                    : <AddressRadioGroup addresses={billingAddresses}/>
+                    :
+                    <div className='p-5'>
+                        <AddressRadioGroup addresses={billingAddresses}/>
+                    </div>
                 }
             </div>
         </>

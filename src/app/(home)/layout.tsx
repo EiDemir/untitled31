@@ -47,8 +47,8 @@ export default async function Layout({bestSelling, mainCategories}: {
             </header>
             <main>
                 <MainCategories/>
-                {bestSelling}
                 {mainCategories}
+                {bestSelling}
             </main>
             <footer>
                 <Footer/>
