@@ -4,6 +4,8 @@ import {prisma} from "@/libs/prisma";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+const bcrypt = require('bcrypt');
+
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     session: {
@@ -15,7 +17,6 @@ export const authOptions: AuthOptions = {
                 email: {type: 'email'},
                 password: {type: 'password'}
             }, async authorize(credentials) {
-                console.log(credentials);
                 if (!credentials)
                     return null;
 
@@ -25,7 +26,12 @@ export const authOptions: AuthOptions = {
                     }
                 });
 
-                if (user)
+                if (!user)
+                    return null;
+
+                const doMatch = await bcrypt.compare(credentials.password, user.hashedPassword);
+
+                if (doMatch && user.emailVerified !== null)
                     return user;
 
                 return null;
