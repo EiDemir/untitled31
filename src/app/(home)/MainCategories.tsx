@@ -8,13 +8,13 @@ export default function MainCategories() {
     const router = useRouter();
 
     return (
-        <div className='flex gap-x-4 h-[500px] mt-16 mx-[10vw]'>
+        <div className='flex md:flex-row flex-col gap-x-4 gap-y-4 h-[700px] md:h-[500px] mt-16 mx-[10vw]'>
             <motion.div onClick={() => router.push('/products/women')} whileHover={{scale: 1.1, zIndex: 10}} transition={{
                 duration: 0.2
-            }} className='cursor-pointer w-1/2 bg-[#E7E6E4] rounded-xl h-full relative drop-shadow-sm overflow-hidden'>
-                <div className='absolute bottom-7 left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
+            }} className='cursor-pointer md:w-1/2 bg-[#E7E6E4] rounded-xl h-full relative drop-shadow-sm overflow-hidden'>
+                <div className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
                     <p className='text-sm'>HOT LIST</p>
-                    <h5 className='font-medium text-2xl'><span className='font-bold'>WOMEN</span> COLLECTION</h5>
+                    <h5 className='font-medium text-lg md:text-2xl'><span className='font-bold'>WOMEN</span> COLLECTION</h5>
                     <p className='text-sm font-medium'>SHOP NOW</p>
                 </div>
                 <Image className='absolute right-0 h-full w-auto' width={936} height={1404}
@@ -22,13 +22,13 @@ export default function MainCategories() {
                        alt='Women Collection'
                 />
             </motion.div>
-            <div className='w-1/2 h-full flex flex-col gap-y-4'>
+            <div className='md:w-1/2 h-full flex flex-col gap-y-4'>
                 <motion.div whileHover={{scale: 1.1}} transition={{
                     duration: 0.2
                 }} className='cursor-pointer h-1/2 bg-[#EAE8E7] w-full rounded-xl relative drop-shadow-sm overflow-hidden'>
-                    <div className='absolute bottom-7 left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
+                    <div className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
                         <p className='text-sm'>HOT LIST</p>
-                        <h5 className='font-medium text-2xl'><span className='font-bold'>MEN</span> COLLECTION</h5>
+                        <h5 className='font-medium text-lg md:text-2xl'><span className='font-bold'>MEN</span> COLLECTION</h5>
                         <p className='text-sm font-medium'>SHOP NOW</p>
                     </div>
                     <Image className='absolute right-0 h-auto w-1/2' width={936} height={1404}
@@ -40,9 +40,9 @@ export default function MainCategories() {
                     <motion.div whileHover={{scale: 1.1}} transition={{
                         duration: 0.2
                     }} className='cursor-pointer bg-[#E7E6E4] w-1/2 rounded-xl relative drop-shadow-sm overflow-hidden'>
-                        <div className='absolute bottom-7 left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
+                        <div className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
                             <p className='text-sm'>HOT LIST</p>
-                            <h5 className='font-medium text-2xl'><span className='font-bold'>KIDS</span> COLLECTION
+                            <h5 className='font-medium text-lg md:text-2xl'><span className='font-bold'>KIDS</span> COLLECTION
                             </h5>
                             <p className='text-sm font-medium'>SHOP NOW</p>
                         </div>
@@ -53,9 +53,9 @@ export default function MainCategories() {
                     <motion.div whileHover={{scale: 1.1}} transition={{
                         duration: 0.2
                     }} className='cursor-pointer bg-[#F5E6E0] w-1/2 rounded-xl relative drop-shadow-sm'>
-                        <div className='absolute bottom-7 left-7 flex flex-col gap-y-1 text-[#222222]'>
+                        <div className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222]'>
                             <p className='text-sm'>HOT LIST</p>
-                            <h5 className='font-medium text-2xl'><span className='font-bold'>BEAUTY</span> COLLECTION
+                            <h5 className='font-medium text-lg md:text-2xl'><span className='font-bold'>BEAUTY</span> COLLECTION
                             </h5>
                             <p className='text-sm font-medium'>SHOP NOW</p>
                         </div>

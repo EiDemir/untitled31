@@ -2,6 +2,7 @@ import NextAuth, {AuthOptions} from "next-auth";
 import {PrismaAdapter} from "@next-auth/prisma-adapter";
 import {prisma} from "@/libs/prisma";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
@@ -9,6 +10,27 @@ export const authOptions: AuthOptions = {
         strategy: 'jwt'
     },
     providers: [
+        CredentialsProvider({
+            credentials: {
+                email: {type: 'email'},
+                password: {type: 'password'}
+            }, async authorize(credentials) {
+                console.log(credentials);
+                if (!credentials)
+                    return null;
+
+                const user = await prisma.user.findUnique({
+                    where: {
+                        email: credentials.email
+                    }
+                });
+
+                if (user)
+                    return user;
+
+                return null;
+            }
+        }),
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
@@ -38,7 +60,6 @@ export const authOptions: AuthOptions = {
         signIn: '/auth/login'
     }, secret: process.env.NEXTAUTH_SECRET
 };
-;
 
 const handler = NextAuth(authOptions);
 

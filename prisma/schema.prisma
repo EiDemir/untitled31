@@ -35,22 +35,24 @@ model Session {
 }
 
 model User {
-  id              String     @id @default(auto()) @map("_id") @db.ObjectId
-  name            String?
-  email           String?    @unique
-  emailVerified   DateTime?
-  image           String?
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
-  orders          Order[]
-  wishlist        Product[]  @relation(fields: [wishlistIDs], references: [id])
-  wishlistIDs     String[]   @db.ObjectId
-  cart            CartItem[]
-  reviews         Review[]
-  billingAddress  Json[]
-  shippingAddress Json[]
-  accounts        Account[]
-  sessions        Session[]
+  id                String     @id @default(auto()) @map("_id") @db.ObjectId
+  name              String?
+  email             String?    @unique
+  emailVerified     DateTime?
+  verificationToken String?
+  image             String?
+  hashedPassword    String?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  orders            Order[]
+  wishlist          Product[]  @relation(fields: [wishlistIDs], references: [id])
+  wishlistIDs       String[]   @db.ObjectId
+  cart              CartItem[]
+  reviews           Review[]
+  billingAddress    Json[]
+  shippingAddress   Json[]
+  accounts          Account[]
+  sessions          Session[]
 }
 
 model VerificationToken {

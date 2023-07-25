@@ -6,7 +6,7 @@ export default function Products({products}: {
     products: {images: string[], name: string, price: number, categories: {name: string}[], id: string}[]
 }) {
     return (
-        <div className='flex gap-x-6'>
+        <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
             {products!.map(product => <CategoryItem
                 key={product.id}
                 imageLink={product.images[0]}
