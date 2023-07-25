@@ -20,11 +20,7 @@ import SidebarLink from "@/components/ui/SidebarLink";
 
 const item = {
     hidden: {opacity: 0, x: -20},
-    show: {opacity: 1, x: 0},
-    exit: {
-        opacity: 0,
-        x: -20
-    }
+    show: {opacity: 1, x: 0}
 };
 
 const list = {
@@ -35,11 +31,6 @@ const list = {
         transition: {
             staggerChildren: 0.2,
             delayChildren: 0.3
-        }
-    }, exit: {
-        transition: {
-            staggerDirection: -1,
-            staggerChildren: 0.1
         }
     }
 };
@@ -120,7 +111,7 @@ export default function Header({startWithWhite}: {
                         {isOpen &&
                             <>
                                 <SearchBox className='block sm:hidden w-full mb-5'/>
-                                <motion.div className='text-[#222222]' variants={list} exit='exit' initial='hidden'
+                                <motion.div className='text-[#222222]' variants={list} initial='hidden'
                                             animate='show'>
                                     <motion.h1 className='text-3xl font-bold mb-4' variants={item}>
                                         CATEGORIES
