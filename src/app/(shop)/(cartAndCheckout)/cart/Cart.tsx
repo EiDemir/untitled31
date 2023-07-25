@@ -106,7 +106,7 @@ export default function Cart({cartItems}: {
     };
 
     return (
-        <div className='flex flex-col md:flex-row gap-x-8'>
+        <div className='flex flex-col md:flex-row gap-8'>
             {items.length ?
                 <div className='flex flex-col gap-y-7 md:w-2/3'>
                     <table
@@ -127,7 +127,7 @@ export default function Cart({cartItems}: {
                                 <td className='flex gap-x-5 items-center py-4 pl-5'>
                                     <Link prefetch={false} href={'/product/' + item.product!.id}>
                                         <Image
-                                            className='cursor-pointer h-full rounded-3xl object-cover aspect-[1/1]'
+                                            className='cursor-pointer h-full rounded-3xl object-cover'
                                             src={item.product!.images[0]}
                                             alt="Product's image" width='120' height='120'/>
                                     </Link>

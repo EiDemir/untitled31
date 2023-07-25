@@ -4,7 +4,7 @@ import PersonalInfo from "./PersonalInfo";
 
 
 export default async function Page() {
-    const personalInfoLoading = <div className='w-full pr-6 flex flex-col gap-y-10'>
+    const personalInfoLoading = <div className='w-full lg:pr-6 flex flex-col gap-y-10'>
         <p className='text-lg font-semibold'>Personal information</p>
         <form className='flex flex-col gap-y-6 text-sm font-medium'>
             <div className='flex gap-x-3'>
