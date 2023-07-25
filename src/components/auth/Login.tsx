@@ -23,7 +23,7 @@ export default function Login() {
         <div
             className='max-w-[450px] px-5 sm:px-0 mt-10 mx-auto text-sm font-medium'>
             {searchParams.get('confirmEmail') === '1' && <h1 className='mb-5 w-full rounded-lg p-3 bg-blue-500 text-white'>A confirmation link was sent to your email. Click on it to confirm your email.</h1>}
-            {searchParams.get('emailConfirmed') === '1' && <h1 className='mb-5 w-full rounded-lg p-3 bg-green-500 text-white'>Your account is now verified. Proceed to log into your account.</h1>}
+            {searchParams.get('emailVerified') === '1' && <h1 className='mb-5 w-full rounded-lg p-3 bg-green-500 text-white'>Your account is now verified. Proceed to log into your account.</h1>}
             <form className='flex flex-col gap-y-5' onSubmit={(event) => {
                 event.preventDefault();
                 signIn('credentials', {
