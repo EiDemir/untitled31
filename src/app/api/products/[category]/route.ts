@@ -51,6 +51,8 @@ export async function GET(request: Request, {params}: {
                     name: true,
                     price: true,
                     id: true,
+                    colors: true,
+                    sizes: true
                 }, take: parseInt(take),
                 skip: 1,
                 cursor: {

@@ -7,17 +7,19 @@ import {useSearchParams} from "next/navigation";
 import _ from 'lodash';
 import Link from "next/link";
 
-export default function Category({products}: {
+export default function Category({products, isAuthenticated}: {
     products: {
         products: {
             images: string[],
             categories: ({ id: string, name: string } & {})[],
             name: string,
             price: number,
-            id: string
+            id: string,
+            colors: { name: string, hexColorCode: string }[],
+            sizes: string[]
         }[],
         _count: { products: number }
-    }
+    }, isAuthenticated: boolean
 }) {
     const searchParams = useSearchParams();
     const currentPage = parseInt(searchParams.get('page')!);
@@ -28,7 +30,8 @@ export default function Category({products}: {
         <>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7'>
                 {products.products.map(item =>
-                    <CategoryItem key={item.id} imageLink={item.images[0]} categories={item.categories}
+                    <CategoryItem isAuthenticated={isAuthenticated} sizes={item.sizes} colors={item.colors} key={item.id} imageLink={item.images[0]}
+                                  categories={item.categories}
                                   title={item.name}
                                   price={item.price} id={item.id}/>)}
             </div>

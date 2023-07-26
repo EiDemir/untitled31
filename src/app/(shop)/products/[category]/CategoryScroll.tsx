@@ -8,17 +8,19 @@ import LoadingAnimation from "@/components/ui/LoadingAnimation";
 import {usePathname, useSearchParams} from "next/navigation";
 import _ from 'lodash';
 
-export default function CategoryScroll({initialProducts}: {
+export default function CategoryScroll({initialProducts, isAuthenticated}: {
     initialProducts: {
         products: {
             images: string[],
             categories: ({ id: string, name: string } & {})[],
             name: string,
             price: number,
-            id: string
+            id: string,
+            sizes: string[],
+            colors: { name: string, hexColorCode: string }[]
         }[],
         _count: { products: number }
-    }
+    }, isAuthenticated: boolean
 }) {
     const [products, setProducts] = useState(initialProducts.products);
     const [page, setPage] = useState(1);
@@ -44,7 +46,8 @@ export default function CategoryScroll({initialProducts}: {
         <>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                 {products.map((item) =>
-                    <CategoryItem key={item.id} imageLink={item.images[0]} categories={item.categories}
+                    <CategoryItem isAuthenticated={isAuthenticated} colors={item.colors} sizes={item.sizes}
+                                  key={item.id} imageLink={item.images[0]} categories={item.categories}
                                   title={item.name}
                                   price={item.price} id={item.id}/>)}
             </div>

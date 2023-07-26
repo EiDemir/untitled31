@@ -4,10 +4,11 @@ import _ from 'lodash';
 import ProductsSection from "./ProductsSection";
 import SortingOptions from "@/app/(shop)/products/[category]/SortingOptions";
 
-export default function Page({params, searchParams}: {
+export default async function Page({params, searchParams}: {
     params: { category: string, page?: string },
     searchParams: { page?: string, color?: string, size?: string, minPrice?: string, maxPrice?: string, sort?: string }
 }) {
+
     return (
         <div className='md:w-4/5'>
             <SortingOptions searchParams={searchParams}/>

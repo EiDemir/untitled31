@@ -2,6 +2,7 @@ import CategoryScroll from "./CategoryScroll";
 import {prisma} from "@/libs/prisma";
 import Category from "./Category";
 import _ from 'lodash';
+import getCurrentUser from "@/actions/getCurrentUser";
 
 async function getCategoryProducts(categoryName: string, page: number, colors: string[], sizes: string[], minMaxPrice: number[], sort?: string) {
     return prisma.category.findUnique({
@@ -36,7 +37,9 @@ async function getCategoryProducts(categoryName: string, page: number, colors: s
                     categories: true,
                     name: true,
                     price: true,
-                    id: true
+                    id: true,
+                    sizes: true,
+                    colors: true
                 }, take: 24,
                 skip: (page - 1) * 24
             }, _count: {
@@ -72,6 +75,7 @@ export default async function ProductsSection({params, searchParams}: {
     params: { category: string, page?: string },
     searchParams: { page?: string, color?: string, size?: string, minPrice?: string, maxPrice?: string, sort?: string }
 }) {
+    const user = await getCurrentUser();
     const products = await getCategoryProducts(params.category,
         searchParams !== undefined && searchParams.page !== undefined ? parseInt(searchParams.page) : 1,
         !searchParams.color ? [] : searchParams.color.split(','),
@@ -85,10 +89,10 @@ export default async function ProductsSection({params, searchParams}: {
 
     if (searchParams.page)
         return (
-            <Category products={products}/>
+            <Category isAuthenticated={user !== null} products={products}/>
         );
 
     return (
-        <CategoryScroll initialProducts={products}/>
+        <CategoryScroll isAuthenticated={user !== null} initialProducts={products}/>
     );
 }

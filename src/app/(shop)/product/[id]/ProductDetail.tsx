@@ -29,7 +29,6 @@ export default function ProductDetail({productDetail, user}: {
     const [quantity, setQuantity] = useState(1);
     const [isHovered, setIsHovered] = useState(false);
     const [isHovered2, setIsHovered2] = useState(false);
-    const [isAddedToCart, setIsAddedToCart] = useState<number>(!user ? 0 : user.quantity);
     const [isAddedToWishlist, setIsAddedToWishlist] = useState<boolean>(!user ? false : user.addedToWishlist);
     const [isWishlistButtonDisabled, setIsWishlistButtonDisabled] = useState(false);
     const [isCartButtonDisabled, setIsCartButtonDisabled] = useState(false);

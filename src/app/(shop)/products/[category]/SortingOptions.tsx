@@ -9,7 +9,7 @@ export default function SortingOptions({searchParams}: {
     searchParams: { page?: string, color?: string, size?: string, minPrice?: string, maxPrice?: string, sort?: string }
 }) {
     const router = useRouter();
-    const [selectedOption, setSelectedOption] = useState(!searchParams.sort ? 'DEFAULT SORTING' : searchParams.sort === 'htl' ? 'Price: High to Low' : 'Price: Low to High');
+    const [selectedOption, setSelectedOption] = useState(!searchParams.sort ? 'Default Sorting' : searchParams.sort === 'htl' ? 'Price: High to Low' : 'Price: Low to High');
 
     return (
         <div
@@ -36,7 +36,7 @@ export default function SortingOptions({searchParams}: {
                             params.delete('sort');
                             router.replace('?' + params.toString());
                         }} className='px-4 py-3 my-1 hover:text-[#E893CF] text-[#222222]'>
-                            DEFAULT SORTING
+                            Default Sorting
                         </Menu.Item>
                         <Menu.Item as='button' id='1' onClick={() => {
                             setSelectedOption('Price: High to Low');
