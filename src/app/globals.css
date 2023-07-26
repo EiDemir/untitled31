@@ -31,16 +31,15 @@ input:-webkit-autofill:active,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus,
-select:-webkit-autofill:active
-{
+select:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
     -webkit-text-fill-color: #222222 !important;
 }
 
 body {
-    position: relative;
     background: white;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 
