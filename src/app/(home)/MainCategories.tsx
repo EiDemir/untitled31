@@ -10,9 +10,14 @@ export default function MainCategories() {
     return (
         <div
             className='flex md:flex-row flex-col gap-x-4 gap-y-4 h-[700px] md:h-[500px] my-16 md:mx-[10vw] mx-[3.6vw] sm:mx-[5vw]'>
-            <motion.div onClick={() => router.push('/products/women')} whileHover={{scale: 1.1, zIndex: 10}}
+            <motion.div initial={{opacity: 0, x: -20}} whileInView={{
+                opacity: 1, x: 0, transition: {
+                    duration: 0.5
+                }
+            }} viewport={{once: true}}
+                        onClick={() => router.push('/products/women')} whileHover={{scale: 1.1, zIndex: 10}}
                         transition={{
-                            duration: 0.2
+                            duration: 0.5
                         }}
                         className='cursor-pointer md:w-1/2 bg-[#E7E6E4] rounded-xl h-full relative drop-shadow-sm overflow-hidden'>
                 <div
@@ -28,8 +33,9 @@ export default function MainCategories() {
                 />
             </motion.div>
             <div className='md:w-1/2 h-full flex flex-col gap-y-4'>
-                <motion.div whileHover={{scale: 1.1}} transition={{
-                    duration: 0.2
+                <motion.div initial={{opacity: 0, x: 20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
+                            whileHover={{scale: 1.1}} transition={{
+                    duration: 0.5
                 }}
                             className='cursor-pointer h-1/2 bg-[#EAE8E7] w-full rounded-xl relative drop-shadow-sm overflow-hidden'>
                     <div
@@ -45,8 +51,9 @@ export default function MainCategories() {
                     />
                 </motion.div>
                 <div className='h-1/2 w-full flex gap-x-4'>
-                    <motion.div whileHover={{scale: 1.1}} transition={{
-                        duration: 0.2
+                    <motion.div initial={{opacity: 0, x: 20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
+                                whileHover={{scale: 1.1}} transition={{
+                        duration: 0.5
                     }} className='cursor-pointer bg-[#E7E6E4] w-1/2 rounded-xl relative drop-shadow-sm overflow-hidden'>
                         <div
                             className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
@@ -60,8 +67,9 @@ export default function MainCategories() {
                                src='https://firebasestorage.googleapis.com/v0/b/sthh-9a6e2.appspot.com/o/07-03-23Studio8_KT_DB_13-58-35_31_5BRB91830NV_White_P_8534_DG_468x%402x.webp?alt=media&token=a183ac32-b4f1-4ca3-a6ac-2e43e7ef22d1'
                                alt='Kids collection'/>
                     </motion.div>
-                    <motion.div whileHover={{scale: 1.1}} transition={{
-                        duration: 0.2
+                    <motion.div initial={{opacity: 0, x: 20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
+                                whileHover={{scale: 1.1}} transition={{
+                        duration: 0.5
                     }} className='cursor-pointer bg-[#F5E6E0] w-1/2 rounded-xl relative drop-shadow-sm'>
                         <div
                             className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222]'>
