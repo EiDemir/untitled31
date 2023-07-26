@@ -225,7 +225,7 @@ export default function Header({startWithWhite}: {
                                     {!isHovered4 ? <ShoppingBagIcon className={iconClasses}/> :
                                         <BagSolid className={iconClasses}/>}
                                     <span
-                                        className='text-xs font-medium text-white absolute -bottom-0 -right-0 bg-[#E893CF] w-4 h-4 rounded-full flex items-center pl-1'>{cartCtx.cartItemsNumber}</span>
+                                        className='text-xs font-medium text-white absolute -bottom-0 -right-0 bg-[#E893CF] rounded-full flex items-center text-center px-1.5 py-px'>{cartCtx.cartItemsNumber}</span>
                                 </Link>
                                 <Link href='/dashboard'
                                       className='cursor-pointer'
