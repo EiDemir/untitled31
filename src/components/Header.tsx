@@ -116,7 +116,7 @@ export default function Header({startWithWhite}: {
                         ref={containerRef}>
                 <motion.div className="background z-40" variants={sidebar}/>
                 <motion.div
-                    className={`absolute z-[100] my-20 w-full px-10 md:px-14 ${isOpen ? '' : 'pointer-events-none'}`}
+                    className={`fixed z-[100] my-20 w-full px-10 md:px-14 ${isOpen ? '' : 'pointer-events-none'}`}
                     variants={{
                         open: {
                             opacity: 1,
@@ -130,14 +130,14 @@ export default function Header({startWithWhite}: {
                     <SearchBox className='block sm:hidden w-full'/>
                 </motion.div>
                 <motion.div variants={list}
-                            className={`${isOpen ? '' : 'pointer-events-none'} absolute text-[#222222] z-50 mx-10 md:mx-14 mt-40 sm:mt-20 lg:hidden flex flex-col gap-y-3`}>
+                            className={`${isOpen ? '' : 'pointer-events-none'} fixed text-[#222222] z-50 mx-10 md:mx-14 mt-40 sm:mt-20 lg:hidden flex flex-col gap-y-3`}>
                     <SidebarLink onClick={menuHandler} href='/products/dresses'>SHOP</SidebarLink>
                     <SidebarLink onClick={menuHandler} href='/'>COLLECTION</SidebarLink>
                     <SidebarLink onClick={menuHandler} href='/'>JOURNAL</SidebarLink>
                     <SidebarLink onClick={menuHandler} href='/'>LOOKBOOK</SidebarLink>
                 </motion.div>
                 <motion.div
-                    className={`absolute text-[#222222] z-50 mx-10 md:mx-14 mt-[360px] sm:mt-72 lg:mt-20 ${isOpen ? '' : 'pointer-events-none'}`}
+                    className={`fixed text-[#222222] z-50 mx-10 md:mx-14 mt-[360px] sm:mt-72 lg:mt-20 ${isOpen ? '' : 'pointer-events-none'}`}
                     variants={list}>
                     <motion.h1 className='text-3xl font-bold mb-4' variants={item}>
                         CATEGORIES
