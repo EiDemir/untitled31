@@ -38,9 +38,9 @@ select:-webkit-autofill:active
 }
 
 body {
+    position: relative;
     background: white;
     overflow-x: hidden;
-    scroll-behavior: smooth;
 }
 
 

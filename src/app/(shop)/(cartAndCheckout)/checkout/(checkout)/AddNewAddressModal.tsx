@@ -23,7 +23,7 @@ export default function AddNewAddressModal({type}: { type: string }) {
         <div onClick={handleOutsideClick}
              className='flex items-center justify-center opacity-100 visible duration-500 transition-opacity backdrop-blur-none bg-black/50 fixed inset-0 z-50'>
             <motion.div ref={ref} initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1}}
-                        className='fixed rounded-xl w-1/2 z-40 bg-white'>
+                        className='fixed rounded-xl w-[80vw] md:w-1/2 z-40 bg-white'>
                 <div className='flex justify-between px-5 py-4 bg-[#E4E4E4] rounded-t-xl text-lg'>
                     <h3>Enter a New {type === 'shipping' ? 'Shipping' : 'Billing'} Address</h3>
                     <XMarkIcon onClick={() => {
