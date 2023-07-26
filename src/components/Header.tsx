@@ -131,10 +131,10 @@ export default function Header({startWithWhite}: {
                 </motion.div>
                 <motion.div variants={list}
                             className={`${isOpen ? '' : 'pointer-events-none'} absolute text-[#222222] z-50 mx-10 md:mx-14 mt-40 sm:mt-20 lg:hidden flex flex-col gap-y-3`}>
-                    <SidebarLink href='/products/dresses'>SHOP</SidebarLink>
-                    <SidebarLink href='/'>COLLECTION</SidebarLink>
-                    <SidebarLink href='/'>JOURNAL</SidebarLink>
-                    <SidebarLink href='/'>LOOKBOOK</SidebarLink>
+                    <SidebarLink onClick={menuHandler} href='/products/dresses'>SHOP</SidebarLink>
+                    <SidebarLink onClick={menuHandler} href='/'>COLLECTION</SidebarLink>
+                    <SidebarLink onClick={menuHandler} href='/'>JOURNAL</SidebarLink>
+                    <SidebarLink onClick={menuHandler} href='/'>LOOKBOOK</SidebarLink>
                 </motion.div>
                 <motion.div
                     className={`absolute text-[#222222] z-50 mx-10 md:mx-14 mt-[360px] sm:mt-72 lg:mt-20 ${isOpen ? '' : 'pointer-events-none'}`}
@@ -143,15 +143,13 @@ export default function Header({startWithWhite}: {
                         CATEGORIES
                     </motion.h1>
                     <div className='flex flex-col gap-y-3'>
-                        <SidebarLink href='/products/dresses'>DRESSES</SidebarLink>
-                        <SidebarLink href='/products/women'>WOMEN</SidebarLink>
-                        <SidebarLink href='/products/shoes'>SHOES</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/dresses'>DRESSES</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/women'>WOMEN</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/shoes'>SHOES</SidebarLink>
                     </div>
                 </motion.div>
                 <MenuToggle color={isLight ? 'white' : '#222222'} toggle={menuHandler}/>
             </motion.div>
-
-
             <div className='fixed top-0 right-0 left-0 z-20'>
                 <nav
                     className={`w-full ${isTransparent ? '' : 'bg-white/50 backdrop-blur-lg'} transition-colors duration-500 relative text-sm text-${isLight ? 'white' : '[#222222]'} font-medium flex justify-between items-center h-[66px] pt-0 px-[3.6vw] sm:px-[5vw] md:px-[60px] gap-x-3`}>
@@ -163,7 +161,6 @@ export default function Header({startWithWhite}: {
                               fill={isLight ? '#FFFFFF' : '#222222'}/>
                     </svg>
                     <div className="relative items-center lg:flex gap-x-7">
-                        {/*<div className='w-[25px] h-[25px]'/>*/}
                         <ul className="lg:flex lg:gap-x-7 hidden lg:visible">
                             <li><Link href='/'>HOME</Link></li>
                             <li><Link href='/products/dresses'>SHOP</Link></li>
