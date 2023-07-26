@@ -132,7 +132,7 @@ export default function Header({startWithWhite}: {
                 <motion.div variants={list}
                             className={`${isOpen ? '' : 'pointer-events-none'} fixed text-[#222222] z-50 mx-10 md:mx-14 mt-40 sm:mt-20 lg:hidden flex flex-col gap-y-3`}>
                     <SidebarLink onClick={menuHandler} href='/products/dresses'>SHOP</SidebarLink>
-                    <SidebarLink onClick={menuHandler} href='/'>COLLECTION</SidebarLink>
+                    <SidebarLink onClick={menuHandler} href='/'>WOMEN</SidebarLink>
                     <SidebarLink onClick={menuHandler} href='/'>JOURNAL</SidebarLink>
                     <SidebarLink onClick={menuHandler} href='/'>LOOKBOOK</SidebarLink>
                 </motion.div>
@@ -153,8 +153,9 @@ export default function Header({startWithWhite}: {
             <div className='fixed top-0 right-0 left-0 z-20'>
                 <nav
                     className={`w-full ${isTransparent ? '' : 'bg-white/50 backdrop-blur-lg'} transition-colors duration-500 relative text-sm text-${isLight ? 'white' : '[#222222]'} font-medium flex justify-between items-center h-[66px] pt-0 px-[3.6vw] sm:px-[5vw] md:px-[60px] gap-x-3`}>
-                    <Link href='/' prefetch={false} className='ml-10 my-3 h-auto'>
-                        <svg width="113" height="28" viewBox="0 0 113 28" fill="none"
+                    <Link href='/' prefetch={false} className='ml-10 my-auto'>
+                        <svg className='max-w-full min-w-0' width="113" height="28" viewBox="0 0
+                        113 28" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <circle cx="99.55" cy="13" r="13" fill="#E893CF"/>
                             <path fillRule="evenodd" clipRule="evenodd"
@@ -162,13 +163,13 @@ export default function Header({startWithWhite}: {
                                   fill={isLight ? '#FFFFFF' : '#222222'}/>
                         </svg>
                     </Link>
-                    <div className="relative items-center lg:flex gap-x-7">
-                        <ul className="lg:flex lg:gap-x-7 hidden lg:visible">
-                            <li><Link href='/products/women'>WOMEN</Link></li>
-                            <li><Link href='/products/men'>MEN</Link></li>
-                            <li><Link href='/products/kids'>KIDS</Link></li>
-                        </ul>
-                    </div>
+                    <ul className="lg:flex hidden items-center gap-x-7 whitespace-nowrap">
+                        <li><Link href='/products/women'>NEW IN</Link></li>
+                        <li><Link href='/products/women'>WOMEN</Link></li>
+                        <li><Link href='/products/men'>MEN</Link></li>
+                        <li><Link href='/products/kids'>KIDS</Link></li>
+                        <li><Link href='/products/beauty'>BEAUTY</Link></li>
+                    </ul>
                     <div className="flex justify-self-end justify-between items-center gap-x-4 md:2/3 lg:w-1/2">
                         <SearchBox className='hidden sm:block'/>
                         {
@@ -225,7 +226,7 @@ export default function Header({startWithWhite}: {
                                     {!isHovered4 ? <ShoppingBagIcon className={iconClasses}/> :
                                         <BagSolid className={iconClasses}/>}
                                     <span
-                                        className='text-xs font-medium text-white absolute -bottom-0 -right-0 bg-[#E893CF] rounded-full flex items-center text-center px-1.5 py-px'>{cartCtx.cartItemsNumber}</span>
+                                        className='text-xs font-medium text-white absolute -bottom-0.5 -right-0.5 bg-[#E893CF] rounded-full flex items-center text-center px-1.5 py-px'>{cartCtx.cartItemsNumber}</span>
                                 </Link>
                                 <Link href='/dashboard'
                                       className='cursor-pointer'
