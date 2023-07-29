@@ -70,7 +70,7 @@ export default function SearchOptions({colors, sizes, minMaxPrices}: {
             <div className='drop-shadow-sm overflow-hidden'>
                 <div
                     onClick={() => setIsOpen(prevState => prevState.map((value, index) => index === 0 ? !value : value))}
-                    className='z-10 cursor-pointer search-option-header mb-2.5'>PRODUCT CATEGORIES
+                    className='z-10 cursor-pointer search-option-header'>PRODUCT CATEGORIES
                     <motion.span animate={{
                         rotate: isOpen[0] ? 180 : 0
                     }} transition={{duration: isOpen[0] ? 0.5 : 0.3}}><ChevronDownIcon
@@ -87,7 +87,7 @@ export default function SearchOptions({colors, sizes, minMaxPrices}: {
             <div className='drop-shadow-sm overflow-hidden'>
                 <div
                     onClick={() => setIsOpen(prevState => prevState.map((value, index) => index === 1 ? !value : value))}
-                    className='z-10 cursor-pointer search-option-header my-2.5'>COLORS
+                    className='z-10 cursor-pointer search-option-header'>COLORS
                     <motion.span animate={{
                         rotate: isOpen[1] ? 180 : 0
                     }} transition={{duration: isOpen[1] ? 0.5 : 0.3}}><ChevronDownIcon
@@ -119,7 +119,7 @@ export default function SearchOptions({colors, sizes, minMaxPrices}: {
             <div className='drop-shadow-sm overflow-hidden'>
                 <div
                     onClick={() => setIsOpen(prevState => prevState.map((value, index) => index === 2 ? !value : value))}
-                    className='z-10 cursor-pointer search-option-header my-2.5'>SIZES
+                    className='z-10 cursor-pointer search-option-header'>SIZES
                     <motion.span animate={{
                         rotate: isOpen[2] ? 180 : 0
                     }} transition={{duration: isOpen[2] ? 0.5 : 0.3}}><ChevronDownIcon
@@ -143,7 +143,7 @@ export default function SearchOptions({colors, sizes, minMaxPrices}: {
             <div className='drop-shadow-sm overflow-hidden'>
                 <div
                     onClick={() => setIsOpen(prevState => prevState.map((value, index) => index === 3 ? !value : value))}
-                    className='z-10 cursor-pointer search-option-header mt-2.5 mb-4'>PRICE
+                    className='z-10 cursor-pointer search-option-header'>PRICE
                     <motion.span animate={{
                         rotate: isOpen[3] ? 180 : 0
                     }} transition={{duration: isOpen[3] ? 0.5 : 0.3}}><ChevronDownIcon

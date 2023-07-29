@@ -23,7 +23,7 @@ export const MenuToggle = ({toggle, color}: { toggle: () => void, color: string 
             setColor(!isOpened ? '#222222' : color);
             toggle();
         }}
-                className="fixed z-50 top-[23px] left-[3.6vw] sm:left-[5vw] md:left-[60px]">
+                className="fixed z-50 top-[23px] left-[3vw]">
             <svg style={{stroke: col}} className={`z-50 transition-colors duration-1000`} width="22" height="19"
                  viewBox="0 0 22 19">
                 <Path

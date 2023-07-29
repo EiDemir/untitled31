@@ -5,8 +5,8 @@ import {motion} from "framer-motion";
 
 export default function Footer() {
     return (
-        <div className='bg-[#E4E4E4] w-full flex flex-col divide-y divide-[#CFCDCD] sm:px-[10vw]'>
-            <div className='px-[3.6vw] sm:px-0 py-14 flex flex-col gap-y-9 md:flex-row'>
+        <div className='bg-[#E4E4E4] w-full flex flex-col divide-y divide-[#CFCDCD] px-[5vw]'>
+            <div className='py-14 flex flex-col gap-y-9 md:flex-row'>
                 <div className='md:basis-1/4 flex flex-col justify-start text-sm gap-y-8 mr-3'>
                     <svg width="113" height="28" viewBox="0 0 113 28" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +95,7 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <div className='flex flex-col gap-y-5 md:flex-row justify-between md:items-center py-7 px-[3.6vw] sm:px-0'>
+            <div className='flex flex-col gap-y-5 md:flex-row justify-between md:items-center py-7'>
                 <p className='text-sm'>©2023 Emir Demir</p>
                 <div className='flex gap-x-5 sm:flex-row flex-col gap-y-5'>
                     <div className='flex gap-x-5'>

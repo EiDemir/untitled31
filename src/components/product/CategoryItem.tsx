@@ -99,7 +99,6 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
             initial='initial'
             whileInView='visible'
             viewport={{once: true}}>
-
             <div onMouseEnter={() => setIsHovered(true)}
                  onMouseLeave={() => {
                      if (!isQuickAddOpen) setIsHovered(false)
@@ -128,7 +127,7 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                             {sizes.length > 0 &&
                                 <div className='flex flex-col items-center mb-1 gap-y-1'>
                                     <p className='font-medium'>Select Size</p>
-                                    <div className='grid grid-cols-5 gap-3'>
+                                    <div className='flex flex-wrap gap-3 ring-1 w-full'>
                                         {sizes.map(size =>
                                             <motion.span
                                                 whileTap={{scale: 0.9}}
@@ -139,7 +138,7 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                                                 onClick={() => setSelectedOptions(prevState =>
                                                     ({...prevState, size}))}
                                                 className={`${selectedOptions.size === size ?
-                                                    'ring-[#222222] ring-2' : 'ring-[#E4E4E4] ring-1'} uppercase ring-inset rounded-full bg-transparent transition-colors cursor-pointer w-8 py-1.5 text-center`}
+                                                    'ring-[#222222] ring-2' : 'ring-[#E4E4E4] ring-1'} uppercase ring-inset rounded-full bg-transparent transition-colors cursor-pointer w-1/6 aspect-[1/1] justify-center flex items-center`}
                                                 key={size}>{size}</motion.span>)}
                                     </div>
                                 </div>

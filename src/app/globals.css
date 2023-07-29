@@ -98,12 +98,12 @@ textarea::-webkit-scrollbar {
 }
 
 .search-option-header {
-    @apply w-full rounded-full bg-[#222222] tracking-wide text-white px-3 py-2 font-medium flex items-center justify-between hover:bg-black;
+    @apply w-full tracking-wide text-[#222222] py-2 font-medium text-lg flex items-center justify-between;
 }
 
 .search-option-body {
 }
 
 .chevron {
-    @apply w-6 h-auto text-white;
+    @apply w-6 h-auto text-[#222222];
 }

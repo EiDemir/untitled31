@@ -152,8 +152,8 @@ export default function Header({startWithWhite}: {
             </motion.div>
             <div className='fixed top-0 right-0 left-0 z-20'>
                 <nav
-                    className={`w-full ${isTransparent ? '' : 'bg-white/50 backdrop-blur-lg'} transition-colors duration-500 relative text-sm text-${isLight ? 'white' : '[#222222]'} font-medium flex justify-between items-center h-[66px] pt-0 px-[3.6vw] sm:px-[5vw] md:px-[60px] gap-x-3`}>
-                    <Link href='/' prefetch={false} className='ml-10 my-auto'>
+                    className={`w-full ${isTransparent ? '' : 'bg-white/50 backdrop-blur-lg'} transition-colors duration-500 relative text-sm text-${isLight ? 'white' : '[#222222]'} font-medium flex justify-between items-center h-[66px] pt-0 px-[3vw] gap-x-3`}>
+                    <Link href='/' prefetch={false} className='ml-8 my-auto'>
                         <svg className='max-w-full min-w-0' width="113" height="28" viewBox="0 0
                         113 28" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
