@@ -21,7 +21,7 @@ export default function Dashboard({children}: { children: ReactNode }) {
     const title = DASHBOARD_SECTIONS[_.findIndex(DASHBOARD_SECTIONS, (section) => section[1] === pathname)][0];
 
     return (
-        <div className='mx-[3.6vw] sm:mx-[5vw] lg:mx-[10vw] my-20 flex flex-col gap-y-12'>
+        <div className='mx-[3vw] my-20 flex flex-col gap-y-12'>
             <div className='flex justify-between items-center'>
                 <motion.h1 initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} key={title}
                            className='font-bold text-3xl sm:text-4xl'>{title.toUpperCase()}</motion.h1>

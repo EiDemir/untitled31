@@ -127,7 +127,7 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
                                 <div className='flex gap-x-2'>
                                     {_.range(1, 6).map(number =>
                                         <StarIcon onClick={() => setRating(number)} key={number}
-                                                  className={`drop-shadow-sm w-7 h-auto transition-colors duration-300 ${number <= rating ? 'text-yellow-400' : 'text-white'}`}/>
+                                                  className={`cursor-pointer drop-shadow-sm w-7 h-auto transition-colors duration-300 ${number <= rating ? 'text-yellow-400' : 'text-white'}`}/>
                                     )}
                                 </div>
                             </motion.div>

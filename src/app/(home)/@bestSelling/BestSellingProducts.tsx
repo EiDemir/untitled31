@@ -11,7 +11,11 @@ export const revalidate = 60;
 
 export default function BestSellingProducts({products}: {
     products: {
-        images: string[], categories: { name: string }[], name: string, price: number, id: string
+        images: string[], categories: { name: string }[],
+        name: string,
+        price: number,
+        id: string,
+        colors: { name: string, hexColorCode: string }[],
     }[]
 }) {
     const {width} = useWindowSize();
@@ -71,15 +75,17 @@ export default function BestSellingProducts({products}: {
                                 categories,
                                 name,
                                 price,
-                                id
+                                id,
+                                colors
                             } = products[(i % products.length + products.length) % products.length];
                             return <ProductItem
                                 direction={direction}
                                 key={i} imageLink={images[0]}
-                                category={categories[0].name}
+                                categories={categories}
                                 title={name}
                                 price={price}
-                                id={id}/>;
+                                id={id}
+                                colors={colors}/>;
                         }
                     )}
                 </AnimatePresence>

@@ -10,7 +10,7 @@ export default function PageLayout({children}: { children: ReactNode }) {
     const isCheckoutResultPage = pathname.startsWith('/checkout/result');
 
     return (
-        <div className='relative mx-[3.6vw] sm:mx-[5vw] lg:mx-[10vw] my-20 flex flex-col gap-y-12'>
+        <div className='relative mx-[3vw] my-20 flex flex-col gap-y-12'>
             <motion.h1 initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}}
                        className='font-bold text-3xl sm:text-4xl'>{isCheckoutResultPage ? 'ORDER RECEIVED' : isCheckoutPage ? 'SHIPPING AND CHECKOUT' : 'CART'}
             </motion.h1>
