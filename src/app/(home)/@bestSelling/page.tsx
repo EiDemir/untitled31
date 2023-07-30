@@ -1,7 +1,7 @@
 import {prisma} from "@/libs/prisma";
 import dynamic from "next/dynamic";
 
-export const revalidate = 3600;
+export const revalidate = 600;
 
 const BestSellingProducts = dynamic(() => import('./BestSellingProducts'), {ssr: false});
 
