@@ -2,9 +2,10 @@ import CategoryItem from "@/components/product/CategoryItem";
 import {prisma} from "@/libs/prisma";
 import getCurrentUser from "@/actions/getCurrentUser";
 
-const revalidate = 3600;
+export const revalidate = 3600;
 
 async function getBestSellingProducts() {
+    console.log('countdown');
     return prisma.product.findMany({
         select: {
             images: true,
