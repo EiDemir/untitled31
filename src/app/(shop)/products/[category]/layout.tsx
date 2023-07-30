@@ -24,7 +24,7 @@ export default async function Layout({params, children, searchOptions}: {
         notFound();
 
     return (
-        <div className='my-3 gap-y-10 flex flex-col'>
+        <div className='my-3 gap-y-5 flex flex-col'>
             <CategoryHeader category={params.category}/>
             <div className='relative flex md:flex-row flex-col gap-x-6 mx-[3vw]'>
                 {searchOptions}
