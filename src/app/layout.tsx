@@ -9,7 +9,10 @@ import CartProvider from "@/providers/CartProvider";
 const jost = Jost({subsets: ['latin']});
 
 export const metadata = {
-    title: 'Uomo | Ecommerce Website for Everybody',
+    title: {
+        template: '%s | Uomo | Ecommerce Website for Everybody',
+        default: 'Uomo | Ecommerce Website for Everybody'
+    },
     description: 'Affordable dresses for women, beside a bunch of other categories of clothes.'
 };
 

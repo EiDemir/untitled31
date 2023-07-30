@@ -89,7 +89,7 @@ export default function SearchBox({className}: {className?: string}) {
                                                 close();
                                             }} href={'/product/' + product.id}
                                                   key={product.id}
-                                                  className='rounded-md p-2 text-black h-14 flex gap-x-3 items-center hover:bg-gray-100'>
+                                                  className='rounded-md p-2 text-black h-14 flex gap-x-3 items-center transition-colors duration-200 hover:bg-gray-100'>
                                                 <Image className='h-full w-auto' src={product.images[0]}
                                                        alt="Product's image" width='1333' height='2000'/>
                                                 <p>{product.name}</p>

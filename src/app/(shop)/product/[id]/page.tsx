@@ -4,8 +4,10 @@ import ProductSections from "@/app/(shop)/product/[id]/ProductSections";
 import {prisma} from "@/libs/prisma";
 import {notFound} from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
+import {Metadata} from "next";
+import {cache} from "react";
 
-async function getProduct(productId?: string) {
+const getProduct = cache(async (productId?: string) => {
     try {
         return await prisma.product.findUnique({
             where: {
@@ -32,6 +34,16 @@ async function getProduct(productId?: string) {
     } catch (e: any) {
         return null;
     }
+});
+
+export async function generateMetadata({params}: { params: { id: string } }): Promise<Metadata> {
+    const product = await getProduct(params.id);
+
+    if (!product) notFound();
+
+    return {
+        title: product!.name
+    };
 }
 
 export default async function Page({params}: { params: { id: string } }) {
@@ -40,9 +52,7 @@ export default async function Page({params}: { params: { id: string } }) {
 
     const [product, user] = await Promise.all([productData, userData]);
 
-    if (!product) {
-        notFound();
-    }
+    if (!product) notFound();
 
     let userInfo;
 

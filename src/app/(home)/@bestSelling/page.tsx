@@ -6,6 +6,7 @@ export const revalidate = 3600;
 const BestSellingProducts = dynamic(() => import('./BestSellingProducts'), {ssr: false});
 
 async function getBestSellingProducts() {
+    console.log('best selling');
     return prisma.product.findMany({
         select: {
             images: true,
