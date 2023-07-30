@@ -37,7 +37,7 @@ export default function CategoryHeader({category}: { category: string }) {
                 <motion.h1 initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.2}}
                            key={category}
                            className='uppercase text-4xl md:text-8xl font-bold text-black'>{category}</motion.h1>
-                <motion.div variants={variants} initial='hidden' animate='show' className='flex flex-wrap gap-y-6 gap-x-2 drop-shadow-md'>
+                <motion.div variants={variants} initial='hidden' animate='show' className='flex flex-wrap gap-y-6 gap-x-2 drop-shadow-sm'>
                     <motion.div variants={itemVariants}><Link href='/products/dresses?color=black'
                                                               className='bg-gradient-to-br hover:from-purple-600 hover:to-yellow-600 from-purple-500 to-yellow-500 text-white w-max py-2 px-4 rounded-full'>New
                         Dresses</Link></motion.div>
