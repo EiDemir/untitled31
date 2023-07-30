@@ -10,12 +10,10 @@ import {CartItemsNumberContext} from "@/store/CartItemsNumberContext";
 
 const variants = {
     initial: {
-        opacity: 0,
-        y: 20
+        opacity: 0
     },
     visible: {
         opacity: 1,
-        y: 0,
         transition: {
             duration: 0.8,
             ease: 'easeOut'
@@ -57,7 +55,9 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                 toastEnd('Added to Your cart', ts);
             }).catch(() => toastEnd("Already in Your Cart", ts, true))
                 .finally(() => {
+                    toggleQuickAdd();
                     setIsCartButtonDisabled(false);
+                    setIsHovered(false);
                 });
         } else {
             const data = localStorage.getItem('cart-items');
@@ -75,6 +75,8 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                 setTimeout(() => {
                     toastEnd("Already in Your Cart", ts, true);
                     setIsCartButtonDisabled(false);
+                    toggleQuickAdd();
+                    setIsHovered(false);
                 }, 1000);
             } else {
                 items.push({
@@ -88,6 +90,8 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                     cartCtx.setCartItemsNumber(prevState => prevState + 1);
                     toastEnd('Added to Your cart', ts);
                     setIsCartButtonDisabled(false);
+                    toggleQuickAdd();
+                    setIsHovered(false);
                 }, 1000);
             }
         }
@@ -109,25 +113,31 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                            height={2000}/>
                 </Link>
                 <motion.div
-                    layout='preserve-aspect'
-                    className='rounded-xl flex flex-col items-center justify-center text-white divide-x divide-[#222222] text-sm absolute inset-x-0 bg-gray-500/40 backdrop-blur-md bottom-1 mx-1'
+                    layout
+                    style={{borderRadius: 12}}
+                    className='flex flex-col items-center justify-center text-white divide-x divide-[#222222] text-sm absolute inset-x-0 bg-gray-500/40 backdrop-blur-md mx-1 bottom-1'
                     initial={false}
                     animate={{
                         opacity: isHovered ? 1 : 0,
                         y: isHovered ? 0 : 20
-                    }}>
+                    }} transition={{layout: {duration: 0.4}, duration: 0.2}}>
                     {!isQuickAddOpen &&
-                        <button onClick={() => toggleQuickAdd()} className='h-10 hover:bg-black w-full rounded-xl'>
+                        <motion.button initial={{opacity: 0}} animate={{
+                            opacity: 1
+                        }}
+                                       transition={{delay: 0.4}} onClick={() => toggleQuickAdd()}
+                                       className='h-10 hover:bg-black w-full rounded-xl'>
                             QUICK ADD
-                        </button>}
+                        </motion.button>}
                     {isQuickAddOpen && (
-                        <div className='w-full p-2 flex flex-col gap-y-2 relative'>
+                        <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 0.4}}
+                                    className='w-full p-2 flex flex-col gap-y-2 relative'>
                             <ChevronDownIcon onClick={() => toggleQuickAdd()}
                                              className='w-6 h-auto absolute top-1 left-1 cursor-pointer'/>
                             {sizes.length > 0 &&
                                 <div className='flex flex-col items-center mb-1 gap-y-1'>
                                     <p className='font-medium'>Select Size</p>
-                                    <div className='flex flex-wrap gap-3 ring-1 w-full'>
+                                    <div className='flex flex-wrap gap-3 w-full justify-center'>
                                         {sizes.map(size =>
                                             <motion.span
                                                 whileTap={{scale: 0.9}}
@@ -146,7 +156,7 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                             <button disabled={isCartButtonDisabled} onClick={toggleCartButton}
                                     className='w-full rounded-xl h-10 ring-1 ring-white ring-inset'>ADD TO CART
                             </button>
-                        </div>
+                        </motion.div>
                     )}
                 </motion.div>
             </div>

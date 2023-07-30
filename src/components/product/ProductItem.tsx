@@ -50,7 +50,7 @@ const ProductItem = forwardRef(({imageLink, category, title, price, direction, i
             exit='exit'
             transition={{
                 type: 'spring',
-                stiffness: 50
+                stiffness: 40
             }}
             className="gap-y-3 flex flex-col">
             <div onMouseEnter={() => setIsHovered(true)}

@@ -94,7 +94,7 @@ export default function SearchOptions({colors, sizes, minMaxPrices}: {
                         className='chevron'/></motion.span>
                 </div>
                 <AnimatePresence>
-                    {isOpen[1] ? <SearchOptionBody className='search-option-body grid grid-cols-4 gap-y-4' key='color'>
+                    {isOpen[1] ? <SearchOptionBody className='search-option-body grid grid-cols-5 md:grid-cols-3 lg:grid-cols-4 gap-y-4' key='color'>
                         {colors.map(color => <div className='capitalize flex flex-col gap-y-2 items-center'
                                                   key={color.name}>
                             <motion.span
