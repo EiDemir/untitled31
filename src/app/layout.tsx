@@ -8,6 +8,11 @@ import CartProvider from "@/providers/CartProvider";
 
 const jost = Jost({subsets: ['latin']});
 
+export const metadata = {
+    title: 'Uomo | Ecommerce Website for Everybody',
+    description: 'Affordable dresses for women, beside a bunch of other categories of clothes.'
+};
+
 export default function RootLayout({children}: { children: ReactNode }) {
     return (
         <html lang="en">
