@@ -16,6 +16,9 @@ export const metadata = {
 export default function RootLayout({children}: { children: ReactNode }) {
     return (
         <html lang="en">
+        <head>
+            <meta name="google-site-verification" content="BXow0uZhUUn8xe9Fr55rb0KUM_O3QTRB5wi_5ADGrsY"/>
+        </head>
         <body className={`${jost.className}`}>
             <CartProvider>
                 <AuthProvider>
