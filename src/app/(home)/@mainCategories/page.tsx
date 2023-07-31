@@ -4,7 +4,7 @@ import _ from 'lodash';
 import ProductItemLoading from "@/components/ui/loading/ProductItemLoading";
 import {Suspense} from "react";
 
-export const revalidate = 600;
+export const dynamic = 'force-static';
 
 export default async function Page() {
     return (

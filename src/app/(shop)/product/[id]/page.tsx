@@ -7,8 +7,6 @@ import getCurrentUser from "@/actions/getCurrentUser";
 import {Metadata} from "next";
 import {cache} from "react";
 
-export const revalidate = 3600;
-
 const getProduct = cache(async (productId?: string) => {
     try {
         return await prisma.product.findUnique({
