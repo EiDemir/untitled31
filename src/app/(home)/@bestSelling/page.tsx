@@ -1,11 +1,12 @@
 import {prisma} from "@/libs/prisma";
 import _dynamic from "next/dynamic";
+import {cache} from "react";
 
-export const dynamic = 'force-static';
+export const revalidate = 3600;
 
 const BestSellingProducts = _dynamic(() => import('./BestSellingProducts'), {ssr: false});
 
-async function getBestSellingProducts() {
+const getBestSellingProducts = cache(async () => {
     return prisma.product.findMany({
         select: {
             images: true,
@@ -20,7 +21,7 @@ async function getBestSellingProducts() {
         }, take: 8,
         skip: 4
     });
-}
+});
 
 export default async function Page() {
     const products = await getBestSellingProducts();

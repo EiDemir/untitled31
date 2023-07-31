@@ -4,8 +4,6 @@ import _ from 'lodash';
 import ProductItemLoading from "@/components/ui/loading/ProductItemLoading";
 import {Suspense} from "react";
 
-export const dynamic = 'force-static';
-
 export default async function Page() {
     return (
         <div className='flex flex-col gap-y-6 px-[3vw] py-10 bg-[#F5E6E0]'>

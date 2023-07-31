@@ -1,8 +1,11 @@
 import CategoryItem from "@/components/product/CategoryItem";
 import {prisma} from "@/libs/prisma";
 import getCurrentUser from "@/actions/getCurrentUser";
+import {cache} from "react";
 
-async function getBestSellingProducts() {
+export const revalidate = 3600;
+
+export const getBestSellingProducts = cache(async () => {
     console.log('countdown');
     return prisma.product.findMany({
         select: {
@@ -18,7 +21,7 @@ async function getBestSellingProducts() {
             sizes: true
         }, take: 5
     });
-}
+});
 
 export default async function Products() {
     const products = await getBestSellingProducts();
