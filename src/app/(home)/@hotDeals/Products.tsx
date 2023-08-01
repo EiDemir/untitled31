@@ -3,10 +3,7 @@ import {prisma} from "@/libs/prisma";
 import getCurrentUser from "@/actions/getCurrentUser";
 import {cache} from "react";
 
-export const revalidate = 3600;
-
 export const getBestSellingProducts = cache(async () => {
-    console.log('countdown');
     return prisma.product.findMany({
         select: {
             images: true,
@@ -28,7 +25,7 @@ export default async function Products() {
     const user = await getCurrentUser();
 
     return (
-        <div className='grid grid-cols-3 md:grid-cols-5 gap-4'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
             {products!.map(product => <CategoryItem
                 isAuthenticated={user !== null}
                 colors={product.colors}

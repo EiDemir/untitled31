@@ -35,9 +35,9 @@ const sliderDetails = [
     }
 ];
 
-export default async function Layout({bestSelling, mainCategories}: {
+export default async function Layout({bestSelling, hotDeals}: {
     bestSelling: ReactNode,
-    mainCategories: ReactNode
+    hotDeals: ReactNode
 }) {
     return (
         <>
@@ -47,7 +47,7 @@ export default async function Layout({bestSelling, mainCategories}: {
             </header>
             <main>
                 <MainCategories/>
-                {mainCategories}
+                {hotDeals}
                 {bestSelling}
             </main>
             <footer>

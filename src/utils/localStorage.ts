@@ -1,6 +1,6 @@
 import {CartItem} from "@/types";
 import axios from "axios";
-import {uniq} from "lodash";
+import _ from "lodash";
 
 export const getCartItemsNumber = () => {
     const data = localStorage.getItem('cart-items');
@@ -12,34 +12,55 @@ export const getCartItemsNumber = () => {
 export const fetchCardLocalStorage = (action: (items: CartItem[]) => void) => {
     const data = localStorage.getItem('cart-items');
 
-    if (!data) return [];
+    if (!data) return null;
 
     const cartItems: {
         productId: string,
         quantity: number,
-        color: string,
-        size: string
+        color: string | null,
+        size: string | null
     }[] = JSON.parse(data);
 
     axios.get('/api/product', {
-        params: {ids: uniq(cartItems.map(item => item.productId)).join(',')}
+        params: {ids: _.uniq(cartItems.map(item => item.productId)).join(',')}
     }).then((data) => {
         const products = data.data.products;
         const userCartItems: CartItem[] = [];
 
         products.map((product:
-                          { images: string[], name: string, price: number, quantity: number, id: string }) => {
-            cartItems.map((cartItem) => {
-                if (cartItem.productId === product.id)
-                    userCartItems.push({
-                        color: cartItem.color,
-                        product: product,
-                        quantity: cartItem.quantity,
-                        size: cartItem.size
-                    })
+                          {
+                              images: string[],
+                              name: string,
+                              price: number,
+                              quantity: number,
+                              id: string,
+                              sizes: string[],
+                              colors: { name: string, hexColorCode: string }[]
+                          }) => {
+            cartItems.map(item => {
+                if (item.productId === product.id)
+                    if (((!item.size && !product.colors) || (item.size && product.sizes.includes(item.size)))
+                        && (((!item.color && !product.sizes) || (item.color && product.colors.find(product => product.name === item.color)))))
+                        userCartItems.push({
+                            product: {
+                                price: product.price,
+                                images: product.images,
+                                name: product.name,
+                                quantity: product.quantity,
+                                id: product.id
+                            }, color: item.color,
+                            size: item.size,
+                            quantity: item.quantity
+                        });
             });
         });
 
+        localStorage.setItem('cart-items', JSON.stringify(userCartItems.map(cartItem => ({
+            productId: cartItem.product!.id,
+            quantity: cartItem.quantity,
+            color: cartItem.color,
+            size: cartItem.size
+        }))));
         action(userCartItems);
     }).catch(() => action([]));
 };

@@ -1,7 +1,12 @@
-import {redirect} from "next/navigation";
+'use client';
 
-export default async function Page() {
-    const response = await fetch('https://untitled32.vercel.app/api/update');
+import axios from "axios";
+import {useEffect} from "react";
 
-    redirect('/cart');
+export default function Page() {
+    useEffect(() => {
+        axios.get('/api/update').then();
+    }, []);
+
+    return <div>yo</div>;
 }

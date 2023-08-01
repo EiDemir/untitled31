@@ -1,8 +1,8 @@
 'use client';
 
 import {signIn} from "next-auth/react";
-import {LockClosedIcon, UserIcon} from "@heroicons/react/24/outline";
-import {LockClosedIcon as LockSolid, UserIcon as UserSolid} from "@heroicons/react/24/solid";
+import {ExclamationCircleIcon, LockClosedIcon, UserIcon} from "@heroicons/react/24/outline";
+import {CheckIcon, LockClosedIcon as LockSolid, UserIcon as UserSolid} from "@heroicons/react/24/solid";
 import Image from "next/image";
 import {motion} from "framer-motion";
 
@@ -10,25 +10,50 @@ import googleLogo from '../../../public/logos/google-logo.png';
 import {useState} from "react";
 import Link from "next/link";
 import {useRouter, useSearchParams} from "next/navigation";
+import {fetchCardLocalStorage} from "@/utils/localStorage";
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstLabelStatus, setFirstLabelStatus] = useState(false);
     const [secondLabelStatus, setSecondLabelStatus] = useState(false);
+    const [message, setMessage] = useState('');
     const searchParams = useSearchParams();
     const router = useRouter();
 
     return (
         <div
             className='max-w-[450px] px-5 sm:px-0 mt-10 mx-auto text-sm font-medium'>
-            {searchParams.get('confirmEmail') === '1' && <h1 className='mb-5 w-full rounded-lg p-3 bg-blue-500 text-white'>A confirmation link was sent to your email. Click on it to confirm your email.</h1>}
-            {searchParams.get('emailVerified') === '1' && <h1 className='mb-5 w-full rounded-lg p-3 bg-green-500 text-white'>Your account is now verified. Proceed to log into your account.</h1>}
+            {searchParams.get('confirmEmail') === '1' &&
+                <h1 className='mb-5 w-full text-base rounded-lg p-3 bg-blue-500 text-white'>A confirmation link was sent
+                    to your
+                    email.</h1>}
+            {searchParams.get('emailVerified') === '1' &&
+                <h1 className='mb-5 w-full text-base rounded-lg p-3 bg-green-500 text-white'>You can now log into your
+                    account.</h1>}
+            {message.length > 0 && (message === 'successful' ? (
+                    <h1 className='mb-5 w-full text-base rounded-lg p-3 bg-green-500 text-white flex items-center gap-x-2'>
+                        <CheckIcon className='w-7 h-auto'/> Successful. You are being redirect.
+                    </h1>
+                ) :
+                <h1 className='mb-5 w-full text-base rounded-lg p-3 bg-red-500 text-white flex items-center gap-x-2'>
+                    <ExclamationCircleIcon className='w-7 h-auto'/> {message}</h1>)}
             <form className='flex flex-col gap-y-5' onSubmit={(event) => {
                 event.preventDefault();
                 signIn('credentials', {
+                    redirect: false,
                     email,
                     password
+                }, {
+                    cartItems: localStorage.getItem('cart-items') ?? ''
+                }).then((response) => {
+                    if (response!.error)
+                        setMessage(response!.error);
+                    else {
+                        setMessage('successful');
+                        // localStorage.removeItem('cart-items');
+                        router.push('/');
+                    }
                 });
             }}>
                 <div className="relative">

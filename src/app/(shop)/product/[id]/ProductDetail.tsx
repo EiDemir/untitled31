@@ -61,37 +61,41 @@ export default function ProductDetail({productDetail, user}: {
         if (user) {
             axios.post('/api/cart', {
                 productId: productDetail.id,
-                quantity,
+                quantity: 1,
                 color: selectedOptions.color,
                 size: selectedOptions.size
             }).then(() => {
                 cartCtx.setCartItemsNumber(prevState => prevState + 1);
                 toastEnd('Added to Your cart', ts);
             }).catch(() => toastEnd("Already in Your Cart", ts, true))
-                .finally(() => setIsCartButtonDisabled(false));
+                .finally(() => {
+                    setIsCartButtonDisabled(false);
+                    setIsHovered(false);
+                });
         } else {
             const data = localStorage.getItem('cart-items');
             const items: {
                 productId: string,
                 quantity: number,
-                color?: { name: string, hexColorCode: string },
-                size?: string
+                color: string | null,
+                size: string | null
             }[] = data !== null ? JSON.parse(data) : [];
 
             if (items.filter(item =>
                 item.size === selectedOptions.size &&
-                item.color === selectedOptions.color &&
-                item.productId === productDetail.id).length) {
+                item.color === (!selectedOptions.color ? null : selectedOptions.color.name) &&
+                item.productId === productDetail.id).length === 1) {
                 setTimeout(() => {
                     toastEnd("Already in Your Cart", ts, true);
                     setIsCartButtonDisabled(false);
+                    setIsHovered(false);
                 }, 1000);
             } else {
                 items.push({
                     productId: productDetail.id,
-                    quantity,
-                    color: selectedOptions.color,
-                    size: selectedOptions.size
+                    quantity: 1,
+                    color: (!selectedOptions.color ? null : selectedOptions.color.name),
+                    size: !selectedOptions.size ? null : selectedOptions.size
                 });
                 localStorage.setItem('cart-items', JSON.stringify(items));
                 setTimeout(() => {
@@ -108,7 +112,8 @@ export default function ProductDetail({productDetail, user}: {
 
     return (
         <div className='px-[3.6vw] sm:px-0 sm:w-5/12 flex flex-col gap-y-1'>
-            <p className='mb-6 text-sm font-medium text-[#222222] leading-none uppercase'> women / {productDetail.category}</p>
+            <p className='mb-6 text-sm font-medium text-[#222222] leading-none uppercase'> women
+                / {productDetail.category}</p>
             <p className='text-[1.625rem] text-[#222222]'>{productDetail.name}</p>
             <p className='font-medium text-[1.375rem] text-[#222222]'>${productDetail.price}</p>
             <p className='font-sm my-6 text-[#222222]'>Phasellus sed volutpat orci. Fusce eget lore mauris vehicula

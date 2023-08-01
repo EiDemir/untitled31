@@ -1,6 +1,6 @@
 export default function Loading() {
     return (
-        <main className='sm:px-[5vw] animate-pulse'>
+        <main className='sm:px-[5vw] lg:px-[10vw] animate-pulse'>
             <div className='flex sm:flex-row flex-col gap-y-10 gap-x-10 my-5'>
                 <div className='sm:w-7/12 flex flex-col xl:flex-row gap-x-2 gap-y-2 z-10'>
                     <div

@@ -68,7 +68,7 @@ export default function Slider({details}: {
 
 
     const dots = (
-        <motion.div className='absolute left-[3.6vw] sm:left-[5vw] md:left-[60px] flex flex-col gap-y-4'>
+        <motion.div className='absolute w-max mx-auto max-md:inset-x-0 max-md:bottom-[3vw] md:left-[3vw] flex md:flex-col gap-4'>
             {range(details.length).map(i =>
                 <motion.div
                     initial={false}
@@ -88,7 +88,7 @@ export default function Slider({details}: {
     );
 
     return (
-        <div className='relative h-screen flex items-center z-10'>
+        <div className='relative h-screen w-screen flex items-center z-10'>
             <AnimatePresence initial={false}>
                 <motion.div
                     ref={ref}
@@ -106,12 +106,12 @@ export default function Slider({details}: {
                     <div className='relative items-center flex'>
                         <motion.div
                             variants={textVariants}
-                            className='uppercase text-white text-left absolute right-4 left-[10vw] z-10'>
+                            className='uppercase text-white text-left absolute right-4 left-[3vw] md:left-[7vw] z-10'>
                             <div className='ml-1 flex flex-row items-center gap-x-2'>
                                 <div className='h-0.5 w-10 bg-white'/>
                                 <p className='text-sm font-medium'>{details[active].date}</p>
                             </div>
-                            <h1 className='text-[35px] sm:text-[60px] font-bold'>{details[active].title}</h1>
+                            <h1 className='text-3xl md:text-5xl lg:text-6xl font-bold'>{details[active].title}</h1>
                             <p className='ml-1 text-sm sm:text-base font-semibold'>{details[active].subtitle}</p>
                             <motion.button whileHover={{
                                 scale: 1.1

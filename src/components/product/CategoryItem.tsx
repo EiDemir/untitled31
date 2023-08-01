@@ -3,12 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import {motion, useCycle} from "framer-motion";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {floor} from "lodash";
 import {ChevronDownIcon} from "@heroicons/react/24/solid";
 import {toastEnd, toastStart} from "@/utils/toast";
 import axios from "axios";
 import {CartItemsNumberContext} from "@/store/CartItemsNumberContext";
+import {useMediaQuery} from "usehooks-ts";
 
 const variants = {
     initial: {
@@ -33,6 +34,7 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
     colors: { name: string, hexColorCode: string }[],
     isAuthenticated: boolean
 }) {
+    const md = useMediaQuery('(min-width: 768px)');
     const [isHovered, setIsHovered] = useState(false);
     const [isQuickAddOpen, toggleQuickAdd] = useCycle(false, true);
     const [selectedOptions, setSelectedOptions] = useState({
@@ -42,6 +44,9 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
     const [isCartButtonDisabled, setIsCartButtonDisabled] = useState(false);
     const cartCtx = useContext(CartItemsNumberContext);
 
+    useEffect(() => {
+        setIsHovered(!md);
+    }, [md, isQuickAddOpen]);
 
     const toggleCartButton = () => {
         setIsCartButtonDisabled(true);
@@ -66,14 +71,14 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
             const items: {
                 productId: string,
                 quantity: number,
-                color?: { name: string, hexColorCode: string },
-                size?: string
+                color: string | null,
+                size: string | null
             }[] = data !== null ? JSON.parse(data) : [];
 
             if (items.filter(item =>
                 item.size === selectedOptions.size &&
-                item.color === selectedOptions.color &&
-                item.productId === id).length) {
+                item.color === (!selectedOptions.color ? null : selectedOptions.color.name) &&
+                item.productId === id).length === 1) {
                 setTimeout(() => {
                     toastEnd("Already in Your Cart", ts, true);
                     setIsCartButtonDisabled(false);
@@ -84,8 +89,8 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                 items.push({
                     productId: id,
                     quantity: 1,
-                    color: selectedOptions.color,
-                    size: selectedOptions.size
+                    color: (!selectedOptions.color ? null : selectedOptions.color.name),
+                    size: !selectedOptions.size ? null : selectedOptions.size
                 });
                 localStorage.setItem('cart-items', JSON.stringify(items));
                 setTimeout(() => {
@@ -127,7 +132,8 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                         <motion.button initial={{opacity: 0}} animate={{
                             opacity: 1
                         }}
-                                       transition={{delay: 0.4}} onClick={() => toggleQuickAdd()}
+                                       transition={{delay: 0.4}}
+                                       onClick={() => toggleQuickAdd()}
                                        className='h-10 hover:bg-black w-full rounded-xl'>
                             QUICK ADD
                         </motion.button>}
@@ -139,7 +145,7 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                             {sizes.length > 0 &&
                                 <div className='flex flex-col items-center mb-1 gap-y-1'>
                                     <p className='font-medium'>Select Size</p>
-                                    <div className='flex flex-wrap gap-3 w-full justify-center'>
+                                    <div className='grid grid-cols-4 gap-1 w-full justify-center'>
                                         {sizes.map(size =>
                                             <motion.span
                                                 whileTap={{scale: 0.9}}
@@ -150,7 +156,7 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                                                 onClick={() => setSelectedOptions(prevState =>
                                                     ({...prevState, size}))}
                                                 className={`${selectedOptions.size === size ?
-                                                    'ring-[#222222] ring-2' : 'ring-[#E4E4E4] ring-1'} uppercase ring-inset rounded-full bg-transparent transition-colors cursor-pointer w-1/6 aspect-[1/1] justify-center flex items-center`}
+                                                    'ring-[#222222] ring-2' : 'ring-[#E4E4E4] ring-1'} uppercase ring-inset rounded-lg bg-transparent transition-colors cursor-pointer px-2 py-2 justify-center flex items-center`}
                                                 key={size}>{size}</motion.span>)}
                                     </div>
                                 </div>

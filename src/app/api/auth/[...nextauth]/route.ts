@@ -23,18 +23,30 @@ export const authOptions: AuthOptions = {
                 const user = await prisma.user.findUnique({
                     where: {
                         email: credentials.email
+                    }, include: {
+                        accounts: {
+                            select: {
+                                provider: true
+                            }
+                        }
                     }
                 });
 
                 if (!user)
-                    return null;
+                    throw new Error('No user with the given email was found.');
+                7
+                if (user.accounts.length === 1)
+                    throw new Error(`A ${user.accounts[0].provider} account associated with this email was found. Please sign in with ${user.accounts[0].provider}.`);
 
                 const doMatch = await bcrypt.compare(credentials.password, user.hashedPassword);
 
-                if (doMatch && user.emailVerified !== null)
-                    return user;
+                if (!doMatch)
+                    throw new Error('Passwords do not match.');
 
-                return null;
+                if (!user.emailVerified)
+                    throw new Error('Your email is not verified.');
+
+                return user;
             }
         }),
         GoogleProvider({
@@ -43,6 +55,10 @@ export const authOptions: AuthOptions = {
         })
     ],
     callbacks: {
+        signIn() {
+            console.log('yes2');
+            return true;
+        },
         async session({session}) {
             const cartItemsNumber = await prisma.user.findUnique({
                 where: {

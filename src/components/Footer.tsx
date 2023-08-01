@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import {motion} from "framer-motion";
+import Link from "next/link";
 
 export default function Footer() {
     return (
@@ -46,8 +47,8 @@ export default function Footer() {
                         <div className='flex flex-col gap-y-5 text-sm'>
                             <p>New Arrivals</p>
                             <p>Accessories</p>
-                            <p>Men</p>
-                            <p>Women</p>
+                            <Link href='/products/men'>Men</Link>
+                            <Link href='/products/women'>Women</Link>
                             <p>Shop All</p>
                         </div>
                     </div>
@@ -55,7 +56,7 @@ export default function Footer() {
                         <h3 className='font-medium text-lg'>HELP</h3>
                         <div className='flex flex-col gap-y-5 text-sm'>
                             <p>Customer Service</p>
-                            <p>My Account</p>
+                            <Link href='/dashboard'>My Account</Link>
                             <p>Find a Store</p>
                             <p>Legal & Privacy</p>
                             <p>Contact</p>

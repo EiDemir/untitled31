@@ -1,10 +1,8 @@
 import {prisma} from "@/libs/prisma";
-import _dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 import {cache} from "react";
 
-export const revalidate = 3600;
-
-const BestSellingProducts = _dynamic(() => import('./BestSellingProducts'), {ssr: false});
+const BestSellingProducts = dynamic(() => import('./BestSellingProducts'), {ssr: false});
 
 const getBestSellingProducts = cache(async () => {
     return prisma.product.findMany({

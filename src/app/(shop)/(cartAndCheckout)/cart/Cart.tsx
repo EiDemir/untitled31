@@ -40,7 +40,8 @@ export default function Cart({cartItems}: {
     cartItems?: CartItem[]
 }) {
     const cartCtx = useContext(CartItemsNumberContext);
-    const [items, setItems] = useState(cartItems ?? []);
+    const [items, setItems] = useState(cartItems);
+    const [isLoading, setIsLoading] = useState(!cartItems);
     const [disabledButtons, setDisabledButtons] = useState(fill(Array(cartItems ? cartItems.length : 0), false));
 
     useEffect(() => {
@@ -49,15 +50,15 @@ export default function Cart({cartItems}: {
         }
     }, [cartItems]);
 
-    const subtotal = sum(items.map(item => item.quantity * item.product!.price));
+    const subtotal = sum(!items ? [] : items.map(item => item.quantity * item.product!.price));
     const vat = (subtotal * 0.05);
 
     const changeQuantity = (operator: string, itemIndex: number) => {
         if (cartItems) {
             setDisabledButtons(prevState => prevState.map((item, index) => index === itemIndex ? true : item))
             axios.put('/api/cart', {
-                cartItemId: items[itemIndex].id,
-                quantity: items[itemIndex].quantity + (operator === '+' ? 1 : -1)
+                cartItemId: items![itemIndex].id,
+                quantity: items![itemIndex].quantity + (operator === '+' ? 1 : -1)
             }).then(() => {
                 setDisabledButtons(prevState => prevState.map((item, index) => index === itemIndex ? false : item));
                 setItems(prevState => prevState?.map((item, index) =>
@@ -72,7 +73,7 @@ export default function Cart({cartItems}: {
         } else {
             const currentItems = JSON.parse(localStorage.getItem('cart-items') as string);
             const itemToBeChanged = currentItems[itemIndex];
-            itemToBeChanged.quantity = clamp(itemToBeChanged.quantity + (operator === '+' ? +1 : -1), 1, items[itemIndex].product!.quantity);
+            itemToBeChanged.quantity = clamp(itemToBeChanged.quantity + (operator === '+' ? +1 : -1), 1, items![itemIndex].product!.quantity);
             localStorage.setItem('cart-items', JSON.stringify(currentItems));
             setItems(prevState => prevState?.map((item, index) =>
                 index === itemIndex ? {
@@ -90,7 +91,7 @@ export default function Cart({cartItems}: {
                     cartCtx.setCartItemsNumber(prevState => prevState - 1);
                     toastEnd('Deleted from Cart', ts);
                     setItems(prevItems =>
-                        prevItems.filter(item => item.id !== cartItemId));
+                        prevItems!.filter(item => item.id !== cartItemId));
                     setDisabledButtons(prevState => prevState.filter((item, index) => index === itemIndex));
                 }
             ).catch(() => {
@@ -101,14 +102,14 @@ export default function Cart({cartItems}: {
             const currentItems = JSON.parse(localStorage.getItem('cart-items') as string);
             localStorage.setItem('cart-items', JSON.stringify(currentItems.filter((item: CartItem, index: number) => index !== itemIndex)));
             setItems(prevItems =>
-                prevItems.filter((item, index) => index !== itemIndex));
+                prevItems!.filter((item, index) => index !== itemIndex));
         }
     };
 
     return (
-        <div className='flex flex-col md:flex-row gap-8'>
-            {items.length ?
-                <div className='flex flex-col gap-y-7 md:w-2/3'>
+        <div className='flex flex-col lg:flex-row gap-8'>
+            {items && items.length > 0 ?
+                <div className='flex flex-col gap-y-7 lg:w-2/3'>
                     <table
                         className='h-min rounded-3xl table-auto text-sm ring-1 ring-[#E4E4E4] ring-inset'>
                         <thead className='bg-[#E4E4E4] drop-shadow-sm h-12'>
@@ -124,12 +125,12 @@ export default function Cart({cartItems}: {
                             <motion.tr layout transition={{duration: 0.2}}
                                        key={item.product?.images[0]! + item.color + item.size}
                                        className=''>
-                                <td className='flex gap-x-5 items-center py-4 pl-5'>
+                                <td className='flex gap-x-5 items-center py-4 pl-5 pr-2'>
                                     <Link prefetch={false} href={'/product/' + item.product!.id}>
                                         <Image
-                                            className='cursor-pointer h-full rounded-3xl object-cover'
+                                            className='cursor-pointer rounded-xl object-cover max-w-[15vw] lg:max-w-[8vw]'
                                             src={item.product!.images[0]}
-                                            alt="Product's image" width='120' height='120'/>
+                                            alt="Product's image" width={133.3} height={200}/>
                                     </Link>
                                     <div className='flex flex-col'>
                                         <Link prefetch={false}
@@ -234,10 +235,10 @@ export default function Cart({cartItems}: {
                     </motion.div>
                 </div> :
                 <div className='md:w-2/3 my-24 md:my-0 flex items-center justify-center text-xl font-medium'>
-                    Your Cart is Empty.
+                    {isLoading && !items ? 'Loading...' : 'Your Cart is Empty.'}
                 </div>
             }
-            <div className='md:w-1/3 md:sticky top-0 flex flex-col gap-y-5'>
+            <div className='lg:w-1/3 lg:sticky top-0 flex flex-col gap-y-5'>
                 <div className='p-8 h-min rounded-3xl ring-1 ring-inset ring-[#222222] bg-white/50 backdrop-blur-md'>
                     <h1 className='font-medium mb-6'>CART TOTALS</h1>
                     <div className='divide-y'>
@@ -259,7 +260,7 @@ export default function Cart({cartItems}: {
                         </div>
                     </div>
                 </div>
-                <button disabled={!items.length} type='button'
+                <button disabled={!(items && items.length > 0)} type='button'
                         className='hover:bg-black disabled:bg-[#E4E4E4] disabled:drop-shadow-none drop-shadow-lg rounded-full h-14 bg-[#222222] font-medium text-sm text-white'>
                     <Link href='/checkout' prefetch={false}>
                         PROCEED TO CHECKOUT

@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import {notFound} from "next/navigation";
+import {redirect} from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
 import PaymentButton from "@/app/(shop)/(cartAndCheckout)/checkout/(checkout)/PaymentButton";
 
@@ -7,7 +7,7 @@ export default async function Layout({children}: { children: ReactNode }) {
     const user = await getCurrentUser();
 
     if (!user) {
-        notFound();
+        redirect('/auth/login');
     }
 
     return (
