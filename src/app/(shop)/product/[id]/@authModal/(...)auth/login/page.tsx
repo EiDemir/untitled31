@@ -1,6 +1,6 @@
 import Login from "@/components/auth/Login";
 
-export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 
 export default function Modal() {
     return (
