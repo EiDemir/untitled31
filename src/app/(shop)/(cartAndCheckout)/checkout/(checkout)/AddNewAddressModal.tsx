@@ -1,7 +1,7 @@
 'use client';
 
 import {useRouter} from "next/navigation";
-import {MouseEvent, useRef} from "react";
+import {MouseEvent, useEffect, useRef} from "react";
 import {motion} from "framer-motion";
 import Input from "@/components/ui/Input";
 import {XMarkIcon} from "@heroicons/react/24/outline";
@@ -11,6 +11,10 @@ import SubmitButton from "@/app/(shop)/(cartAndCheckout)/checkout/(checkout)/Sub
 export default function AddNewAddressModal({type}: { type: string }) {
     const router = useRouter();
     const ref = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        document.body.style.overflowY = 'hidden';
+    }, [])
 
     const handleOutsideClick = (event: MouseEvent) => {
         if (!ref.current?.contains(event.target as Node)) {
