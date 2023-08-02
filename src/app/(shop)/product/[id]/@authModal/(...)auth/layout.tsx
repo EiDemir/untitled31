@@ -2,11 +2,15 @@
 
 import {useRouter} from "next/navigation";
 import {motion} from "framer-motion";
-import {useRef, MouseEvent, ReactNode} from "react";
+import {useRef, MouseEvent, ReactNode, useEffect} from "react";
 
 export default function Layout({children}: { children: ReactNode }) {
     const router = useRouter();
     const ref = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        document.body.style.overflowY = 'hidden';
+    }, []);
 
     const handleOutsideClick = (event: MouseEvent) => {
         if (!ref.current?.contains(event.target as Node)) {
