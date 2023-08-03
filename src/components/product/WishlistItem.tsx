@@ -46,7 +46,7 @@ export default function WishlistItem(
                 </motion.div>
             </div>
             <div className='flex flex-col font-normal'>
-                <p className="text-[#B9A16B] text-sm">{category}</p>
+                <p className="text-[#B9A16B] text-sm capitalize">{category}</p>
                 <p className="text-base">{title}</p>
                 <p className="text-[#767676] text-base">{price}</p>
             </div>

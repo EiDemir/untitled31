@@ -169,7 +169,7 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                 </motion.div>
             </div>
             <div className='flex flex-col font-normal mt-2'>
-                <p className="text-[#B9A16B] text-sm">{categories[0].name}</p>
+                <p className="text-[#B9A16B] text-sm capitalize">{categories[0].name}</p>
                 <p className="text-base">{title}</p>
                 <p className="text-[#767676] text-base">${price}</p>
                 {colors.length > 0 &&
