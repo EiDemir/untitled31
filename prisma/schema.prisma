@@ -74,6 +74,7 @@ model Product {
   images        String[]
   colors        ProductColor[]
   sizes         String[]
+  ordersNumber  Int            @default(0)
   users         User[]         @relation(fields: [userIDs], references: [id])
   userIDs       String[]       @db.ObjectId
   cartItems     CartItem[]

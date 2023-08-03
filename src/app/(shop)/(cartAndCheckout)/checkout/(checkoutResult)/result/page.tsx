@@ -1,7 +1,9 @@
 import {notFound} from "next/navigation";
-import {CheckCircleIcon} from "@heroicons/react/24/solid";
 import Stripe from "stripe";
 import {prisma} from "@/libs/prisma";
+import SuccessfulPaymentIcon
+    from "@/app/(shop)/(cartAndCheckout)/checkout/(checkoutResult)/result/SuccessfulPaymentIcon";
+import _ from "lodash";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: '2022-11-15'
@@ -28,6 +30,7 @@ export default async function Page({searchParams}: {
     if (order.status === 'paid') notFound();
 
     let checkout_session: Stripe.Checkout.Session;
+    let totalPrice;
 
     try {
         checkout_session = await
@@ -41,6 +44,7 @@ export default async function Page({searchParams}: {
                     status: 'paid'
                 }
             });
+        totalPrice = _.reduce(order.items, (prev, curr) => prev + curr.quantity * curr.price, 0);
     } catch (e) {
         notFound();
     }
@@ -48,7 +52,9 @@ export default async function Page({searchParams}: {
     return (
         <div className='text-center flex flex-col justify-center gap-y-9 w-full'>
             <div className='flex flex-col gap-y-2'>
-                <CheckCircleIcon className='mx-auto w-24 h-auto text-green-500'/>
+                <div className='mx-auto w-24 h-24 text-green-500'>
+                    <SuccessfulPaymentIcon/>
+                </div>
                 <h1 className='text-4xl text-[#222222]'>Your order is completed!</h1>
                 <p className='text-[#767676] text-sm'>Thank you. Your order has been received.</p>
             </div>
@@ -57,15 +63,19 @@ export default async function Page({searchParams}: {
             }} className='text-start flex gap-x-16 p-12 w-2/3 mx-auto'>
                 <div>
                     <p className='text-[#767676] text-sm'>Order Number</p>
-                    <p>13119</p>
+                    <p>#{order.id}</p>
                 </div>
                 <div>
                     <p className='text-[#767676] text-sm'>Date</p>
-                    <p>7/13/2023</p>
+                    <p>{order.date.toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: '2-digit',
+                        year: 'numeric'
+                    })}</p>
                 </div>
                 <div>
                     <p className='text-[#767676] text-sm'>Total</p>
-                    <p>$40.10</p>
+                    <p>${totalPrice}</p>
                 </div>
             </div>
         </div>
