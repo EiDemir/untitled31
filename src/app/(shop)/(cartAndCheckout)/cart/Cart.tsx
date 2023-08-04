@@ -4,7 +4,6 @@ import {motion} from "framer-motion";
 import {useContext, useEffect, useState} from "react";
 import Image from "next/image";
 import {clamp, fill, sum} from "lodash";
-import {XMarkIcon} from "@heroicons/react/24/outline";
 import axios from "axios";
 import {MouseEvent} from "react";
 import {toastEnd, toastStart} from "@/utils/toast";
@@ -13,6 +12,7 @@ import {fetchCardLocalStorage} from "@/utils/localStorage";
 import {CartItemsNumberContext} from "@/store/CartItemsNumberContext";
 import Link from "next/link";
 import LoadingAnimation from "@/components/ui/LoadingAnimation";
+import {TrashIcon} from "@heroicons/react/24/outline";
 
 export const variants = {
     initial: {
@@ -140,10 +140,14 @@ export default function Cart({cartItems}: {
                                             <p className='text-sm text-[#767676]'>Color: {item.color}</p>}
                                         {item.size &&
                                             <p className='text-sm text-[#767676]'>Size: {item.size}</p>}
+                                        <button
+                                            onClick={(event) => toggleRemoveItemButton(event, item.id!, index)}
+                                            className='flex gap-x-1 text-red-500 text-sm font-medium mt-3 items-center'><TrashIcon
+                                            className='w-5 h-auto'/><p className='pt-0.5'>DELETE FROM CART</p></button>
                                     </div>
                                 </td>
-                                <td className=''>${item.product!.price}</td>
-                                <td className=''>
+                                <td>${item.product!.price}</td>
+                                <td>
                                     <div
                                         className='flex flex-row w-28 h-14 ring-1 ring-[#E4E4E4] ring-inset items-center justify-center rounded-full'>
                                         <motion.button layout disabled={disabledButtons[index]}
@@ -168,10 +172,6 @@ export default function Cart({cartItems}: {
                                 <td className='pr-5'>
                                     <div className='flex justify-between'>
                                         ${(item.quantity * item.product!.price).toFixed(2)}
-                                        <button
-                                            onClick={(event) => toggleRemoveItemButton(event, item.id!, index)}
-                                            className='disabled:text-[#E4E4E4] text-[#222222]'><XMarkIcon
-                                            className='w-5 h-auto'/></button>
                                     </div>
                                 </td>
                             </motion.tr>)}
