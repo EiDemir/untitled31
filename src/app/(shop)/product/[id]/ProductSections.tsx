@@ -4,7 +4,6 @@ import {useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import {range} from "lodash";
 import Reviews from "@/app/(shop)/product/[id]/Reviews";
-// import ProductItem from "@/components/product/ProductItem";
 
 const variants = {
     enter: (direction: number) => ({
@@ -103,17 +102,6 @@ export default function ProductSections({productId, numberOfReviews, isAuthentic
                     {sections[selected]}
                 </motion.div>
             </AnimatePresence>
-            <div className='flex flex-col gap-y-6 bg-white z-10'>
-                <motion.p layout transition={{duration: 0.5}} className='text-2xl'>RELATED <span
-                    className='font-bold'>PRODUCTS</span></motion.p>
-                <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5'>
-                    {/*{relatedProducts.map(product =>*/}
-                    {/*    <ProductItem id='' key={product.imageLink} imageLink={product.imageLink}*/}
-                    {/*                 category={product.category}*/}
-                    {/*                 title={product.title} price={product.price}*/}
-                    {/*                 direction={2}/>)}*/}
-                </div>
-            </div>
         </div>
     );
 }

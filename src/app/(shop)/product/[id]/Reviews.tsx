@@ -1,10 +1,11 @@
 import Image from "next/image";
 import {FormEvent, useEffect, useRef, useState} from "react";
-import _ from 'lodash';
+import _, {ceil} from 'lodash';
 import axios from "axios";
 import {ChevronDownIcon, ChevronUpIcon, StarIcon} from "@heroicons/react/24/solid";
 import {useRouter} from "next/navigation";
 import {motion} from "framer-motion";
+import LoadingAnimation from "@/components/ui/LoadingAnimation";
 
 export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
     productId: string,
@@ -30,6 +31,7 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
     const bottomRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        setIsLoading(true);
         axios.get(`/api/product/${productId}/reviews`, {params: {isAuthenticated}}).then((res) =>
             setReviews(res.data.reviews)).catch().finally(() => setIsLoading(false));
     }, [productId, isAuthenticated]);
@@ -51,7 +53,7 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
         }
     };
 
-    const addReviewHandler = (event: FormEvent) => {
+    const handleAddReviewButton = (event: FormEvent) => {
         event.preventDefault();
         axios.post('/api/product/' + productId + '/reviews', {
             rating: rating,
@@ -71,7 +73,7 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
             <div className='relative flex md:flex-row flex-col'>
                 <div className='w-full md:w-2/3'>
                     <div className='divide-y flex flex-col md:pr-4'>
-                        {reviews.map((review: {
+                        {!isLoading ? reviews.map((review: {
                                 voteCount: number,
                                 id: string,
                                 rating: number,
@@ -83,7 +85,7 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
                                 <div key={index} className='flex text-sm py-5'>
                                     <div className='h-full w-20 px-4 flex flex-col gap-y-4'>
                                         <Image className='rounded-full w-full' src={review.user.image}
-                                               alt="User's profile picture" width='40' height='40'/>
+                                               alt="User's profile picture" width='96' height='96'/>
                                         <div className='flex flex-col gap-y-1 items-center'>
                                             <button onClick={() => toggleVoteButton('up', review.id)} type='button'
                                                     className={`rounded-full ${review.userVoted && review.userVoted.vote === 'up' ? 'bg-green-400 hover:bg-green-500' : ''} transition-colors duration-500 p-2`}>
@@ -108,7 +110,65 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
                                         <p className='mt-5 text-[#767676]'>{review.reviewText}</p>
                                     </div>
                                 </div>
-                        )}
+                        ) : <>
+                            <div className='flex text-sm py-5 animate-pulse'>
+                                <div className='h-full w-20 px-4 flex flex-col gap-y-6'>
+                                    <div className='rounded-full bg-slate-400 w-[43.16px] h-[43.16px]'/>
+                                    <div className='flex flex-col gap-y-2 items-center'>
+                                        <div className='rounded-full bg-slate-400 p-3'/>
+                                        <div className='rounded-full p-1 bg-slate-400'></div>
+                                        <div className='rounded-full bg-slate-400 p-3'/>
+                                    </div>
+                                </div>
+                                <div className='w-full'>
+                                    <div className='h-2 w-10 mt-2 rounded-full bg-slate-400'/>
+                                    <div className='h-2 w-14 mt-4 rounded-full bg-slate-400'/>
+                                    <div className='mt-8 flex flex-col gap-y-3'>
+                                        <div className='h-2 w-full rounded-full bg-slate-400'/>
+                                        <div className='h-2 w-full rounded-full bg-slate-400'/>
+                                        <div className='h-2 w-1/2 rounded-full bg-slate-400'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex text-sm py-5 animate-pulse'>
+                                <div className='h-full w-20 px-4 flex flex-col gap-y-6'>
+                                    <div className='rounded-full bg-slate-400 w-[43.16px] h-[43.16px]'/>
+                                    <div className='flex flex-col gap-y-2 items-center'>
+                                        <div className='rounded-full bg-slate-400 p-3'/>
+                                        <div className='rounded-full p-1 bg-slate-400'></div>
+                                        <div className='rounded-full bg-slate-400 p-3'/>
+                                    </div>
+                                </div>
+                                <div className='w-full'>
+                                    <div className='h-2 w-10 mt-2 rounded-full bg-slate-400'/>
+                                    <div className='h-2 w-14 mt-4 rounded-full bg-slate-400'/>
+                                    <div className='mt-8 flex flex-col gap-y-3'>
+                                        <div className='h-2 w-full rounded-full bg-slate-400'/>
+                                        <div className='h-2 w-full rounded-full bg-slate-400'/>
+                                        <div className='h-2 w-1/2 rounded-full bg-slate-400'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex text-sm py-5 animate-pulse'>
+                                <div className='h-full w-20 px-4 flex flex-col gap-y-6'>
+                                    <div className='rounded-full bg-slate-400 w-[43.16px] h-[43.16px]'/>
+                                    <div className='flex flex-col gap-y-2 items-center'>
+                                        <div className='rounded-full bg-slate-400 p-3'/>
+                                        <div className='rounded-full p-1 bg-slate-400'></div>
+                                        <div className='rounded-full bg-slate-400 p-3'/>
+                                    </div>
+                                </div>
+                                <div className='w-full'>
+                                    <div className='h-2 w-10 mt-2 rounded-full bg-slate-400'/>
+                                    <div className='h-2 w-14 mt-4 rounded-full bg-slate-400'/>
+                                    <div className='mt-8 flex flex-col gap-y-3'>
+                                        <div className='h-2 w-full rounded-full bg-slate-400'/>
+                                        <div className='h-2 w-full rounded-full bg-slate-400'/>
+                                        <div className='h-2 w-1/2 rounded-full bg-slate-400'/>
+                                    </div>
+                                </div>
+                            </div>
+                        </>}
                     </div>
                     <div ref={bottomRef}/>
                 </div>
@@ -119,7 +179,7 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
                             }}
                             className={`drop-shadow-sm w-full order-first md:order-last sticky top-20 md:w-1/3 bg-gray-200/50 backdrop-blur-md flex flex-col justify-between rounded-xl ${isAddReviewOpen ? 'h-full' : 'h-40'} p-3`}>
                     {isAddReviewOpen ?
-                        <form onSubmit={addReviewHandler} className='flex flex-col'>
+                        <form onSubmit={handleAddReviewButton} className='flex flex-col'>
                             <motion.div initial={{opacity: 0}} animate={{opacity: 1}}
                                         transition={{delay: 0.5}}
                                         className='flex gap-x-3 items-center'>
@@ -165,8 +225,18 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum}: {
                             </motion.button>
                         </form> :
                         <>
-                            <motion.p initial={{opacity: 0}} animate={{opacity: 1}}
-                                      transition={{delay: 0.5}}>Average rating: {average.toFixed(1)}</motion.p>
+                            <motion.div initial={{opacity: 0}} animate={{opacity: 1}}
+                                        transition={{delay: 0.5}}
+                                        className={`flex ${isLoading ? 'my-auto justify-center' : ''}`}>
+                                {isLoading ? <LoadingAnimation/> :
+                                    <div className='flex items-center gap-x-2'>
+                                        Average Rating: <div className='flex gap-x-2'>
+                                        {_.range(1, 6).map(number =>
+                                            <StarIcon key={number}
+                                                      className={`drop-shadow-sm w-7 h-full ${number <= ceil(average) ? 'text-yellow-400' : 'text-white'}`}/>
+                                        )} </div>
+                                    </div>}
+                            </motion.div>
                             <motion.button initial={{opacity: 0}} animate={{opacity: 1}}
                                            transition={{delay: 0.7}} type='button'
                                            onClick={() => setIsAddReviewOpen(prevState => !prevState)}

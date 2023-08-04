@@ -1,11 +1,12 @@
-import ImageSlider from "@/app/(shop)/product/[id]/ImageSlider";
-import ProductDetail from "@/app/(shop)/product/[id]/ProductDetail";
-import ProductSections from "@/app/(shop)/product/[id]/ProductSections";
+import ImageSlider from "./ImageSlider";
+import ProductDetail from "./ProductDetail";
+import ProductSections from "./ProductSections";
 import {prisma} from "@/libs/prisma";
 import {notFound} from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
 import {Metadata} from "next";
-import {cache} from "react";
+import {cache, Suspense} from "react";
+import RelatedProducts from "./RelatedProducts";
 
 const getProduct = cache(async (productId?: string) => {
     try {
@@ -68,7 +69,7 @@ export default async function Page({params}: { params: { id: string } }) {
     }
 
     return (
-        <main className='sm:px-[5vw] lg:px-[10vw]'>
+        <main className='sm:px-[5vw] lg:px-[10vw] mb-10'>
             <div className='flex sm:flex-row flex-col gap-y-10 gap-x-10 my-5'>
                 <ImageSlider
                     images={product.images}/>
@@ -87,6 +88,11 @@ export default async function Page({params}: { params: { id: string } }) {
                 numberOfReviews={product._count.reviews}
                 productId={product.id}
             />
+            <Suspense fallback={<div className=''>
+
+            </div>}>
+                <RelatedProducts isAuthenticated={user !== null} categories={product.categories} id={product.id}/>
+            </Suspense>
         </main>
     );
 }

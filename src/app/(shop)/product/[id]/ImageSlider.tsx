@@ -67,14 +67,21 @@ export default function ImageSlider({images}: { images: string[] }) {
             </div>
 
             <div className='relative w-full aspect-[1333/2000] flex items-center overflow-hidden'>
-                <motion.button whileTap={{scale: 0.9}}
-                    disabled={page === 0 || areButtonsDisabled} onClick={() => paginate(-1)}
-                    className='disabled:cursor-default disabled:bg-gray-200/70 backdrop-blur-md cursor-pointer z-10 absolute flex items-center justify-center left-4 bg-white/70 rounded-full w-10 h-10'>
+                <motion.button whileTap={{scale: 0.9}} initial={{scale: page === 0 ? 0 : 1}}
+                               disabled={page === 0 || areButtonsDisabled}
+                               animate={{scale: page === 0 ? 0 : 1, opacity: page === 0 ? 0 : 1}}
+                               transition={{type: 'spring'}} onClick={() => paginate(-1)}
+                               className='disabled:cursor-default disabled:bg-gray-300/70 backdrop-blur-md cursor-pointer z-10 absolute flex items-center justify-center left-4 bg-white/70 rounded-full w-10 h-10'>
                     <ChevronLeftIcon className='w-5'/>
                 </motion.button>
-                <motion.button whileTap={{scale: 0.9}}
-                    disabled={page === images.length - 1 || areButtonsDisabled} onClick={() => paginate(1)}
-                        className='disabled:cursor-default disabled:bg-gray-200/70 backdrop-blur-md cursor-pointer z-10 absolute flex items-center justify-center right-4 bg-white/70 rounded-full w-10 h-10'>
+                <motion.button whileTap={{scale: 0.9}} initial={{scale: page === images.length - 1 ? 0 : 1}}
+                               disabled={page === images.length - 1 || areButtonsDisabled}
+                               animate={{
+                                   scale: page === images.length - 1 ? 0.5 : 1,
+                                   opacity: page === images.length - 1 ? 0 : 1
+                               }} onClick={() => paginate(1)}
+                               transition={{type: 'spring'}}
+                               className='disabled:cursor-default disabled:bg-gray-300/70 backdrop-blur-md cursor-pointer z-10 absolute flex items-center justify-center right-4 bg-white/70 rounded-full w-10 h-10'>
                     <ChevronRightIcon className='w-5'/>
                 </motion.button>
                 <AnimatePresence initial={false} custom={direction}>
