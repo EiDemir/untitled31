@@ -27,7 +27,7 @@ export default function ProductSections({productId, numberOfReviews, isAuthentic
 
     const sections = [
         <div key={0}
-             className='w-full md:w-2/3 md:px-0 px-[3vw] mx-auto'
+             className='mx-auto'
         >
             yo 1
             Sed do eiusmod tempor incid=idunt ut labore
@@ -41,7 +41,7 @@ export default function ProductSections({productId, numberOfReviews, isAuthentic
             dicta sunt explicabo.
         </div>,
         <div key={1}
-             className='w-full md:w-2/3 md:px-0 px-[3vw]'
+             className=''
         >
             yo 2
             Sed do eiusmod tempor incid=idunt ut labore
