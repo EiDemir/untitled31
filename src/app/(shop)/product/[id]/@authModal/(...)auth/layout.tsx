@@ -23,7 +23,7 @@ export default function Layout({children}: { children: ReactNode }) {
         <div onClick={handleOutsideClick}
              className='flex items-center justify-center opacity-100 visible duration-500 transition-opacity backdrop-blur-none bg-black/50 fixed inset-0 z-30'>
             <motion.div ref={ref} initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1}}
-                        className='fixed rounded-xl h-2/3 w-2/3 py-20 z-40 bg-white'>
+                        className='fixed rounded-xl h-2/3 w-11/12 md:w-2/3 py-20 z-40 bg-white'>
                 <div className='w-max mx-auto flex gap-x-10 font-medium'>
                     <h1>Log In</h1>
                 </div>
