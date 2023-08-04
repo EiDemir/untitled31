@@ -32,7 +32,7 @@ export default async function RelatedProducts({categories, id, isAuthenticated}:
         <div className='flex flex-col gap-y-6 z-10 bg-white px-[3vw] sm:px:0'>
             <p className='text-2xl'>RELATED <span
                 className='font-bold'>PRODUCTS</span></p>
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5'>
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                 {relatedProducts.map(product =>
                     <CategoryItem isAuthenticated={isAuthenticated} colors={product.colors} sizes={product.sizes} id=''
                                   key={product.id} imageLink={product.images[0]}
