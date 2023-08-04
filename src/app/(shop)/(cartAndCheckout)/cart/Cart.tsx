@@ -143,7 +143,7 @@ export default function Cart({cartItems}: {
                                         <button
                                             onClick={(event) => toggleRemoveItemButton(event, item.id!, index)}
                                             className='flex gap-x-1 text-red-500 text-sm font-medium mt-3 items-center'><TrashIcon
-                                            className='w-5 h-auto'/><p className='pt-0.5'>DELETE FROM CART</p></button>
+                                            className='w-5 h-auto'/><p className='pt-0.5'>DELETE<span className='hidden sm:block'> FROM CART</span></p></button>
                                     </div>
                                 </td>
                                 <td>${item.product!.price}</td>
