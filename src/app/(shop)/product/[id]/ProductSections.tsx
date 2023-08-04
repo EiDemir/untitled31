@@ -26,12 +26,7 @@ export default function ProductSections({productId, numberOfReviews, isAuthentic
     const sectionNames = ['DESCRIPTIONS', 'ADDITIONAL INFORMATION', `REVIEWS (${reviewNum})`];
 
     const sections = [
-        <div key={0}
-             className='mx-auto'
-        >
-            yo 1
-            Sed do eiusmod tempor incid=idunt ut labore
-
+        <div key={0} className='mx-auto'>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
             ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
@@ -40,12 +35,7 @@ export default function ProductSections({productId, numberOfReviews, isAuthentic
             laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
             dicta sunt explicabo.
         </div>,
-        <div key={1}
-             className=''
-        >
-            yo 2
-            Sed do eiusmod tempor incid=idunt ut labore
-
+        <div key={1}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
             ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
@@ -53,9 +43,6 @@ export default function ProductSections({productId, numberOfReviews, isAuthentic
             anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
             laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
             dicta sunt explicabo.
-
-            yo 2
-            Sed do eiusmod tempor incid=idunt ut labore
 
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
