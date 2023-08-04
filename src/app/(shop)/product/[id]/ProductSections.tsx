@@ -70,7 +70,7 @@ export default function ProductSections({productId, numberOfReviews, isAuthentic
     ];
 
     return (
-        <div className='flex flex-col gap-y-10 w-full my-10 px-[3.6vw] sm:px-0'>
+        <div className='flex flex-col gap-y-10 w-full my-10 px-[3vw] sm:px-0'>
             <div
                 className='w-full justify-between sm:justify-normal sm:w-max sm:mx-auto flex sm:gap-x-20 text-sm sm:text-base font-medium'>
                 {range(sectionNames.length).map(index =>
