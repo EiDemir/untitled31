@@ -35,7 +35,7 @@ export default function AddNewAddressModal({type}: { type: string }) {
                         router.back();
                     }} className='cursor-pointer h-6 w-auto text-[#222222]'/>
                 </div>
-                <form className='flex flex-col gap-y-4 px-10 py-4'
+                <form className='flex flex-col gap-y-4 px-5 md:px-10 py-4'
                       action={type === 'shipping' ? addShippingAddress : addBillingAddress}>
                     <div className='grid grid-cols-2 gap-x-4'>
                         <Input label='First Name *' name='firstName' required/>
