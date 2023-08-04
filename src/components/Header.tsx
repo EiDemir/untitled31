@@ -129,13 +129,6 @@ export default function Header({startWithWhite}: {
                     }}>
                     <SearchBox className='block sm:hidden w-full'/>
                 </motion.div>
-                <motion.div variants={list}
-                            className={`${isOpen ? '' : 'pointer-events-none'} fixed text-[#222222] z-50 mx-10 md:mx-14 mt-40 sm:mt-20 lg:hidden flex flex-col gap-y-3`}>
-                    <SidebarLink onClick={menuHandler} href='/products/dresses'>SHOP</SidebarLink>
-                    <SidebarLink onClick={menuHandler} href='/'>WOMEN</SidebarLink>
-                    <SidebarLink onClick={menuHandler} href='/'>JOURNAL</SidebarLink>
-                    <SidebarLink onClick={menuHandler} href='/'>LOOKBOOK</SidebarLink>
-                </motion.div>
                 <motion.div
                     className={`fixed text-[#222222] z-50 mx-10 md:mx-14 mt-[360px] sm:mt-72 lg:mt-20 ${isOpen ? '' : 'pointer-events-none'}`}
                     variants={list}>
@@ -143,8 +136,9 @@ export default function Header({startWithWhite}: {
                         CATEGORIES
                     </motion.h1>
                     <div className='flex flex-col gap-y-3'>
-                        <SidebarLink onClick={menuHandler} href='/products/dresses'>DRESSES</SidebarLink>
                         <SidebarLink onClick={menuHandler} href='/products/women'>WOMEN</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/men'>MEN</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/shirts'>SHIRTS</SidebarLink>
                         <SidebarLink onClick={menuHandler} href='/products/shoes'>SHOES</SidebarLink>
                     </div>
                 </motion.div>

@@ -42,7 +42,7 @@ export async function addShippingAddress(data: FormData) {
         });
     }
 
-    revalidatePath('/checkout')
+    revalidatePath('/checkout');
     redirect('/checkout');
 }
 
@@ -71,7 +71,7 @@ export async function addBillingAddress(data: FormData) {
         });
     }
 
-    revalidatePath('/checkout')
+    revalidatePath('/checkout');
     redirect('/checkout');
 }
 

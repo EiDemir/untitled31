@@ -1,9 +1,14 @@
 import {experimental_useFormStatus as useFormStatus} from 'react-dom'
 import LoadingAnimation from "@/components/ui/LoadingAnimation";
+import {useEffect} from "react";
 
 
 export default function SubmitButton() {
     const {pending} = useFormStatus();
+
+    useEffect(() => {
+        if (pending) document.body.style.overflowY = 'scroll';
+    }, [pending])
 
     return (
         <button type='submit'
