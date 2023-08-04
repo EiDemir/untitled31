@@ -4,12 +4,13 @@ export const variants = {
     initial: {
         transition: {
             staggerChildren: 0.1
-        }
+        }, scale: 0
     },
     animate: {
         transition: {
-            staggerChildren: 0.1
-        }
+            staggerChildren: 0.1,
+            duration: 0.4
+        }, scale: 1
     }
 };
 

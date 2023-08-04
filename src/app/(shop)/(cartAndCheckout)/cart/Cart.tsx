@@ -12,6 +12,7 @@ import {CartItem} from "@/types";
 import {fetchCardLocalStorage} from "@/utils/localStorage";
 import {CartItemsNumberContext} from "@/store/CartItemsNumberContext";
 import Link from "next/link";
+import LoadingAnimation from "@/components/ui/LoadingAnimation";
 
 export const variants = {
     initial: {
@@ -114,10 +115,10 @@ export default function Cart({cartItems}: {
                         className='h-min rounded-3xl table-auto text-sm ring-1 ring-[#E4E4E4] ring-inset'>
                         <thead className='bg-[#E4E4E4] drop-shadow-sm h-12'>
                         <tr className='font-medium'>
-                            <th className='py-4 pl-5 w-1/2 text-start rounded-l-3xl'>PRODUCT</th>
+                            <th className='py-4 pl-5 text-start rounded-l-3xl'>PRODUCT</th>
                             <th className='py-4 text-start'>PRICE</th>
-                            <th className='py-4 text-start w-1/5'>QUANTITY</th>
-                            <th className='py-4 text-start w-1/5 rounded-r-3xl'>SUBTOTAL</th>
+                            <th className='py-4 text-start'>QUANTITY</th>
+                            <th className='py-4 text-start rounded-r-3xl'>SUBTOTAL</th>
                         </tr>
                         </thead>
                         <tbody className='divide-y divide-[#E4E4E4]'>
@@ -125,7 +126,7 @@ export default function Cart({cartItems}: {
                             <motion.tr layout transition={{duration: 0.2}}
                                        key={item.product?.images[0]! + item.color + item.size}
                                        className=''>
-                                <td className='flex gap-x-5 items-center py-4 pl-5 pr-2'>
+                                <td className='flex sm:flex-row flex-col gap-5 justify-start sm:items-center py-4 pl-5 pr-2'>
                                     <Link prefetch={false} href={'/product/' + item.product!.id}>
                                         <Image
                                             className='cursor-pointer rounded-xl object-cover max-w-[15vw] lg:max-w-[8vw]'
@@ -147,53 +148,11 @@ export default function Cart({cartItems}: {
                                         className='flex flex-row w-28 h-14 ring-1 ring-[#E4E4E4] ring-inset items-center justify-center rounded-full'>
                                         <motion.button layout disabled={disabledButtons[index]}
                                                        type='button'
-                                                       className='w-7 h-full'
+                                                       className={`pl-2 w-full h-full ${disabledButtons[index] ? 'text-sm' : 'text-xl'}`}
                                                        onClick={() => changeQuantity('-', index)}>-
                                         </motion.button>
                                         {disabledButtons[index] ?
-                                            <motion.div className='px-1' initial='initial' animate='animate'
-                                                        variants={variants}
-                                                        style={{display: 'flex', columnGap: '4px'}}>
-                                                <motion.span variants={dotVariants}
-                                                             transition={{
-                                                                 ease: 'easeInOut',
-                                                                 duration: 0.5,
-                                                                 repeatType: 'reverse',
-                                                                 repeat: Infinity
-                                                             }}
-                                                             style={{
-                                                                 width: '10px',
-                                                                 height: '10px',
-                                                                 background: '#222222',
-                                                                 borderRadius: '50%'
-                                                             }}/>
-                                                <motion.span variants={dotVariants}
-                                                             transition={{
-                                                                 ease: 'easeInOut',
-                                                                 duration: 0.5,
-                                                                 repeatType: 'reverse',
-                                                                 repeat: Infinity
-                                                             }}
-                                                             style={{
-                                                                 width: '10px',
-                                                                 height: '10px',
-                                                                 background: '#222222',
-                                                                 borderRadius: '50%'
-                                                             }}/>
-                                                <motion.span variants={dotVariants}
-                                                             transition={{
-                                                                 ease: 'easeInOut',
-                                                                 duration: 0.5,
-                                                                 repeatType: 'reverse',
-                                                                 repeat: Infinity
-                                                             }}
-                                                             style={{
-                                                                 width: '10px',
-                                                                 height: '10px',
-                                                                 background: '#222222',
-                                                                 borderRadius: '50%'
-                                                             }}/>
-                                            </motion.div> :
+                                            <LoadingAnimation color='000000'/> :
                                             <input readOnly
                                                    className='border-transparent focus:border-transparent focus:ring-0 p-0 text-center text-[#222222]'
                                                    type='number'
@@ -201,7 +160,7 @@ export default function Cart({cartItems}: {
                                                    min='0' max='10'/>}
                                         <motion.button layout disabled={disabledButtons[index]}
                                                        type='button'
-                                                       className='w-7 h-full'
+                                                       className={`pr-2 w-full h-full ${disabledButtons[index] ? 'text-sm' : 'text-xl'}`}
                                                        onClick={() => changeQuantity('+', index)}>+
                                         </motion.button>
                                     </div>
@@ -218,21 +177,15 @@ export default function Cart({cartItems}: {
                             </motion.tr>)}
                         </tbody>
                     </table>
-                    <motion.div layout
-                                whileTap={{
-                                    scale: 0.9
-                                }}
-                                transition={{
-                                    ease: 'easeOut'
-                                }}
-                                className='rounded-full bg-white max-w-[400px] ring-1 ring-[#E4E4E4] h-12 ring-inset flex justify-between items-center'>
+                    <div
+                        className='rounded-full bg-white max-w-[400px] ring-1 ring-[#E4E4E4] h-12 ring-inset flex justify-between items-center'>
                         <input type='email' placeholder='Coupon Code'
                                className='border-transparent focus:border-transparent focus:ring-0 p-0 w-full text-sm my-3 mx-4 placeholder-[#767676]'/>
                         <button type='button'
-                                className='rounded-r-full px-4 w-56 h-full text-sm font-medium bg-[#E4E4E4] hover:bg-[#222222] hover:text-white'>APPLY
+                                className='rounded-full px-4 w-56 h-full text-sm font-medium bg-[#E4E4E4] hover:bg-[#222222] hover:text-white'>APPLY
                             COUPON
                         </button>
-                    </motion.div>
+                    </div>
                 </div> :
                 <div className='md:w-2/3 my-24 md:my-0 flex items-center justify-center text-xl font-medium'>
                     {isLoading && !items ? 'Loading...' : 'Your Cart is Empty.'}
