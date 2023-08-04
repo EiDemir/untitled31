@@ -29,7 +29,7 @@ export default async function RelatedProducts({categories, id, isAuthenticated}:
     const relatedProducts = (await getRelatedProducts(categories, id))!.products;
 
     return (
-        <div className='flex flex-col gap-y-6 z-10 bg-white'>
+        <div className='flex flex-col gap-y-6 z-10 bg-white px-[3vw] sm:px:0'>
             <p className='text-2xl'>RELATED <span
                 className='font-bold'>PRODUCTS</span></p>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5'>
