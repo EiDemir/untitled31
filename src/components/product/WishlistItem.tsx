@@ -33,8 +33,8 @@ export default function WishlistItem(
                     className='disabled:bg-gray-400 absolute top-2 left-2 w-10 p-1.5 bg-white rounded-xl'>
                     <XMarkIcon className='text-black '/>
                 </button>
-                <Image className="aspect-[3/4] object-cover rounded-xl" src={imageLink} alt="Product's picture" width={400}
-                       height={485}/>
+                <Image className="aspect-[3/4] object-cover rounded-xl" src={imageLink.replace('c_crop,w_1333,h_2000', 'c_fill,w_666,h_1000')} alt="Product's picture" width={666}
+                       height={1000}/>
                 <motion.div
                     className='rounded-xl flex text-white divide-x divide-[#222222] text-xs absolute inset-x-0 bg-[#222222]/50 backdrop-blur-lg h-10 bottom-1 mx-1'
                     initial={false}
