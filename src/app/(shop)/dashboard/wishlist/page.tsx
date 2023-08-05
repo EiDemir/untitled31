@@ -8,7 +8,20 @@ async function getUserWishlist(userEmail: string) {
             where: {
                 email: userEmail
             }, select: {
-                wishlist: true
+                wishlist: {
+                    select: {
+                        images: true,
+                        name: true,
+                        price: true,
+                        categories: {
+                            select: {
+                                name: true
+                            }
+                        }, id: true,
+                        colors: true,
+                        sizes: true
+                    }
+                }
             }
         });
         return data!.wishlist;

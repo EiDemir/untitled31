@@ -10,6 +10,7 @@ import {toastEnd, toastStart} from "@/utils/toast";
 import axios from "axios";
 import {CartItemsNumberContext} from "@/store/CartItemsNumberContext";
 import {useMediaQuery} from "usehooks-ts";
+import {XMarkIcon} from "@heroicons/react/24/outline";
 
 const variants = {
     initial: {
@@ -24,7 +25,21 @@ const variants = {
     }
 };
 
-export default function CategoryItem({imageLink, categories, title, price, id, sizes, colors, isAuthenticated}: {
+export default function CategoryItem({
+                                         imageLink,
+                                         categories,
+                                         title,
+                                         price,
+                                         id,
+                                         sizes,
+                                         colors,
+                                         isAuthenticated,
+                                         wishlistDeleteButton = false,
+                                         deleteHandler, deleteButtonDisabled
+                                     }: {
+    wishlistDeleteButton?: boolean,
+    deleteHandler?: (id: string) => void,
+    deleteButtonDisabled?: boolean
     imageLink: string,
     categories: { name: string }[],
     title: string,
@@ -115,6 +130,14 @@ export default function CategoryItem({imageLink, categories, title, price, id, s
                      if (!isQuickAddOpen) setIsHovered(false)
                  }}
                  className='relative overflow-hidden rounded-xl'>
+                {wishlistDeleteButton && <button
+                    disabled={deleteButtonDisabled}
+                    onClick={() => deleteHandler!(id)}
+                    onMouseEnter={() => setIsHovered(false)}
+                    onMouseLeave={() => setIsHovered(true)}
+                    className='disabled:bg-gray-200 hover:bg-gray-100 absolute top-2 left-2 w-10 p-1.5 bg-white rounded-xl'>
+                    <XMarkIcon className='text-black '/>
+                </button>}
                 <Link prefetch={false} href={'/product/' + id}>
                     <Image className="rounded-xl" src={imageLink.replace('c_crop,w_1333,h_2000', 'c_fill,w_666,h_1000')}
                            alt="Product's picture" width={666}

@@ -1,13 +1,22 @@
 'use client';
 
-import {Product} from "@prisma/client";
-import WishlistItem from "@/components/product/WishlistItem";
 import axios from "axios";
 import {useState} from "react";
 import {AnimatePresence} from "framer-motion";
 import {toastEnd, toastStart} from "@/utils/toast";
+import CategoryItem from "@/components/product/CategoryItem";
 
-export default function WishlistClient({wishlistItems}: { wishlistItems: Product[] }) {
+export default function WishlistClient({wishlistItems}: {
+    wishlistItems: {
+        images: string[],
+        name: string,
+        price: number,
+        categories: { name: string }[],
+        id: string,
+        colors: { name: string, hexColorCode: string }[],
+        sizes: string[]
+    }[]
+}) {
     const [wishlist, setWishlist] = useState(wishlistItems);
     const [isDisabled, setIsDisabled] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
@@ -27,22 +36,27 @@ export default function WishlistClient({wishlistItems}: { wishlistItems: Product
     }
 
 
-    if (!wishlistItems.length || (isEmpty && !wishlist.length)) return <div className='text-2xl h-full flex items-center justify-center'>
+    if (!wishlistItems.length || (isEmpty && !wishlist.length)) return <div
+        className='text-2xl h-full flex items-center justify-center'>
         Your wishlist is empty.
     </div>;
 
     return (
-        <div className='grid grid-cols-3 gap-5'>
+        <div className='grid grid-cols-3 gap-5 mb-1'>
             <AnimatePresence onExitComplete={() => setIsEmpty(true)}>
                 {wishlist.map(wishlistItem =>
-                    <WishlistItem
+                    <CategoryItem
+                        wishlistDeleteButton={true}
+                        colors={wishlistItem.colors}
+                        sizes={wishlistItem.sizes}
+                        isAuthenticated={true}
                         key={wishlistItem.id}
                         deleteButtonDisabled={isDisabled}
                         deleteHandler={deleteItem}
                         id={wishlistItem.id}
                         imageLink={wishlistItem.images[0]}
-                        category='Tops' title={wishlistItem.name}
-                        price={wishlistItem.price.toString()}/>)}
+                        categories={wishlistItem.categories} title={wishlistItem.name}
+                        price={wishlistItem.price}/>)}
             </AnimatePresence>
         </div>
     );
