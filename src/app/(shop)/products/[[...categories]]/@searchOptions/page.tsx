@@ -1,23 +1,23 @@
 import {prisma} from "@/libs/prisma";
-import SearchOptions from "@/app/(shop)/products/[category]/@searchOptions/SearchOptions";
+import SearchOptions from "./SearchOptions";
 import {Suspense} from "react";
-import SearchOptionsLoading from "@/app/(shop)/products/[category]/@searchOptions/SearchOptionsLoading";
+import SearchOptionsLoading from "./SearchOptionsLoading";
 
-async function getColors(category: string) {
+async function getColors(categories?: string[]) {
     return prisma.color.findMany();
 }
 
-async function getSizes(category: string) {
+async function getSizes(categories?: string[]) {
     return prisma.size.findMany();
 }
 
-async function getMinAndMaxPrices(category: string) {
+async function getMinAndMaxPrices(categories?: string[]) {
     return prisma.product.aggregate({
         where: {
             categories: {
-                some: {
-                    name: category
-                }
+                some: categories ? {
+                    name: categories[0]
+                } : {}
             }
         }, _min: {
             price: true
@@ -28,11 +28,11 @@ async function getMinAndMaxPrices(category: string) {
 }
 
 export default async function SearchOptionsSection({params}: {
-    params: { category: string }
+    params: { categories?: string[] }
 }) {
-    const colorsPromise = getColors(params.category);
-    const sizesPromise = getSizes(params.category);
-    const minMaxPromise = getMinAndMaxPrices(params.category);
+    const colorsPromise = getColors(params.categories);
+    const sizesPromise = getSizes(params.categories);
+    const minMaxPromise = getMinAndMaxPrices(params.categories);
 
     const [colors, sizes, minMaxPrices] = await Promise.all([colorsPromise, sizesPromise, minMaxPromise]);
 

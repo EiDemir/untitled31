@@ -28,7 +28,7 @@ export default function Category({products, isAuthenticated}: {
 
     return (
         <>
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7'>
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                 {products.products.map(item =>
                     <CategoryItem isAuthenticated={isAuthenticated} sizes={item.sizes} colors={item.colors} key={item.id} imageLink={item.images[0]}
                                   categories={item.categories}

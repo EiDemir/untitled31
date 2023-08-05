@@ -5,7 +5,7 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {useCallback, useEffect, useState} from "react";
 import _ from 'lodash';
 import {ChevronDownIcon} from "@heroicons/react/24/solid";
-import SearchOptionBody from "@/app/(shop)/products/[category]/@searchOptions/SearchOptionBody";
+import SearchOptionBody from "./SearchOptionBody";
 import {Slider} from "@mui/base";
 
 export default function SearchOptions({colors, sizes, minMaxPrices}: {

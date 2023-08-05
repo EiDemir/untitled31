@@ -8,7 +8,8 @@ import LoadingAnimation from "@/components/ui/LoadingAnimation";
 import {usePathname, useSearchParams} from "next/navigation";
 import _ from 'lodash';
 
-export default function CategoryScroll({initialProducts, isAuthenticated}: {
+export default function CategoryScroll({initialProducts, isAuthenticated, allProducts}: {
+    allProducts: boolean,
     initialProducts: {
         products: {
             images: string[],
@@ -35,7 +36,10 @@ export default function CategoryScroll({initialProducts, isAuthenticated}: {
 
     const getProducts = () => {
         setIsLoading(true);
-        axios.get(`/api/products/${pathname.split('/')[2]}?take=24&id=${_.last(products)!.id}${searchParams.get('color') ? `&color=${searchParams.get('color')}` : ''}${searchParams.get('minPrice') ? `&minPrice=${searchParams.get('minPrice')}` : ''}${searchParams.get('maxPrice') ? `&maxPrice=${searchParams.get('maxPrice')}` : ''}${searchParams.get('sort') ? `&sort=${searchParams.get('sort')}` : ''}`).then((res) => {
+        let category;
+        if (allProducts) category = 'all';
+        else category = pathname.split('/')[2];
+        axios.get(`/api/products/${category}?take=24&id=${_.last(products)!.id}${searchParams.get('color') ? `&color=${searchParams.get('color')}` : ''}${searchParams.get('minPrice') ? `&minPrice=${searchParams.get('minPrice')}` : ''}${searchParams.get('maxPrice') ? `&maxPrice=${searchParams.get('maxPrice')}` : ''}${searchParams.get('sort') ? `&sort=${searchParams.get('sort')}` : ''}`).then((res) => {
             setProducts(prevState => [...prevState, ...res.data.products.products]);
             setIsLoading(false);
             setPage(prevState => prevState + 1);

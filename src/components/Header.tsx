@@ -136,10 +136,21 @@ export default function Header({startWithWhite}: {
                         CATEGORIES
                     </motion.h1>
                     <div className='flex flex-col gap-y-3'>
+                        <SidebarLink onClick={menuHandler} href='/products'>ALL PRODUCTS</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/summer'>SUMMER PRODUCTS</SidebarLink>
                         <SidebarLink onClick={menuHandler} href='/products/women'>WOMEN</SidebarLink>
                         <SidebarLink onClick={menuHandler} href='/products/men'>MEN</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/kids'>KIDS</SidebarLink>
                         <SidebarLink onClick={menuHandler} href='/products/shirts'>SHIRTS</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/t-shirts'>T-SHIRTS</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/dresses'>DRESSES</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/sunglasses'>SUNGLASSES</SidebarLink>
                         <SidebarLink onClick={menuHandler} href='/products/shoes'>SHOES</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/sneakers'>SNEAKERS</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/hoodies'>HOODIES</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/sweaters'>SWEATERS</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/sandals'>SANDALS</SidebarLink>
+                        <SidebarLink onClick={menuHandler} href='/products/leather'>LEATHER PRODUCTS</SidebarLink>
                     </div>
                 </motion.div>
                 <MenuToggle color={isLight ? 'white' : '#222222'} toggle={menuHandler}/>

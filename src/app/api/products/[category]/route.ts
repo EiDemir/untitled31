@@ -18,11 +18,74 @@ export async function GET(request: Request, {params}: {
     const maxPrice = url.searchParams.get('maxPrice') ? parseFloat(url.searchParams.get('maxPrice')!) : null;
     const sort = url.searchParams.get('sort') ?? null;
 
-    const data = await prisma.category.findUnique({
-        where: {
-            name: params.category
-        }, select: {
-            products: {
+    const data = params.category !== 'all' ? await prisma.category.findUnique({
+            where: {
+                name: params.category
+            }, select: {
+                products: {
+                    where: {
+                        AND: [
+                            {
+                                sizes: {
+                                    hasEvery: sizes.map(item => _.toLower(item))
+                                },
+                                price: (minPrice && maxPrice) ? {
+                                    gte: minPrice,
+                                    lte: maxPrice
+                                } : {},
+                            }, ...colors.map(color => ({
+                                colors: {
+                                    some: {
+                                        name: color
+                                    }
+                                }
+                            }))
+                        ]
+                    },
+                    orderBy: sort ? {
+                        price: sort === 'htl' ? 'desc' : 'asc'
+                    } : {},
+                    select: {
+                        images: true,
+                        categories: true,
+                        name: true,
+                        price: true,
+                        id: true,
+                        colors: true,
+                        sizes: true
+                    }, take: parseInt(take),
+                    skip: 1,
+                    cursor: {
+                        id: cursorId
+                    }
+                }, _count: {
+                    select: {
+                        products: {
+                            where: {
+                                AND: [
+                                    {
+                                        sizes: {
+                                            hasEvery: sizes.map(item => _.toLower(item))
+                                        },
+                                        price: (minPrice && maxPrice) ? {
+                                            gte: minPrice,
+                                            lte: maxPrice
+                                        } : {},
+                                    }, ...colors.map(color => ({
+                                        colors: {
+                                            some: {
+                                                name: color
+                                            }
+                                        }
+                                    }))
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }) : {
+            products: await prisma.product.findMany({
                 where: {
                     AND: [
                         {
@@ -51,40 +114,38 @@ export async function GET(request: Request, {params}: {
                     name: true,
                     price: true,
                     id: true,
-                    colors: true,
-                    sizes: true
+                    sizes: true,
+                    colors: true
                 }, take: parseInt(take),
                 skip: 1,
                 cursor: {
                     id: cursorId
                 }
-            }, _count: {
-                select: {
-                    products: {
-                        where: {
-                            AND: [
-                                {
-                                    sizes: {
-                                        hasEvery: sizes.map(item => _.toLower(item))
-                                    },
-                                    price: (minPrice && maxPrice) ? {
-                                        gte: minPrice,
-                                        lte: maxPrice
-                                    } : {},
-                                }, ...colors.map(color => ({
-                                    colors: {
-                                        some: {
-                                            name: color
-                                        }
+            }), _count: {
+                products: await prisma.product.count({
+                    where: {
+                        AND: [
+                            {
+                                sizes: {
+                                    hasEvery: sizes.map(item => _.toLower(item))
+                                },
+                                price: (minPrice && maxPrice) ? {
+                                    gte: minPrice,
+                                    lte: maxPrice
+                                } : {},
+                            }, ...colors.map(color => ({
+                                colors: {
+                                    some: {
+                                        name: color
                                     }
-                                }))
-                            ]
-                        }
+                                }
+                            }))
+                        ]
                     }
-                }
+                })
             }
         }
-    });
+    ;
 
     return NextResponse.json({
         products: data,

@@ -2,10 +2,10 @@ import {Suspense} from "react";
 import ProductItemLoading from "@/components/ui/loading/ProductItemLoading";
 import _ from 'lodash';
 import ProductsSection from "./ProductsSection";
-import SortingOptions from "@/app/(shop)/products/[category]/SortingOptions";
+import SortingOptions from "./SortingOptions";
 
 export default async function Page({params, searchParams}: {
-    params: { category: string, page?: string },
+    params: { categories?: string[], page?: string },
     searchParams: { page?: string, color?: string, size?: string, minPrice?: string, maxPrice?: string, sort?: string }
 }) {
 
