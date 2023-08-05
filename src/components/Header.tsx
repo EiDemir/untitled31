@@ -116,7 +116,7 @@ export default function Header({startWithWhite}: {
                         ref={containerRef}>
                 <motion.div className="background z-40" variants={sidebar}/>
                 <motion.div
-                    className={`fixed z-[100] my-20 w-full px-10 md:px-14 ${isOpen ? '' : 'pointer-events-none'}`}
+                    className={`fixed z-[100] my-20 w-full px-7 md:px-10 ${isOpen ? '' : 'pointer-events-none'}`}
                     variants={{
                         open: {
                             opacity: 1,
@@ -130,7 +130,7 @@ export default function Header({startWithWhite}: {
                     <SearchBox className='block sm:hidden w-full'/>
                 </motion.div>
                 <motion.div
-                    className={`fixed text-[#222222] z-50 mx-10 md:mx-14 mt-[360px] sm:mt-72 lg:mt-20 ${isOpen ? '' : 'pointer-events-none'}`}
+                    className={`fixed text-[#222222] z-50 mx-7 md:mx-10 mt-40 sm:mt-20 ${isOpen ? '' : 'pointer-events-none'}`}
                     variants={list}>
                     <motion.h1 className='text-3xl font-bold mb-4' variants={item}>
                         CATEGORIES
@@ -146,11 +146,8 @@ export default function Header({startWithWhite}: {
                         <SidebarLink onClick={menuHandler} href='/products/dresses'>DRESSES</SidebarLink>
                         <SidebarLink onClick={menuHandler} href='/products/sunglasses'>SUNGLASSES</SidebarLink>
                         <SidebarLink onClick={menuHandler} href='/products/shoes'>SHOES</SidebarLink>
-                        <SidebarLink onClick={menuHandler} href='/products/sneakers'>SNEAKERS</SidebarLink>
                         <SidebarLink onClick={menuHandler} href='/products/hoodies'>HOODIES</SidebarLink>
                         <SidebarLink onClick={menuHandler} href='/products/sweaters'>SWEATERS</SidebarLink>
-                        <SidebarLink onClick={menuHandler} href='/products/sandals'>SANDALS</SidebarLink>
-                        <SidebarLink onClick={menuHandler} href='/products/leather'>LEATHER PRODUCTS</SidebarLink>
                     </div>
                 </motion.div>
                 <MenuToggle color={isLight ? 'white' : '#222222'} toggle={menuHandler}/>
