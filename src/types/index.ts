@@ -5,3 +5,13 @@ export type CartItem = {
     quantity: number,
     id?: string
 };
+
+export type Review = {
+    voteCount: number,
+    id: string,
+    rating: number,
+    reviewText: string,
+    date: Date,
+    user: { image: string, name: string },
+    userVoted?: { userId: string, vote: string }
+};

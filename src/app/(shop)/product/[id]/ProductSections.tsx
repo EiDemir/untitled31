@@ -51,9 +51,7 @@ export default function ProductSections({productId, numberOfReviews, isAuthentic
             anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
             laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
             dicta sunt explicabo.
-        </div>,
-        <Reviews changeReviewNum={() => setReviewNum(prevState => prevState + 1)} isAuthenticated={isAuthenticated}
-                 key={2} productId={productId}/>
+        </div>
     ];
 
     return (
@@ -86,7 +84,9 @@ export default function ProductSections({productId, numberOfReviews, isAuthentic
                     }}
                     className='z-0'
                 >
-                    {sections[selected]}
+                    {selected === 2 ? <Reviews numberOfReviews={numberOfReviews} changeReviewNum={() => setReviewNum(prevState => prevState + 1)}
+                                               isAuthenticated={isAuthenticated}
+                                               key={2} productId={productId}/> : sections[selected]}
                 </motion.div>
             </AnimatePresence>
         </div>

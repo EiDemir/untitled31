@@ -61,7 +61,7 @@ export default function ImageSlider({images}: { images: string[] }) {
                     }}
                     className={`w-[90px] sm:w-[65px] md:w-[82px] ${index !== page ? ' opacity-50 hover:opacity-100 transition-opacity duration-500 ease-in-out' : ''} cursor-pointer`}
                     key={index}
-                    src={images[index]}
+                    src={images[index].replace('c_crop,w_1333,h_2000', 'c_fill,w_333,h_500')}
                     alt="Product's image" width='1333'
                     height='2000'/>)}
             </div>

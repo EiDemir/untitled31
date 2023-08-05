@@ -54,8 +54,8 @@ const ProductItem = forwardRef(({imageLink, categories, title, price, id, colors
             className="gap-y-3 flex flex-col">
             <div className='relative overflow-hidden rounded-xl'>
                 <Link prefetch={false} href={'/product/' + id}>
-                    <Image className="rounded-xl" src={imageLink} alt="Product's picture" width={1333}
-                           height={2000}/>
+                    <Image className="rounded-xl" src={imageLink.replace('c_crop,w_1333,h_2000', 'c_fill,w_666,h_1000')} alt="Product's picture" width={666}
+                           height={1000}/>
                 </Link>
             </div>
             <div className='flex flex-col font-normal'>

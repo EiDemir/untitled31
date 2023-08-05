@@ -1,6 +1,7 @@
 import {prisma} from "@/libs/prisma";
 import {NextResponse} from "next/server";
 import getCurrentUser from "@/actions/getCurrentUser";
+import {cookies} from "next/headers";
 
 export async function POST(request: Request) {
     const user = await getCurrentUser();
@@ -8,6 +9,8 @@ export async function POST(request: Request) {
     if (!user) {
         return NextResponse.error();
     }
+
+    console.log(cookies().set('sentANewReq', 'yes'))
 
     const {reviewId, type} = await request.json();
 

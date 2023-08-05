@@ -25,7 +25,6 @@ export default async function RelatedProducts({categories, id, isAuthenticated}:
     id: string,
     categories: { name: string }[]
 }) {
-    console.log(categories);
     const relatedProducts = (await getRelatedProducts(categories, id))!.products;
 
     return (
@@ -34,7 +33,7 @@ export default async function RelatedProducts({categories, id, isAuthenticated}:
                 className='font-bold'>PRODUCTS</span></p>
             <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
                 {relatedProducts.map(product =>
-                    <CategoryItem isAuthenticated={isAuthenticated} colors={product.colors} sizes={product.sizes} id=''
+                    <CategoryItem isAuthenticated={isAuthenticated} colors={product.colors} sizes={product.sizes} id={product.id}
                                   key={product.id} imageLink={product.images[0]}
                                   categories={product.categories}
                                   title={product.name} price={product.price}/>)}
