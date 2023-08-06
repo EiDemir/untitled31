@@ -115,13 +115,13 @@ export default function Slider({details}: {
                             <motion.button onClick={() => router.push('/products/summer')} whileHover={{
                                 scale: 1.1
                             }} type='button'
-                                           className='rounded-full mt-5 bg-black text-white text-sm font-medium px-11 py-[18px] flex items-center gap-x-2.5'>
+                                           className='rounded-full mt-5 bg-gradient-to-r from-[#E893CF] to-[#D7943D] text-white text-sm font-medium px-11 py-[18px] flex items-center gap-x-2.5'>
                                 <div className='h-0.5 w-5 bg-white'/>
                                 DISCOVER NOW
                             </motion.button>
                         </motion.div>
                         <motion.div style={{y: imageY}} className='relative'>
-                            <svg className='absolute top-0 left-0 h-full w-auto' version="1.2"
+                            <svg className='absolute top-0 left-0 h-full min-h-[600px] w-auto' version="1.2"
                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5320 2900" width="5320"
                                  height="2900">
                                 <defs>
