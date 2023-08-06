@@ -5,7 +5,7 @@ import {
     AnimatePresence
 } from "framer-motion";
 import {useMediaQuery, useWindowSize} from "usehooks-ts";
-import ProductItem from "@/components/product/ProductItem";
+import ProductItem2 from "@/components/product/ProductItem2";
 
 export const revalidate = 60;
 
@@ -78,7 +78,7 @@ export default function BestSellingProducts({products}: {
                                 id,
                                 colors
                             } = products[(i % products.length + products.length) % products.length];
-                            return <ProductItem
+                            return <ProductItem2
                                 direction={direction}
                                 key={i} imageLink={images[0]}
                                 categories={categories}

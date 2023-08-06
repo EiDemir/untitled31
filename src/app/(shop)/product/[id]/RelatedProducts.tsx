@@ -1,6 +1,6 @@
 import {cache} from "react";
 import {prisma} from "@/libs/prisma";
-import CategoryItem from "@/components/product/CategoryItem";
+import ProductItem from "@/components/product/ProductItem";
 
 const getRelatedProducts = cache(async (categories: { name: string }[], id: string) => {
     return prisma.category.findUnique({
@@ -33,10 +33,10 @@ export default async function RelatedProducts({categories, id, isAuthenticated}:
                 className='font-bold'>PRODUCTS</span></p>
             <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
                 {relatedProducts.map(product =>
-                    <CategoryItem isAuthenticated={isAuthenticated} colors={product.colors} sizes={product.sizes} id={product.id}
-                                  key={product.id} imageLink={product.images[0]}
-                                  categories={product.categories}
-                                  title={product.name} price={product.price}/>)}
+                    <ProductItem isAuthenticated={isAuthenticated} colors={product.colors} sizes={product.sizes} id={product.id}
+                                 key={product.id} imageLink={product.images[0]}
+                                 categories={product.categories}
+                                 title={product.name} price={product.price}/>)}
             </div>
         </div>
     );

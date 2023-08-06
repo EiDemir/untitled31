@@ -177,7 +177,11 @@ export default function Header({startWithWhite}: {
                             status === 'loading' &&
                             <>
                                 <div
-                                    className={`rounded-full animate-pulse w-[103.5px] h-12 ${isLight ? 'bg-[#FFFFFF]' : 'bg-[#222222]'}`}/>
+                                    className={`p-3 mx-0.5 sm:mx-1.5 rounded-full animate-pulse ${isLight ? 'bg-[#FFFFFF]' : 'bg-[#222222]'}`}/>
+                                <div
+                                    className={`block sm:hidden p-3 rounded-full animate-pulse ${isLight ? 'bg-[#FFFFFF]' : 'bg-[#222222]'}`}/>
+                                <div
+                                    className={`hidden sm:block rounded-full animate-pulse w-24 h-12 ${isLight ? 'bg-[#FFFFFF]' : 'bg-[#222222]'}`}/>
                             </>
                         }
 

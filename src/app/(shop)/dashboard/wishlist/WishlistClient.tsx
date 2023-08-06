@@ -4,7 +4,7 @@ import axios from "axios";
 import {useState} from "react";
 import {AnimatePresence} from "framer-motion";
 import {toastEnd, toastStart} from "@/utils/toast";
-import CategoryItem from "@/components/product/CategoryItem";
+import ProductItem from "@/components/product/ProductItem";
 
 export default function WishlistClient({wishlistItems}: {
     wishlistItems: {
@@ -45,7 +45,7 @@ export default function WishlistClient({wishlistItems}: {
         <div className='grid grid-cols-3 gap-5 mb-1'>
             <AnimatePresence onExitComplete={() => setIsEmpty(true)}>
                 {wishlist.map(wishlistItem =>
-                    <CategoryItem
+                    <ProductItem
                         wishlistDeleteButton={true}
                         colors={wishlistItem.colors}
                         sizes={wishlistItem.sizes}

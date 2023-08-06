@@ -1,4 +1,4 @@
-import CategoryItem from "@/components/product/CategoryItem";
+import ProductItem from "@/components/product/ProductItem";
 import {prisma} from "@/libs/prisma";
 import getCurrentUser from "@/actions/getCurrentUser";
 import {cache} from "react";
@@ -26,7 +26,7 @@ export default async function Products() {
 
     return (
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
-            {products!.map(product => <CategoryItem
+            {products!.map(product => <ProductItem
                 isAuthenticated={user !== null}
                 colors={product.colors}
                 sizes={product.sizes}

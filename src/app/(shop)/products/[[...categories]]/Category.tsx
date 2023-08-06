@@ -1,6 +1,6 @@
 'use client';
 
-import CategoryItem from "@/components/product/CategoryItem";
+import ProductItem from "@/components/product/ProductItem";
 import {motion} from "framer-motion";
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/solid";
 import {useSearchParams} from "next/navigation";
@@ -30,10 +30,10 @@ export default function Category({products, isAuthenticated}: {
         <>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                 {products.products.map(item =>
-                    <CategoryItem isAuthenticated={isAuthenticated} sizes={item.sizes} colors={item.colors} key={item.id} imageLink={item.images[0]}
-                                  categories={item.categories}
-                                  title={item.name}
-                                  price={item.price} id={item.id}/>)}
+                    <ProductItem isAuthenticated={isAuthenticated} sizes={item.sizes} colors={item.colors} key={item.id} imageLink={item.images[0]}
+                                 categories={item.categories}
+                                 title={item.name}
+                                 price={item.price} id={item.id}/>)}
             </div>
             <motion.div className='flex justify-between py-5'>
                 <button disabled={currentPage === 1}

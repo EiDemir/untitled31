@@ -1,6 +1,6 @@
 'use client';
 
-import CategoryItem from "@/components/product/CategoryItem";
+import ProductItem from "@/components/product/ProductItem";
 import {useEffect, useState} from "react";
 import {motion} from "framer-motion";
 import axios from "axios";
@@ -50,10 +50,10 @@ export default function CategoryScroll({initialProducts, isAuthenticated, allPro
         <>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                 {products.map((item) =>
-                    <CategoryItem isAuthenticated={isAuthenticated} colors={item.colors} sizes={item.sizes}
-                                  key={item.id} imageLink={item.images[0]} categories={item.categories}
-                                  title={item.name}
-                                  price={item.price} id={item.id}/>)}
+                    <ProductItem isAuthenticated={isAuthenticated} colors={item.colors} sizes={item.sizes}
+                                 key={item.id} imageLink={item.images[0]} categories={item.categories}
+                                 title={item.name}
+                                 price={item.price} id={item.id}/>)}
             </div>
             {page !== Math.floor(initialProducts._count.products / 24) + 1 ?
                 <motion.div className='flex justify-center py-5' onViewportEnter={getProducts}>
