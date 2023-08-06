@@ -13,6 +13,7 @@ import {CartItemsNumberContext} from "@/store/CartItemsNumberContext";
 import Link from "next/link";
 import LoadingAnimation from "@/components/ui/LoadingAnimation";
 import {TrashIcon} from "@heroicons/react/24/outline";
+import {useRouter} from "next/navigation";
 
 export const variants = {
     initial: {
@@ -44,6 +45,11 @@ export default function Cart({cartItems}: {
     const [items, setItems] = useState(cartItems);
     const [isLoading, setIsLoading] = useState(!cartItems);
     const [disabledButtons, setDisabledButtons] = useState(fill(Array(cartItems ? cartItems.length : 0), false));
+    const router = useRouter();
+
+    useEffect(() => {
+        router.refresh();
+    }, []);
 
     useEffect(() => {
         if (!cartItems) {
