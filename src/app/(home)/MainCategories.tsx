@@ -9,7 +9,7 @@ import Link from "next/link";
 export default function MainCategories() {
     return (
         <div
-            className='flex md:flex-row flex-col gap-x-4 gap-y-4 h-[800px] md:h-[500px] py-10 md:mx-[7vw] mx-[3vw]'>
+            className='flex md:flex-row flex-col gap-x-4 gap-y-4 h-[800px] md:h-[500px] py-10 lg:mx-[7vw] mx-[3vw]'>
             <motion.div initial={{opacity: 0, x: -20}} whileInView={{
                 opacity: 1, x: 0, transition: {
                     duration: 0.5
