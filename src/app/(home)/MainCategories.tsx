@@ -23,9 +23,9 @@ export default function MainCategories() {
                     <div
                         className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
                         <p className='text-sm'>HOT LIST</p>
-                        <h3 className='font-medium text-lg md:text-2xl'><span
+                        <h1 className='font-medium text-lg md:text-2xl'><span
                             className='font-bold'>WOMEN</span> COLLECTION
-                        </h3>
+                        </h1>
                         <p className='text-sm font-medium'>SHOP NOW</p>
                     </div>
                     <Image className='absolute right-0 h-full w-min object-cover' src={women}
@@ -45,8 +45,8 @@ export default function MainCategories() {
                         <div
                             className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
                             <p className='text-sm'>HOT LIST</p>
-                            <h3 className='font-medium text-lg md:text-2xl'><span
-                                className='font-bold'>MEN</span> COLLECTION</h3>
+                            <h1 className='font-medium text-lg md:text-2xl'><span
+                                className='font-bold'>MEN</span> COLLECTION</h1>
                             <p className='text-sm font-medium'>SHOP NOW</p>
                         </div>
                         <Image className='absolute right-0 h-full w-min object-cover' src={men} alt='Men Collection'
@@ -64,9 +64,9 @@ export default function MainCategories() {
                               className='flex items-center justify-center h-full'>
                             <div
                                 className='flex flex-col gap-y-1 text-[#222222] items-center'>
-                                <h3 className='font-medium text-lg lg:text-2xl'><span
+                                <h1 className='font-medium text-lg lg:text-2xl'><span
                                     className='font-bold'>KIDS</span>
-                                </h3>
+                                </h1>
                                 <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
                             </div>
                         </Link>
@@ -80,9 +80,9 @@ export default function MainCategories() {
                               className='flex items-center justify-center h-full'>
                             <div
                                 className='flex flex-col gap-y-1 text-[#222222] items-center'>
-                                <h3 className='font-medium text-lg lg:text-2xl'><span
+                                <h1 className='font-medium text-lg lg:text-2xl'><span
                                     className='font-bold'>BEAUTY</span>
-                                </h3>
+                                </h1>
                                 <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
                             </div>
                         </Link>
@@ -96,9 +96,9 @@ export default function MainCategories() {
                         <Link href='/products/shoes'
                               className='flex items-center justify-center h-full'>
                             <div className='flex flex-col gap-y-1 text-[#222222] items-center'>
-                                <h3 className='font-medium text-lg lg:text-2xl'><span
+                                <h1 className='font-medium text-lg lg:text-2xl'><span
                                     className='font-bold'>SHOES</span>
-                                </h3>
+                                </h1>
                                 <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
                             </div>
                         </Link>
