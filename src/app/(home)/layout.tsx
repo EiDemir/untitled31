@@ -8,23 +8,23 @@ import slide1 from '../../../public/slide1.jpg';
 const sliderDetails = [
     {
         imageLink: slide1,
-        title: 'summer sale!',
-        subtitle: 'limited time offer - up to 60% off & free shipping'
+        title: 'summer sale',
+        subtitle: 'limited time offer - up to 60% off'
     },
     {
         imageLink: slide1,
-        title: 'summer sale!',
-        subtitle: 'limited time offer - up to 60% off & free shipping'
+        title: 'summer sale',
+        subtitle: 'limited time offer - up to 60% off'
     },
     {
         imageLink: slide1,
-        title: 'summer sale!',
-        subtitle: 'limited time offer - up to 60% off & free shipping'
+        title: 'summer sale',
+        subtitle: 'limited time offer - up to 60% off'
     },
     {
         imageLink: slide1,
-        title: 'summer sale!',
-        subtitle: 'limited time offer - up to 60% off & free shipping'
+        title: 'summer sale',
+        subtitle: 'limited time offer - up to 60% off'
     }
 ];
 
