@@ -18,7 +18,7 @@ export default function MainCategories() {
                         transition={{
                             duration: 0.2
                         }}
-                        className='cursor-pointer md:w-1/2 bg-[#E7E6E4] rounded-xl h-full relative drop-shadow-sm overflow-hidden'>
+                        className='cursor-pointer md:w-1/2 bg-[#F4CAA6] rounded-xl h-full relative drop-shadow-sm overflow-hidden'>
                 <Link href='/products/women'>
                     <div
                         className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
@@ -28,7 +28,7 @@ export default function MainCategories() {
                         </h5>
                         <p className='text-sm font-medium'>SHOP NOW</p>
                     </div>
-                    <Image className='absolute right-0 h-full object-cover' src={women}
+                    <Image className='absolute right-0 h-full w-min object-cover' src={women}
                            alt='Women Collection'
                     />
                 </Link>
@@ -36,9 +36,10 @@ export default function MainCategories() {
             <div className='md:w-1/2 h-full flex flex-col gap-y-4'>
                 <motion.div initial={{opacity: 0, x: 20}}
                             whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
-                            whileHover={{scale: 1.05}} transition={{
-                    duration: 0.2
-                }}
+                            whileHover={{scale: 1.05}}
+                            transition={{
+                                duration: 0.2
+                            }}
                             className='cursor-pointer h-3/4 bg-[#B9E2E5] w-full rounded-xl relative drop-shadow-sm overflow-hidden'>
                     <Link href='/products/men'>
                         <div
@@ -48,7 +49,7 @@ export default function MainCategories() {
                                 className='font-bold'>MEN</span> COLLECTION</h5>
                             <p className='text-sm font-medium'>SHOP NOW</p>
                         </div>
-                        <Image className='absolute right-0 h-full w-auto' src={men} alt='Men Collection'
+                        <Image className='absolute right-0 h-full w-min object-cover' src={men} alt='Men Collection'
                         />
                     </Link>
                 </motion.div>
