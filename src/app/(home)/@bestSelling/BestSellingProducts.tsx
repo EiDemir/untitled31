@@ -57,6 +57,7 @@ export default function BestSellingProducts({products}: {
     return (
         <div className='flex'>
             <button
+                aria-label='Previous product'
                 disabled={areButtonsDisabled}
                 onClick={nextHandler.bind(null, -1)}
                 className='sm:w-[5vw] w-[8vw] flex justify-center items-center z-10'>
@@ -91,6 +92,7 @@ export default function BestSellingProducts({products}: {
                 </AnimatePresence>
             </div>
             <button
+                aria-label='Next product'
                 disabled={areButtonsDisabled}
                 onClick={nextHandler.bind(null, 1)}
                 className='sm:w-[5vw] w-[8vw] flex justify-center items-center z-10'>
