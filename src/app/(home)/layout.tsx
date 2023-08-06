@@ -8,26 +8,22 @@ import slide1 from '../../../public/slide1.jpg';
 const sliderDetails = [
     {
         imageLink: slide1,
-        date: 'summer 2023',
-        title: 'hello new season',
+        title: 'summer sale!',
         subtitle: 'limited time offer - up to 60% off & free shipping'
     },
     {
         imageLink: slide1,
-        date: 'summer 2023',
-        title: 'hello new season',
+        title: 'summer sale!',
         subtitle: 'limited time offer - up to 60% off & free shipping'
     },
     {
         imageLink: slide1,
-        date: 'summer 2023',
-        title: 'hello new season',
+        title: 'summer sale!',
         subtitle: 'limited time offer - up to 60% off & free shipping'
     },
     {
         imageLink: slide1,
-        date: 'summer 2023',
-        title: 'hello new season',
+        title: 'summer sale!',
         subtitle: 'limited time offer - up to 60% off & free shipping'
     }
 ];
@@ -42,7 +38,7 @@ export default async function Layout({bestSelling, hotDeals}: {
                 <Header startWithWhite={false}/>
                 <Slider details={sliderDetails}/>
             </header>
-            <main>
+            <main className='bg-gradient-to-b from-pink-300 to-[#E4E4E4]'>
                 <MainCategories/>
                 {hotDeals}
                 {bestSelling}

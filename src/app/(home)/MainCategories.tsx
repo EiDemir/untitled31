@@ -9,7 +9,7 @@ export default function MainCategories() {
 
     return (
         <div
-            className='flex md:flex-row flex-col gap-x-4 gap-y-4 h-[700px] md:h-[500px] my-10 md:mx-[10vw] mx-[3.6vw] sm:mx-[5vw]'>
+            className='flex md:flex-row flex-col gap-x-4 gap-y-4 h-[700px] md:h-[500px] py-10 md:mx-[10vw] mx-[3.6vw] sm:mx-[5vw]'>
             <motion.div initial={{opacity: 0, x: -20}} whileInView={{
                 opacity: 1, x: 0, transition: {
                     duration: 0.5

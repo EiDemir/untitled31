@@ -4,6 +4,7 @@ import {useEffect, useRef, useState} from "react";
 import {range} from "lodash";
 import {AnimatePresence, motion, useScroll, useTransform} from "framer-motion";
 import Image, {StaticImageData} from "next/image";
+import {useRouter} from "next/navigation";
 
 const sliderVariants = {
     initial: {
@@ -34,13 +35,14 @@ const textVariants = {
 
 
 export default function Slider({details}: {
-    details: { imageLink: StaticImageData, date: string, title: string, subtitle: string }[]
+    details: { imageLink: StaticImageData, title: string, subtitle: string }[]
 }) {
     const [areButtonsDisabled, setAreButtonsDisabled] = useState(false);
     const [active, setActive] = useState(0);
     const ref = useRef(null);
     const {scrollY} = useScroll({target: ref});
     const imageY = useTransform(scrollY, [0, 1000], [0, 500]);
+    const router = useRouter();
 
     const dotClickHandler = (dotNumber: number) => {
         if (!areButtonsDisabled) {
@@ -75,7 +77,7 @@ export default function Slider({details}: {
                     initial={false}
                     key={i}
                     onClick={dotClickHandler.bind(null, i)}
-                    className='rounded-full cursor-pointer opacity-80 w-1.5 h-1.5 bg-white'
+                    className='rounded-full cursor-pointer opacity-80 w-1.5 h-1.5 bg-black'
                     animate={{
                         scale: active === i ? 1.5 : 1,
                         opacity: active === i ? 1 : 0.5
@@ -108,13 +110,9 @@ export default function Slider({details}: {
                         <motion.div
                             variants={textVariants}
                             className='uppercase text-black text-left absolute right-4 left-[3vw] md:left-[7vw] z-10'>
-                            <div className='ml-1 flex flex-row items-center gap-x-2'>
-                                <div className='h-0.5 w-10 bg-black'/>
-                                <p className='text-sm font-medium'>{details[active].date}</p>
-                            </div>
                             <h1 className='text-3xl md:text-5xl lg:text-6xl font-bold'>{details[active].title}</h1>
                             <p className='ml-1 text-sm sm:text-base font-semibold'>{details[active].subtitle}</p>
-                            <motion.button whileHover={{
+                            <motion.button onClick={() => router.push('/products/summer')} whileHover={{
                                 scale: 1.1
                             }} type='button'
                                            className='rounded-full mt-5 bg-black text-white text-sm font-medium px-11 py-[18px] flex items-center gap-x-2.5'>
@@ -123,8 +121,9 @@ export default function Slider({details}: {
                             </motion.button>
                         </motion.div>
                         <motion.div style={{y: imageY}} className='relative'>
-                            <svg className='absolute top-0 left-0 h-[1000px] w-auto' version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5320 3547" width="5320"
-                                 height="3547">
+                            <svg className='absolute top-0 left-0 h-full w-auto' version="1.2"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5320 2900" width="5320"
+                                 height="2900">
                                 <defs>
                                     <clipPath clipPathUnits="userSpaceOnUse" id="cp1">
                                         <path

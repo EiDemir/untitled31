@@ -6,7 +6,7 @@ import {Suspense} from "react";
 
 export default async function Page() {
     return (
-        <div className='flex flex-col gap-y-6 px-[3vw] py-10 bg-[#F5E6E0]'>
+        <div className='flex flex-col gap-y-6 p-[3vw] mx-[3vw] bg-[#F5E6E0]/70 backdrop-blur-md rounded-xl drop-shadow-sm'>
             <h3 className='text-4xl font-bold text-center'>HOT DEALS</h3>
             <div className='flex lg:flex-row flex-col gap-y-10 gap-x-10 items-center'>
                 <div className='transition-transform translate-y-4'>
