@@ -143,9 +143,9 @@ export default function Cart({cartItems}: {
                                         <Link prefetch={false}
                                               href={'/product/' + item.product!.id}>{item.product!.name}</Link>
                                         {item.color &&
-                                            <p className='text-sm text-[#767676]'>Color: {item.color}</p>}
+                                            <p className='text-sm text-[#767676] capitalize'>Color: {item.color}</p>}
                                         {item.size &&
-                                            <p className='text-sm text-[#767676]'>Size: {item.size}</p>}
+                                            <p className='text-sm text-[#767676]'>Size: <p className='uppercase'>{item.size}</p></p>}
                                         <button
                                             onClick={(event) => toggleRemoveItemButton(event, item.id!, index)}
                                             className='flex gap-x-1 text-red-500 text-sm font-medium mt-3 items-center'><TrashIcon
