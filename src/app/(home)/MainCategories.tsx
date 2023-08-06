@@ -5,6 +5,7 @@ import Image from "next/image";
 import {useRouter} from "next/navigation";
 import men from '../../../public/men.jpg';
 import women from '../../../public/women.jpg';
+import Link from "next/link";
 
 export default function MainCategories() {
     const router = useRouter();
@@ -16,22 +17,24 @@ export default function MainCategories() {
                 opacity: 1, x: 0, transition: {
                     duration: 0.5
                 }
-            }} viewport={{once: true}}
-                        onClick={() => router.push('/products/women')} whileHover={{scale: 1.05, zIndex: 10}}
+            }} viewport={{once: true}} whileHover={{scale: 1.05, zIndex: 10}}
                         transition={{
                             duration: 0.2
                         }}
                         className='cursor-pointer md:w-1/2 bg-[#E7E6E4] rounded-xl h-full relative drop-shadow-sm overflow-hidden'>
-                <div
-                    className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
-                    <p className='text-sm'>HOT LIST</p>
-                    <h5 className='font-medium text-lg md:text-2xl'><span className='font-bold'>WOMEN</span> COLLECTION
-                    </h5>
-                    <p className='text-sm font-medium'>SHOP NOW</p>
-                </div>
-                <Image className='absolute right-0 h-full object-cover' src={women}
-                       alt='Women Collection'
-                />
+                <Link href='/products/women'>
+                    <div
+                        className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
+                        <p className='text-sm'>HOT LIST</p>
+                        <h5 className='font-medium text-lg md:text-2xl'><span
+                            className='font-bold'>WOMEN</span> COLLECTION
+                        </h5>
+                        <p className='text-sm font-medium'>SHOP NOW</p>
+                    </div>
+                    <Image className='absolute right-0 h-full object-cover' src={women}
+                           alt='Women Collection'
+                    />
+                </Link>
             </motion.div>
             <div className='md:w-1/2 h-full flex flex-col gap-y-4'>
                 <motion.div onClick={() => router.push('/products/men')} initial={{opacity: 0, x: 20}}
