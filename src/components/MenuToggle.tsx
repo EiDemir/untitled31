@@ -19,7 +19,8 @@ export const MenuToggle = ({toggle, color}: { toggle: () => void, color: string 
     }, [color])
 
     return (
-        <button onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onClick={() => {
+        <button aria-label={isOpened ? 'Close menu' : 'Open menu'} onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)} onClick={() => {
             toggleOpen();
             setColor(!isOpened ? '#222222' : color);
             toggle();

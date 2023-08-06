@@ -100,11 +100,11 @@ export default function Footer() {
                 <p className='text-sm'>©2023 Emir Demir</p>
                 <div className='flex gap-x-5 sm:flex-row flex-col gap-y-5'>
                     <div className='flex gap-x-5'>
-                        <p className='text-[#767676]'>Language</p>
+                        <p className='text-[#222222]'>Language</p>
                         <p>United States | English</p>
                     </div>
                     <div className='flex gap-x-5'>
-                        <p className='text-[#767676]'>Currency</p>
+                        <p className='text-[#222222]'>Currency</p>
                         <p>$ USD</p>
                     </div>
                 </div>

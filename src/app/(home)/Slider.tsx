@@ -74,6 +74,7 @@ export default function Slider({details}: {
             className='absolute w-max mx-auto max-md:inset-x-0 max-md:bottom-[3vw] md:left-[3vw] flex md:flex-col gap-4'>
             {range(details.length).map(i =>
                 <motion.button
+                    aria-label={i === 0 ? 'Open first slide' : (i === 1) ? 'Open second slide' : 'Open third slide'}
                     disabled={areButtonsDisabled}
                     initial={false}
                     key={i}

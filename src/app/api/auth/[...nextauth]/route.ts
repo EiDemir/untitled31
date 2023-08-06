@@ -56,7 +56,6 @@ export const authOptions: AuthOptions = {
     ],
     callbacks: {
         signIn() {
-            console.log('yes2');
             return true;
         },
         async session({session}) {
