@@ -3,13 +3,15 @@
 import {motion} from "framer-motion";
 import Image from "next/image";
 import {useRouter} from "next/navigation";
+import men from '../../../public/men.jpg';
+import women from '../../../public/women.jpg';
 
 export default function MainCategories() {
     const router = useRouter();
 
     return (
         <div
-            className='flex md:flex-row flex-col gap-x-4 gap-y-4 h-[700px] md:h-[500px] py-10 md:mx-[10vw] mx-[3.6vw] sm:mx-[5vw]'>
+            className='flex md:flex-row flex-col gap-x-4 gap-y-4 h-[800px] md:h-[500px] py-10 md:mx-[7vw] mx-[3vw]'>
             <motion.div initial={{opacity: 0, x: -20}} whileInView={{
                 opacity: 1, x: 0, transition: {
                     duration: 0.5
@@ -27,17 +29,17 @@ export default function MainCategories() {
                     </h5>
                     <p className='text-sm font-medium'>SHOP NOW</p>
                 </div>
-                <Image className='absolute right-0 h-full w-auto' width={936} height={1404}
-                       src='https://firebasestorage.googleapis.com/v0/b/sthh-9a6e2.appspot.com/o/05-31-23Studio3_KS_IM_14-39-47_53_BCCDQ43909_Gold_1789_SG_468x%402x.webp?alt=media&token=c98f9ef8-bbdf-4c0e-ab30-7dd29233700c'
+                <Image className='absolute right-0 h-full object-cover' src={women}
                        alt='Women Collection'
                 />
             </motion.div>
             <div className='md:w-1/2 h-full flex flex-col gap-y-4'>
-                <motion.div initial={{opacity: 0, x: 20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
+                <motion.div onClick={() => router.push('/products/men')} initial={{opacity: 0, x: 20}}
+                            whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
                             whileHover={{scale: 1.05}} transition={{
                     duration: 0.2
                 }}
-                            className='cursor-pointer h-1/2 bg-[#EAE8E7] w-full rounded-xl relative drop-shadow-sm overflow-hidden'>
+                            className='cursor-pointer h-3/4 bg-[#B9E2E5] w-full rounded-xl relative drop-shadow-sm overflow-hidden'>
                     <div
                         className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
                         <p className='text-sm'>HOT LIST</p>
@@ -45,39 +47,49 @@ export default function MainCategories() {
                             className='font-bold'>MEN</span> COLLECTION</h5>
                         <p className='text-sm font-medium'>SHOP NOW</p>
                     </div>
-                    <Image className='absolute right-0 h-auto w-1/2' width={936} height={1404}
-                           src='https://firebasestorage.googleapis.com/v0/b/sthh-9a6e2.appspot.com/o/06-15-23Studio6_TK_DJ_11-21-49_10_SPDN2483M_White_24332_SG_468x%402x.webp?alt=media&token=c54c7be9-2aec-4b63-a0b5-b3e38cb890c9'
-                           alt='Men Collection'
+                    <Image className='absolute right-0 h-full w-auto' src={men} alt='Men Collection'
                     />
                 </motion.div>
-                <div className='h-1/2 w-full flex gap-x-4'>
-                    <motion.div initial={{opacity: 0, x: 20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
+                <div className='h-1/4 w-full flex gap-x-4'>
+                    <motion.div onClick={() => router.push('/products/kids')} initial={{opacity: 0, x: 20}}
+                                whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
                                 whileHover={{scale: 1.05}} transition={{
                         duration: 0.2
-                    }} className='cursor-pointer bg-[#E7E6E4] w-1/2 rounded-xl relative drop-shadow-sm overflow-hidden'>
+                    }}
+                                className='cursor-pointer bg-[#E7E6E4] w-1/3 flex items-center justify-center rounded-xl relative drop-shadow-sm overflow-hidden'>
                         <div
-                            className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
-                            <p className='text-sm'>HOT LIST</p>
-                            <h5 className='font-medium text-lg md:text-2xl'><span
-                                className='font-bold'>KIDS</span> COLLECTION
+                            className='flex flex-col gap-y-1 text-[#222222] items-center'>
+                            <h5 className='font-medium text-lg lg:text-2xl'><span
+                                className='font-bold'>KIDS</span>
                             </h5>
-                            <p className='text-sm font-medium'>SHOP NOW</p>
+                            <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
                         </div>
-                        <Image className='absolute right-0 h-full w-auto' width={936} height={1404}
-                               src='https://firebasestorage.googleapis.com/v0/b/sthh-9a6e2.appspot.com/o/07-03-23Studio8_KT_DB_13-58-35_31_5BRB91830NV_White_P_8534_DG_468x%402x.webp?alt=media&token=a183ac32-b4f1-4ca3-a6ac-2e43e7ef22d1'
-                               alt='Kids collection'/>
                     </motion.div>
                     <motion.div initial={{opacity: 0, x: 20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
                                 whileHover={{scale: 1.05}} transition={{
                         duration: 0.2
-                    }} className='cursor-pointer bg-[#F5E6E0] w-1/2 rounded-xl relative drop-shadow-sm'>
+                    }}
+                                className='cursor-pointer bg-[#F5E6E0] w-1/3 flex items-center justify-center rounded-xl relative drop-shadow-sm overflow-hidden'>
                         <div
-                            className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222]'>
-                            <p className='text-sm'>HOT LIST</p>
-                            <h5 className='font-medium text-lg md:text-2xl'><span
-                                className='font-bold'>BEAUTY</span> COLLECTION
+                            className='flex flex-col gap-y-1 text-[#222222] items-center'>
+                            <h5 className='font-medium text-lg lg:text-2xl'><span
+                                className='font-bold'>BEAUTY</span>
                             </h5>
-                            <p className='text-sm font-medium'>SHOP NOW</p>
+                            <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
+                        </div>
+                    </motion.div>
+                    <motion.div onClick={() => router.push('/products/shoes')} initial={{opacity: 0, x: 20}}
+                                whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
+                                whileHover={{scale: 1.05}} transition={{
+                        duration: 0.2
+                    }}
+                                className='cursor-pointer bg-[#F5E6E0] w-1/3 flex items-center justify-center rounded-xl relative drop-shadow-sm overflow-hidden'>
+                        <div
+                            className='flex flex-col gap-y-1 text-[#222222] items-center'>
+                            <h5 className='font-medium text-lg lg:text-2xl'><span
+                                className='font-bold'>SHOES</span>
+                            </h5>
+                            <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
                         </div>
                     </motion.div>
                 </div>

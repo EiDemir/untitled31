@@ -17,7 +17,7 @@ const getBestSellingProducts = cache(async () => {
                 }
             }, id: true
         }, take: 8,
-        skip: 4
+        skip: 8
     });
 });
 
