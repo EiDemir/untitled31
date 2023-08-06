@@ -154,7 +154,7 @@ export default function Header({startWithWhite}: {
             <div className='fixed top-0 right-0 left-0 z-20'>
                 <nav
                     className={`w-full ${isTransparent ? '' : 'bg-white/50 backdrop-blur-lg'} transition-colors duration-500 relative text-sm text-${isLight ? 'white' : '[#222222]'} font-medium flex justify-between items-center h-[66px] pt-0 px-[3vw] gap-x-3`}>
-                    <Link href='/' prefetch={false} className='ml-12 my-auto'>
+                    <Link aria-label='Go to home page' href='/' prefetch={false} className='ml-12 my-auto'>
                         <svg className='max-w-full min-w-0' width="113" height="28" viewBox="0 0
                         113 28" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
@@ -201,7 +201,7 @@ export default function Header({startWithWhite}: {
                                                 // @ts-ignore */
                                                 className='text-xs font-medium text-white absolute -bottom-0 -right-0 bg-[#E893CF] w-4 h-4 rounded-full flex items-center pl-1'>{cartCtx.cartItemsNumber}</span>
                                         </Link>
-                                        <Link href='/auth/login'
+                                        <Link aria-label='Go to dashboard' href='/auth/login'
                                               className='block sm:hidden cursor-pointer'
                                               onMouseEnter={() => setIsHovered2(true)}
                                               onMouseLeave={() => setIsHovered2(false)}>
