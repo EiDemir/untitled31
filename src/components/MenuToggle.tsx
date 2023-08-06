@@ -34,7 +34,6 @@ export const MenuToggle = ({toggle, color}: { toggle: () => void, color: string 
                     }}
                 />
                 <Path
-                    className={`${isHovered ? '' : 'stroke-[#E893CF]'} transition-colors`}
                     variants={{
                         closed: {
                             opacity: 1,

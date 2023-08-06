@@ -7,6 +7,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            objectPosition: {
+                'center-right': 'center right',
+            },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'gradient-conic':

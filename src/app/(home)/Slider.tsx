@@ -35,7 +35,7 @@ const textVariants = {
 
 
 export default function Slider({details}: {
-    details: { imageLink: StaticImageData, title: string, subtitle: string }[]
+    details: { imageLink: StaticImageData, title: string[], subtitle: string }[]
 }) {
     const [areButtonsDisabled, setAreButtonsDisabled] = useState(false);
     const [active, setActive] = useState(0);
@@ -55,7 +55,7 @@ export default function Slider({details}: {
         if (areButtonsDisabled) {
             const timeout = setTimeout(() => {
                 setAreButtonsDisabled(false);
-            }, 800);
+            }, 1500);
 
             return () => clearTimeout(timeout);
         }
@@ -73,7 +73,8 @@ export default function Slider({details}: {
         <motion.div
             className='absolute w-max mx-auto max-md:inset-x-0 max-md:bottom-[3vw] md:left-[3vw] flex md:flex-col gap-4'>
             {range(details.length).map(i =>
-                <motion.div
+                <motion.button
+                    disabled={areButtonsDisabled}
                     initial={false}
                     key={i}
                     onClick={dotClickHandler.bind(null, i)}
@@ -99,7 +100,7 @@ export default function Slider({details}: {
                     variants={sliderVariants}
                     transition={{
                         duration: 0.7,
-                        delayChildren: 1.2
+                        delayChildren: 0.8
                     }}
                     initial='initial'
                     animate='animate'
@@ -109,19 +110,19 @@ export default function Slider({details}: {
                     <div className='relative items-center flex'>
                         <motion.div
                             variants={textVariants}
-                            className='text-black text-left absolute right-4 left-[3vw] md:left-[7vw] z-10'>
-                            <h1 className='text-7xl md:text-9xl font-bold'>Summer<br/>Sale<span className='text-[#F6A452]'>.</span></h1>
+                            className={`${active === 0 || active === 2 ? 'text-black' : 'text-white'} text-left absolute right-4 left-[3vw] md:left-[7vw] z-10`}>
+                            <h1 className='text-6xl md:text-[120px] font-bold'>{details[active].title[0]}<br/>{details[active].title[1]}<span className={`${active === 0 ? 'text-[#222222] md:text-[#F6A452]' : 'text-[#E893CF]'}`}>.</span></h1>
                             <p className='uppercase ml-1 text-sm md:text-base font-semibold mt-6 md:mt-16'>{details[active].subtitle}</p>
                             <motion.button onClick={() => router.push('/products/summer')} whileHover={{
                                 scale: 1.1
                             }} type='button'
-                                           className='rounded-full mt-5 bg-gradient-to-r from-[#E893CF] to-[#F6A452] text-white text-sm font-medium px-6 md:px-11 py-[10px] md:py-[18px] flex items-center gap-x-2.5'>
-                                <div className='h-0.5 w-5 bg-white'/>
+                                           className={`rounded-full mt-5 ${active === 0 ? 'from-[#E893CF] bg-gradient-to-r to-[#F6A452] text-white' : 'bg-white text-[#222222]'} text-sm font-medium px-6 md:px-11 py-[10px] md:py-[18px] flex items-center gap-x-2.5`}>
+                                <div className={`h-0.5 w-5 ${active === 0 ? 'bg-white' : 'bg-[#222222]'}`}/>
                                 DISCOVER NOW
                             </motion.button>
                         </motion.div>
                         <motion.div style={{y: imageY}} className='relative'>
-                            <svg className='absolute top-0 -left-7 md:left-0 h-[75vh] md:h-[90vh] min-h-[500px] md:min-h-[700px] w-auto' version="1.2"
+                            {active === 0 && <svg className='absolute hidden md:block top-0 -left-7 md:left-0 h-[75vh] md:h-[90vh] min-h-[500px] md:min-h-[700px] w-auto' version="1.2"
                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5320 2900" width="5320"
                                  height="2900">
                                 <defs>
@@ -154,8 +155,9 @@ export default function Slider({details}: {
                                               d="m13.8-337c222.4-93.6 522.4-60.5 731.1 68.5 208.6 129.1 440 154 697.4 78.4 257.4-75.6 520.7-42.5 747.4 88.9 226.7 131.3 484.9 159.5 761.2 86.3"/>
                                     </g>
                                 </g>
-                            </svg>
+                            </svg>}
                             <Image priority className='h-screen overflow-hidden object-cover'
+                                   style={{objectPosition: '80% 50%'}}
                                    src={details[active].imageLink}
                                    alt='Slider image' unoptimized={true}/>
                         </motion.div>
