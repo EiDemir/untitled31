@@ -58,26 +58,32 @@ export default function MainCategories() {
                                 whileHover={{scale: 1.05}} transition={{
                         duration: 0.2
                     }}
-                                className='cursor-pointer bg-[#E7E6E4] w-1/3 flex items-center justify-center rounded-xl relative drop-shadow-sm overflow-hidden'>
+                                className='cursor-pointer bg-[#E7E6E4] w-1/3 rounded-xl relative drop-shadow-sm overflow-hidden'>
                         <Link href='/products/kids'
-                              className='flex flex-col gap-y-1 text-[#222222] items-center'>
-                            <h5 className='font-medium text-lg lg:text-2xl'><span
-                                className='font-bold'>KIDS</span>
-                            </h5>
-                            <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
+                              className='flex items-center justify-center h-full'>
+                            <div
+                                className='flex flex-col gap-y-1 text-[#222222] items-center'>
+                                <h5 className='font-medium text-lg lg:text-2xl'><span
+                                    className='font-bold'>KIDS</span>
+                                </h5>
+                                <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
+                            </div>
                         </Link>
                     </motion.div>
                     <motion.div initial={{opacity: 0, x: 20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
                                 whileHover={{scale: 1.05}} transition={{
                         duration: 0.2
                     }}
-                                className='cursor-pointer bg-[#F5E6E0] w-1/3 flex items-center justify-center rounded-xl relative drop-shadow-sm overflow-hidden'>
+                                className='cursor-pointer bg-[#F5E6E0] w-1/3 rounded-xl relative drop-shadow-sm overflow-hidden'>
                         <Link href='/'
-                              className='flex flex-col gap-y-1 text-[#222222] items-center'>
-                            <h5 className='font-medium text-lg lg:text-2xl'><span
-                                className='font-bold'>BEAUTY</span>
-                            </h5>
-                            <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
+                              className='flex items-center justify-center h-full'>
+                            <div
+                                className='flex flex-col gap-y-1 text-[#222222] items-center'>
+                                <h5 className='font-medium text-lg lg:text-2xl'><span
+                                    className='font-bold'>BEAUTY</span>
+                                </h5>
+                                <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
+                            </div>
                         </Link>
                     </motion.div>
                     <motion.div initial={{opacity: 0, x: 20}}
@@ -85,13 +91,15 @@ export default function MainCategories() {
                                 whileHover={{scale: 1.05}} transition={{
                         duration: 0.2
                     }}
-                                className='cursor-pointer bg-[#F5E6E0] w-1/3 flex items-center justify-center rounded-xl relative drop-shadow-sm overflow-hidden'>
+                                className='cursor-pointer bg-[#F5E6E0] w-1/3 rounded-xl relative drop-shadow-sm overflow-hidden'>
                         <Link href='/products/shoes'
-                              className='flex flex-col gap-y-1 text-[#222222] items-center'>
-                            <h5 className='font-medium text-lg lg:text-2xl'><span
-                                className='font-bold'>SHOES</span>
-                            </h5>
-                            <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
+                              className='flex items-center justify-center h-full'>
+                            <div className='flex flex-col gap-y-1 text-[#222222] items-center'>
+                                <h5 className='font-medium text-lg lg:text-2xl'><span
+                                    className='font-bold'>SHOES</span>
+                                </h5>
+                                <p className='text-xs lg:text-sm font-medium'>SHOP NOW</p>
+                            </div>
                         </Link>
                     </motion.div>
                 </div>
