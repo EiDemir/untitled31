@@ -3,7 +3,8 @@ import {useEffect, useState} from "react";
 
 const Path = (props: any) => (
     <motion.path
-        strokeWidth="2"
+        strokeWidth="4"
+        strokeLinecap='round'
         {...props}
     />
 );
@@ -23,16 +24,17 @@ export const MenuToggle = ({toggle, color}: { toggle: () => void, color: string 
             setColor(!isOpened ? '#222222' : color);
             toggle();
         }}
-                className="fixed z-50 top-[23px] left-[3vw]">
-            <svg style={{stroke: col}} className={`z-50 transition-colors duration-1000`} width="22" height="19"
-                 viewBox="0 0 22 19">
+                className="fixed z-50 top-[19.5px] left-[3vw]">
+            <svg style={{stroke: col}} className={`z-50 transition-colors duration-1000`} width="30" height="28"
+                 viewBox="0 0 30 28">
                 <Path
                     variants={{
-                        closed: {d: "M 2 2.5 L 20 2.5"},
-                        open: {d: "M 3 16.5 L 17 2.5"}
+                        closed: {d: "M 2 2.5 L 28 2.5"},
+                        open: {d: "M 2 26 L 28 1.98"}
                     }}
                 />
                 <Path
+                    className={`${isHovered ? '' : 'stroke-[#E893CF]'} transition-colors`}
                     variants={{
                         closed: {
                             opacity: 1,
@@ -40,7 +42,7 @@ export const MenuToggle = ({toggle, color}: { toggle: () => void, color: string 
                         open: {opacity: 0}
                     }}
                     animate={{
-                        d: `M 2 9.423 L ${isHovered ? '20' : '12'} 9.423`
+                        d: `M 2 14 L ${isHovered ? '28' : '16'} 14`
                     }}
                     transition={{
                         opacity: {
@@ -52,8 +54,8 @@ export const MenuToggle = ({toggle, color}: { toggle: () => void, color: string 
                 />
                 <Path
                     variants={{
-                        closed: {d: "M 2 16.346 L 20 16.346"},
-                        open: {d: "M 3 2.5 L 17 16.346"}
+                        closed: {d: "M 2 25.5 L 28 25.5"},
+                        open: {d: "M 2 2.09 L 28 26"}
                     }}
                 />
             </svg>

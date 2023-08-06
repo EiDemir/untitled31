@@ -68,7 +68,8 @@ export default function Slider({details}: {
 
 
     const dots = (
-        <motion.div className='absolute w-max mx-auto max-md:inset-x-0 max-md:bottom-[3vw] md:left-[3vw] flex md:flex-col gap-4'>
+        <motion.div
+            className='absolute w-max mx-auto max-md:inset-x-0 max-md:bottom-[3vw] md:left-[3vw] flex md:flex-col gap-4'>
             {range(details.length).map(i =>
                 <motion.div
                     initial={false}
@@ -106,9 +107,9 @@ export default function Slider({details}: {
                     <div className='relative items-center flex'>
                         <motion.div
                             variants={textVariants}
-                            className='uppercase text-white text-left absolute right-4 left-[3vw] md:left-[7vw] z-10'>
+                            className='uppercase text-black text-left absolute right-4 left-[3vw] md:left-[7vw] z-10'>
                             <div className='ml-1 flex flex-row items-center gap-x-2'>
-                                <div className='h-0.5 w-10 bg-white'/>
+                                <div className='h-0.5 w-10 bg-black'/>
                                 <p className='text-sm font-medium'>{details[active].date}</p>
                             </div>
                             <h1 className='text-3xl md:text-5xl lg:text-6xl font-bold'>{details[active].title}</h1>
@@ -116,15 +117,48 @@ export default function Slider({details}: {
                             <motion.button whileHover={{
                                 scale: 1.1
                             }} type='button'
-                                           className='rounded-full mt-5 bg-white text-black text-sm font-medium px-11 py-[18px] flex items-center gap-x-2.5'>
-                                <div className='h-0.5 w-5 bg-black'/>
+                                           className='rounded-full mt-5 bg-black text-white text-sm font-medium px-11 py-[18px] flex items-center gap-x-2.5'>
+                                <div className='h-0.5 w-5 bg-white'/>
                                 DISCOVER NOW
                             </motion.button>
                         </motion.div>
-                        <motion.div style={{y: imageY}}>
+                        <motion.div style={{y: imageY}} className='relative'>
+                            <svg className='absolute top-0 left-0 h-[1000px] w-auto' version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5320 3547" width="5320"
+                                 height="3547">
+                                <defs>
+                                    <clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+                                        <path
+                                            d="m2709-112.44c0 0 260.94 869.72-52 1191-312.94 321.29-756.03 181.23-817 599-60.97 417.78 339.34 756.49-365 974-704.34 217.51-1522.04 400.75-1826-269-303.96-669.74 209-2782 209-2782z"/>
+                                    </clipPath>
+                                </defs>
+                                <g id="obj">
+                                </g>
+                                <g id="bg">
+                                    <g clipPath="url(#cp1)">
+                                        <path id="Shape 4" className="s0"
+                                              d="m2709-112.4c0 0 260.9 869.7-52 1191-312.9 321.2-756 181.2-817 599-61 417.7 339.3 756.5-365 974-704.3 217.5-1522 400.7-1826-269-304-669.8 209-2782 209-2782z"/>
+                                        <path id="Shape 2" className="s1"
+                                              d="m-94.9 529c222.5-93.6 522.5-60.5 731.1 68.5 208.6 129.1 440 154 697.4 78.4 257.4-75.6 520.8-42.4 747.4 88.9 226.7 131.3 484.9 159.6 761.2 86.4"/>
+                                        <path id="Shape 2 copy" className="s1"
+                                              d="m-79.4 405.7c222.4-93.6 522.4-60.5 731.1 68.6 208.6 129 440 153.9 697.4 78.3 257.4-75.6 520.7-42.4 747.4 88.9 226.7 131.3 484.9 159.6 761.2 86.4"/>
+                                        <path id="Shape 2 copy 2" className="s1"
+                                              d="m-64.7 280.3c222.5-93.6 522.4-60.5 731.1 68.5 208.6 129.1 440 154 697.4 78.4 257.4-75.6 520.7-42.4 747.4 88.9 226.7 131.3 484.9 159.6 761.2 86.4"/>
+                                        <path id="Shape 2 copy 2" className="s1"
+                                              d="m-49.2 157c222.4-93.6 522.4-60.5 731 68.6 208.7 129 440.1 153.9 697.5 78.3 257.4-75.6 520.7-42.4 747.4 88.9 226.7 131.3 484.9 159.6 761.2 86.4"/>
+                                        <path id="Shape 2 copy 3" className="s1"
+                                              d="m-31.8 35c222.4-93.6 522.4-60.5 731 68.5 208.6 129.1 440 153.9 697.4 78.4 257.5-75.6 520.8-42.5 747.4 88.9 226.7 131.3 484.9 159.5 761.2 86.3"/>
+                                        <path id="Shape 2 copy 3" className="s1"
+                                              d="m-16.4-88.3c222.4-93.6 522.4-60.5 731.1 68.5 208.6 129.1 440 154 697.4 78.4 257.4-75.6 520.7-42.4 747.4 88.9 226.7 131.3 484.9 159.5 761.2 86.3"/>
+                                        <path id="Shape 2 copy 3" className="s1"
+                                              d="m-1.6-213.7c222.4-93.6 522.4-60.5 731 68.5 208.6 129.1 440 153.9 697.4 78.4 257.4-75.6 520.8-42.5 747.4 88.9 226.7 131.3 484.9 159.5 761.2 86.3"/>
+                                        <path id="Shape 2 copy 3" className="s1"
+                                              d="m13.8-337c222.4-93.6 522.4-60.5 731.1 68.5 208.6 129.1 440 154 697.4 78.4 257.4-75.6 520.7-42.5 747.4 88.9 226.7 131.3 484.9 159.5 761.2 86.3"/>
+                                    </g>
+                                </g>
+                            </svg>
                             <Image priority className='h-screen overflow-hidden object-cover'
                                    src={details[active].imageLink}
-                                   alt='Slider image'/>
+                                   alt='Slider image' unoptimized={true}/>
                         </motion.div>
                     </div>
                 </motion.div>

@@ -107,3 +107,15 @@ textarea::-webkit-scrollbar {
 .chevron {
     @apply w-6 h-auto text-[#222222];
 }
+
+.s0 {
+    fill: #fff8e5
+}
+
+.s1 {
+    fill: none;
+    stroke: #f0e6ca;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 53.8
+}

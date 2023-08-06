@@ -15,9 +15,9 @@ export default function MainCategories() {
                     duration: 0.5
                 }
             }} viewport={{once: true}}
-                        onClick={() => router.push('/products/women')} whileHover={{scale: 1.1, zIndex: 10}}
+                        onClick={() => router.push('/products/women')} whileHover={{scale: 1.05, zIndex: 10}}
                         transition={{
-                            duration: 0.5
+                            duration: 0.2
                         }}
                         className='cursor-pointer md:w-1/2 bg-[#E7E6E4] rounded-xl h-full relative drop-shadow-sm overflow-hidden'>
                 <div
@@ -34,8 +34,8 @@ export default function MainCategories() {
             </motion.div>
             <div className='md:w-1/2 h-full flex flex-col gap-y-4'>
                 <motion.div initial={{opacity: 0, x: 20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
-                            whileHover={{scale: 1.1}} transition={{
-                    duration: 0.5
+                            whileHover={{scale: 1.05}} transition={{
+                    duration: 0.2
                 }}
                             className='cursor-pointer h-1/2 bg-[#EAE8E7] w-full rounded-xl relative drop-shadow-sm overflow-hidden'>
                     <div
@@ -52,8 +52,8 @@ export default function MainCategories() {
                 </motion.div>
                 <div className='h-1/2 w-full flex gap-x-4'>
                     <motion.div initial={{opacity: 0, x: 20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
-                                whileHover={{scale: 1.1}} transition={{
-                        duration: 0.5
+                                whileHover={{scale: 1.05}} transition={{
+                        duration: 0.2
                     }} className='cursor-pointer bg-[#E7E6E4] w-1/2 rounded-xl relative drop-shadow-sm overflow-hidden'>
                         <div
                             className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
@@ -68,8 +68,8 @@ export default function MainCategories() {
                                alt='Kids collection'/>
                     </motion.div>
                     <motion.div initial={{opacity: 0, x: 20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}}
-                                whileHover={{scale: 1.1}} transition={{
-                        duration: 0.5
+                                whileHover={{scale: 1.05}} transition={{
+                        duration: 0.2
                     }} className='cursor-pointer bg-[#F5E6E0] w-1/2 rounded-xl relative drop-shadow-sm'>
                         <div
                             className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222]'>

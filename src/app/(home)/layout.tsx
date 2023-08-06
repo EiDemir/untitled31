@@ -2,11 +2,8 @@ import React, {ReactNode} from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Slider from "./Slider";
-import slide1 from "../../../public/slide1.jpg";
-import slide2 from "../../../public/slide2.jpg";
-import slide3 from "../../../public/slide3.webp";
-import slide4 from "../../../public/slide4.webp";
 import MainCategories from "./MainCategories";
+import slide1 from '../../../public/slide1.jpg';
 
 const sliderDetails = [
     {
@@ -16,19 +13,19 @@ const sliderDetails = [
         subtitle: 'limited time offer - up to 60% off & free shipping'
     },
     {
-        imageLink: slide2,
+        imageLink: slide1,
         date: 'summer 2023',
         title: 'hello new season',
         subtitle: 'limited time offer - up to 60% off & free shipping'
     },
     {
-        imageLink: slide3,
+        imageLink: slide1,
         date: 'summer 2023',
         title: 'hello new season',
         subtitle: 'limited time offer - up to 60% off & free shipping'
     },
     {
-        imageLink: slide4,
+        imageLink: slide1,
         date: 'summer 2023',
         title: 'hello new season',
         subtitle: 'limited time offer - up to 60% off & free shipping'
@@ -42,7 +39,7 @@ export default async function Layout({bestSelling, hotDeals}: {
     return (
         <>
             <header className='overflow-hidden h-screen bg-[#222222]'>
-                <Header startWithWhite={true}/>
+                <Header startWithWhite={false}/>
                 <Slider details={sliderDetails}/>
             </header>
             <main>
