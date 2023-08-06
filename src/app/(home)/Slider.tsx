@@ -63,7 +63,7 @@ export default function Slider({details}: {
 
     useEffect(() => {
         const interval = setInterval(() => setActive(
-            prevState => (prevState + 1) % details.length), 4000);
+            prevState => (prevState + 1) % details.length), 8000);
 
         return () => clearInterval(interval);
     }, [active, details.length]);
@@ -109,19 +109,19 @@ export default function Slider({details}: {
                     <div className='relative items-center flex'>
                         <motion.div
                             variants={textVariants}
-                            className='uppercase text-black text-left absolute right-4 left-[3vw] md:left-[7vw] z-10'>
-                            <h1 className='text-3xl md:text-5xl lg:text-6xl font-bold'>{details[active].title}</h1>
-                            <p className='ml-1 text-sm sm:text-base font-semibold'>{details[active].subtitle}</p>
+                            className='text-black text-left absolute right-4 left-[3vw] md:left-[7vw] z-10'>
+                            <h1 className='text-7xl md:text-9xl font-bold'>Summer<br/>Sale<span className='text-[#F6A452]'>.</span></h1>
+                            <p className='uppercase ml-1 text-sm md:text-base font-semibold mt-6 md:mt-16'>{details[active].subtitle}</p>
                             <motion.button onClick={() => router.push('/products/summer')} whileHover={{
                                 scale: 1.1
                             }} type='button'
-                                           className='rounded-full mt-5 bg-gradient-to-r from-[#E893CF] to-[#D7943D] text-white text-sm font-medium px-11 py-[18px] flex items-center gap-x-2.5'>
+                                           className='rounded-full mt-5 bg-gradient-to-r from-[#E893CF] to-[#F6A452] text-white text-sm font-medium px-6 md:px-11 py-[10px] md:py-[18px] flex items-center gap-x-2.5'>
                                 <div className='h-0.5 w-5 bg-white'/>
                                 DISCOVER NOW
                             </motion.button>
                         </motion.div>
                         <motion.div style={{y: imageY}} className='relative'>
-                            <svg className='absolute top-0 left-0 h-1/2 sm:h-full min-h-[450px] w-auto' version="1.2"
+                            <svg className='absolute top-0 -left-7 md:left-0 h-[75vh] md:h-[90vh] min-h-[500px] md:min-h-[700px] w-auto' version="1.2"
                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5320 2900" width="5320"
                                  height="2900">
                                 <defs>
