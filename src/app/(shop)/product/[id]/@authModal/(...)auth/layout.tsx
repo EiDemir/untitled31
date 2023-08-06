@@ -9,6 +9,7 @@ export default function Layout({children}: { children: ReactNode }) {
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+        router.refresh();
         document.body.style.overflowY = 'hidden';
     }, []);
 
