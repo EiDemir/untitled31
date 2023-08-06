@@ -10,8 +10,8 @@ export default async function Page() {
             <h3 className='text-4xl font-bold text-center'>HOT DEALS</h3>
             <div className='flex lg:flex-row flex-col gap-y-10 gap-x-10 items-center'>
                 <div className='transition-transform translate-y-4'>
-                    <h5 className='text-2xl'>Summer Sale</h5>
-                    <h5 className='text-2xl font-bold'>Up to 60% Off</h5>
+                    <h3 className='text-2xl'>Summer Sale</h3>
+                    <h3 className='text-2xl font-bold'>Up to 60% Off</h3>
                     <Countdown endDate={new Date(2023, 8, 23)}/>
                 </div>
                 <Suspense fallback={(

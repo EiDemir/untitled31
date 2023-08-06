@@ -23,9 +23,9 @@ export default function MainCategories() {
                     <div
                         className='absolute bottom-4 left-4 md:bottom-7 md:left-7 flex flex-col gap-y-1 text-[#222222] z-10'>
                         <p className='text-sm'>HOT LIST</p>
-                        <h5 className='font-medium text-lg md:text-2xl'><span
+                        <h3 className='font-medium text-lg md:text-2xl'><span
                             className='font-bold'>WOMEN</span> COLLECTION
-                        </h5>
+                        </h3>
                         <p className='text-sm font-medium'>SHOP NOW</p>
                     </div>
                     <Image className='absolute right-0 h-full w-min object-cover' src={women}
