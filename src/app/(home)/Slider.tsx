@@ -71,7 +71,7 @@ export default function Slider({details}: {
 
     const dots = (
         <motion.div
-            className='absolute w-max mx-auto max-md:inset-x-0 max-md:bottom-[3vw] md:left-[3vw] flex md:flex-col gap-4'>
+            className='absolute w-max mx-auto max-md:inset-x-0 max-md:bottom-[4vw] md:left-[3vw] flex md:flex-col gap-8 md:gap-4'>
             {range(details.length).map(i =>
                 <motion.button
                     aria-label={i === 0 ? 'Open first slide' : (i === 1) ? 'Open second slide' : 'Open third slide'}
@@ -79,7 +79,7 @@ export default function Slider({details}: {
                     initial={false}
                     key={i}
                     onClick={dotClickHandler.bind(null, i)}
-                    className='rounded-full cursor-pointer opacity-80 w-1.5 h-1.5 bg-black'
+                    className='rounded-full cursor-pointer opacity-80 w-2 h-2 md:w-1.5 md:h-1.5 bg-black'
                     animate={{
                         scale: active === i ? 1.5 : 1,
                         opacity: active === i ? 1 : 0.5
