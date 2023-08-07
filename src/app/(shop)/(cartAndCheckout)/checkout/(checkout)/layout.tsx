@@ -2,6 +2,7 @@ import {ReactNode} from "react";
 import {redirect} from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
 import PaymentButton from "@/app/(shop)/(cartAndCheckout)/checkout/(checkout)/PaymentButton";
+import {sum} from "lodash";
 
 export default async function Layout({children}: { children: ReactNode }) {
     const user = await getCurrentUser();
@@ -9,6 +10,9 @@ export default async function Layout({children}: { children: ReactNode }) {
     if (!user) {
         redirect('/auth/login');
     }
+
+    const subtotal = sum(!user.cart ? [] : user.cart.map(item => item.quantity * item.product!.price));
+    const vat = (subtotal * 0.05);
 
     return (
         <div className='flex flex-col md:flex-row gap-8'>
@@ -38,12 +42,8 @@ export default async function Layout({children}: { children: ReactNode }) {
                             }
                         </div>
                         <div className='font-medium py-4 text-sm flex justify-between'>
-                            PRODUCT
-                            <p className='pl-4'>SUBTOTAL</p>
-                        </div>
-                        <div className='font-medium py-4 text-sm flex justify-between'>
                             SUBTOTAL
-                            <p className='pl-4'>$89.99</p>
+                            <p className='pl-4'>${(subtotal).toFixed(2)}</p>
                         </div>
                         <div className='font-medium py-4 text-sm flex justify-between'>
                             SHIPPING
@@ -51,11 +51,11 @@ export default async function Layout({children}: { children: ReactNode }) {
                         </div>
                         <div className='font-medium py-4 text-sm flex justify-between'>
                             VAT (5%)
-                            <p className='pl-4'>$12.99</p>
+                            <p className='pl-4'>${vat.toFixed(2)}</p>
                         </div>
                         <div className='font-medium py-4 text-sm flex justify-between'>
                             TOTAL
-                            <p className='pl-4'>$100</p>
+                            <p className='pl-4'>${(subtotal + vat).toFixed(2)}</p>
                         </div>
                     </div>
                 </div>
