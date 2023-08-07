@@ -3,9 +3,9 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Slider from "./Slider";
 import MainCategories from "./MainCategories";
-import slide1 from '../../../public/slide1.jpg';
-import slide2 from '../../../public/slide2.jpg';
-import slide3 from '../../../public/slide3.jpg';
+import slide1 from '../../../public/slide1.webp';
+import slide2 from '../../../public/slide2.webp';
+import slide3 from '../../../public/slide3.webp';
 
 export const dynamic = 'force-dynamic';
 
