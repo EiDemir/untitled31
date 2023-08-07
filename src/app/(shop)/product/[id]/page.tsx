@@ -80,7 +80,7 @@ export default async function Page({params}: { params: { id: string } }) {
                     maxQuantity: product.quantity,
                     colors: product.colors,
                     sizes: product.sizes,
-                    category: product.categories[0].name
+                    categories: product.categories
                 }} user={userInfo}/>
             </div>
             <ProductSections
