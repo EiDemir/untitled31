@@ -112,8 +112,7 @@ export default function ProductDetail({productDetail, user}: {
 
     return (
         <div className='px-[3.6vw] sm:px-0 sm:w-5/12 flex flex-col gap-y-1'>
-            <p className='mb-6 text-sm font-medium text-[#222222] leading-none uppercase'> {productDetail.categories[0].name}
-                / {productDetail.categories[1].name}</p>
+            <p className='mb-6 text-sm font-medium text-[#222222] leading-none uppercase'> {productDetail.categories[1].name} / {productDetail.categories[0].name}</p>
             <p className='text-[1.625rem] text-[#222222]'>{productDetail.name}</p>
             <p className='font-medium text-[1.375rem] text-[#222222]'>${productDetail.price}</p>
             <p className='font-sm my-6 text-[#222222]'>Phasellus sed volutpat orci. Fusce eget lore mauris vehicula
