@@ -7,7 +7,7 @@ import slide1 from '../../../public/slide1.webp';
 import slide2 from '../../../public/slide2.webp';
 import slide3 from '../../../public/slide3.webp';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
 const sliderDetails = [
     {

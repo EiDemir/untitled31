@@ -171,7 +171,7 @@ export default function ProductDetail({productDetail, user}: {
                             onClick={() => changeQuantity('-')}>-
                     </button>
                     <input readOnly
-                           className='border-transparent focus:border-transparent focus:ring-0 p-0 text-center text-[#222222]'
+                           className='w-9 border-transparent focus:border-transparent focus:ring-0 p-0 text-center text-[#222222]'
                            type='number'
                            value={quantity.toString()} step='1'
                            min='0' max='10'/>
