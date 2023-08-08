@@ -37,7 +37,7 @@ export default async function Layout({bestSelling, hotDeals}: {
                 <Header startWithWhite={false}/>
                 <Slider details={sliderDetails}/>
             </header>
-            <main className='bg-gradient-to-b from-[#E893CF] to-[#E4E4E4] overflow-x-hidden'>
+            <main className='bg-gradient-to-b from-white to-[#E4E4E4] overflow-x-hidden'>
                 <MainCategories/>
                 {hotDeals}
                 {bestSelling}
