@@ -34,7 +34,7 @@ export default function BestSellingProducts({products}: {
         if (areButtonsDisabled) {
             const timeout = setTimeout(() => {
                 setAreButtonsDisabled(false);
-            }, 500);
+            }, 1000);
 
             return () => clearTimeout(timeout);
         }

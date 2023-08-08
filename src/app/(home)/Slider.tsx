@@ -40,8 +40,8 @@ export default function Slider({details}: {
     const [areButtonsDisabled, setAreButtonsDisabled] = useState(false);
     const [active, setActive] = useState(0);
     const ref = useRef(null);
-    const {scrollY} = useScroll({target: ref});
-    const imageY = useTransform(scrollY, [0, 1000], [0, 500]);
+    const {scrollY} = useScroll({target: ref, offset: ['start start', 'end start']});
+    const imageY = useTransform(scrollY, [0, 1000], [0, 300]);
     const router = useRouter();
 
     const dotClickHandler = (dotNumber: number) => {
@@ -63,7 +63,7 @@ export default function Slider({details}: {
 
     useEffect(() => {
         const interval = setInterval(() => setActive(
-            prevState => (prevState + 1) % details.length), 8000);
+            prevState => (prevState + 1) % details.length), 6000);
 
         return () => clearInterval(interval);
     }, [active, details.length]);

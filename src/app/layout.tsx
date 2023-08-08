@@ -10,8 +10,8 @@ const jost = Jost({subsets: ['latin']});
 
 export const metadata = {
     title: {
-        template: '%s | Uomo | Ecommerce Website for Everybody',
-        default: 'Uomo | Ecommerce Website for Everybody'
+        template: '%s | Uomo | Ecommerce Website',
+        default: 'Uomo | Ecommerce Website'
     },
     description: 'Affordable dresses for women, beside a bunch of other categories of clothes.'
 };
