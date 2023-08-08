@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import {motion} from "framer-motion";
+import {m} from "framer-motion";
 import {ForwardedRef, forwardRef} from "react";
 import Link from "next/link";
 
@@ -39,7 +39,7 @@ const ProductItem2 = forwardRef(({imageLink, categories, title, price, id, color
     direction: number,
 }, ref: ForwardedRef<HTMLDivElement>) => {
     return (
-        <motion.div
+        <m.div
             ref={ref}
             layout
             custom={direction}
@@ -63,7 +63,7 @@ const ProductItem2 = forwardRef(({imageLink, categories, title, price, id, color
                 <p className="text-base">{title}</p>
                 <p className="text-[#767676] text-base">${price}</p>
             </div>
-        </motion.div>
+        </m.div>
     );
 })
 

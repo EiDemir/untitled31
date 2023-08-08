@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import {motion} from "framer-motion";
+import {domAnimation, LazyMotion, m} from "framer-motion";
 import Link from "next/link";
 
 export default function Footer() {
@@ -68,20 +68,22 @@ export default function Footer() {
                     <h3 className='font-medium text-lg'>SUBSCRIBE</h3>
                     <p className='text-sm'>Be the first to get the latest news about trends, promotions, and much
                         more!</p>
-                    <motion.div
-                        whileTap={{
-                            scale: 0.9
-                        }}
-                        transition={{
-                            ease: 'easeOut'
-                        }}
-                        className='rounded-full bg-white w-full h-12 flex justify-between items-center'>
-                        <input type='email' placeholder='Your email address'
-                               className='border-transparent focus:border-transparent focus:ring-0 p-0 w-full text-sm my-3 mx-4 placeholder-black'/>
-                        <button type='button'
-                                className='rounded-r-full px-4 h-full text-sm font-medium hover:bg-blue-500 hover:text-white'>JOIN
-                        </button>
-                    </motion.div>
+                    <LazyMotion features={domAnimation}>
+                        <m.div
+                            whileTap={{
+                                scale: 0.9
+                            }}
+                            transition={{
+                                ease: 'easeOut'
+                            }}
+                            className='rounded-full bg-white w-full h-12 flex justify-between items-center'>
+                            <input type='email' placeholder='Your email address'
+                                   className='border-transparent focus:border-transparent focus:ring-0 p-0 w-full text-sm my-3 mx-4 placeholder-black'/>
+                            <button type='button'
+                                    className='rounded-r-full px-4 h-full text-sm font-medium hover:bg-blue-500 hover:text-white'>JOIN
+                            </button>
+                        </m.div>
+                    </LazyMotion>
                     <div>
                         <p className='font-medium mb-3'>Secure payments</p>
                         <div className='flex flex-row gap-x-10 md:gap-x-0 h-4 md:justify-between'>

@@ -1,8 +1,8 @@
-import {motion, useCycle} from "framer-motion";
+import {m, useCycle} from "framer-motion";
 import {useEffect, useState} from "react";
 
 const Path = (props: any) => (
-    <motion.path
+    <m.path
         strokeWidth="4"
         strokeLinecap='round'
         {...props}

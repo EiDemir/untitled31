@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from "react";
 import {
-    AnimatePresence
+    AnimatePresence, domAnimation, LazyMotion
 } from "framer-motion";
 import {useMediaQuery, useWindowSize} from "usehooks-ts";
 import ProductItem2 from "@/components/product/ProductItem2";
@@ -69,27 +69,29 @@ export default function BestSellingProducts({products}: {
             </button>
             <div
                 className="flex sm:w-[90vw] w-[84vw] gap-x-4 z-0">
-                <AnimatePresence initial={false} mode='popLayout' custom={direction}>
-                    {currentProducts.map(i => {
-                            const {
-                                images,
-                                categories,
-                                name,
-                                price,
-                                id,
-                                colors
-                            } = products[(i % products.length + products.length) % products.length];
-                            return <ProductItem2
-                                direction={direction}
-                                key={i} imageLink={images[0]}
-                                categories={categories}
-                                title={name}
-                                price={price}
-                                id={id}
-                                colors={colors}/>;
-                        }
-                    )}
-                </AnimatePresence>
+                <LazyMotion features={domAnimation}>
+                    <AnimatePresence initial={false} mode='popLayout' custom={direction}>
+                        {currentProducts.map(i => {
+                                const {
+                                    images,
+                                    categories,
+                                    name,
+                                    price,
+                                    id,
+                                    colors
+                                } = products[(i % products.length + products.length) % products.length];
+                                return <ProductItem2
+                                    direction={direction}
+                                    key={i} imageLink={images[0]}
+                                    categories={categories}
+                                    title={name}
+                                    price={price}
+                                    id={id}
+                                    colors={colors}/>;
+                            }
+                        )}
+                    </AnimatePresence>
+                </LazyMotion>
             </div>
             <button
                 aria-label='Next product'
