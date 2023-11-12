@@ -18,7 +18,7 @@ export default function Reviews({productId, isAuthenticated, changeReviewNum, nu
 }) {
     const {data, isLoading, mutate, error} =
         useSWR<Review[]>(`/api/product/${productId}/reviews`,
-            (url) => axios.get(url, {params: {isAuthenticated}}).then(res => res.data.reviews));
+            (url: string) => axios.get(url, {params: {isAuthenticated}}).then(res => res.data.reviews));
     const [firstLabelStatus, setFirstLabelStatus] = useState(false);
     const [isAddReviewOpen, setIsAddReviewOpen] = useState(false);
     const router = useRouter();

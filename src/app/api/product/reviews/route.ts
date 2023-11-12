@@ -10,7 +10,7 @@ export async function POST(request: Request) {
         return NextResponse.error();
     }
 
-    console.log(cookies().set('sentANewReq', 'yes'))
+    console.log(cookies().set('sentANewReq', 'yes'));
 
     const {reviewId, type} = await request.json();
 
