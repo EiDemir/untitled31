@@ -14,7 +14,7 @@ export async function GET(request: Request, {params}: { params: { productId?: st
     }
 
     if (!productId) {
-        return new Error('Invalid ID');
+        return NextResponse.json({message:'Invalid ID'});
     }
 
     const reviews = await prisma.product.findUnique({
@@ -60,12 +60,12 @@ export async function GET(request: Request, {params}: { params: { productId?: st
 export async function POST(request: Request, {params}: { params: { productId?: string } }) {
     const {productId} = params;
     if (!productId) {
-        return new Error('Invalid ID');
+        return NextResponse.json({error: 'Invalid ID'});
     }
 
     const user = await getCurrentUser();
     if (!user) {
-        return NextResponse.error();
+        return NextResponse.json({});
     }
 
     const {rating, reviewText} = await request.json();

@@ -4,7 +4,7 @@ import getCurrentUser from "@/actions/getCurrentUser";
 import {prisma} from "@/libs/prisma";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2022-11-15',
+    apiVersion: '2023-10-16',
     typescript: true
 });
 
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     const user = await getCurrentUser(true);
 
     if (!user) {
-        return NextResponse.error();
+        return NextResponse.json({});
     }
 
     try {

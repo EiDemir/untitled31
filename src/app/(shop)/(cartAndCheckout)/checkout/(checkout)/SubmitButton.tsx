@@ -1,4 +1,4 @@
-import {useFormStatus as useFormStatus} from 'react-dom';
+import {experimental_useFormStatus as useFormStatus} from 'react-dom';
 import LoadingAnimation from "@/components/ui/LoadingAnimation";
 import {useEffect} from "react";
 

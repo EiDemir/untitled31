@@ -6,13 +6,13 @@ export async function POST(request: Request) {
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-        return NextResponse.error();
+        return NextResponse.json({});
     }
 
     const {productId, quantity, color, size} = await request.json();
 
     if (color === '' || size === '') {
-        return NextResponse.error();
+        return NextResponse.json({});
     }
 
     const newCartItem = await prisma.cartItem.create({

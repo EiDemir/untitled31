@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const user = await getCurrentUser();
 
     if (!user) {
-        return NextResponse.error();
+        return NextResponse.json({});
     }
 
     console.log(cookies().set('sentANewReq', 'yes'));

@@ -10,7 +10,7 @@ export async function GET(request: Request, {params}: {
     const cursorId = url.searchParams.get('id');
 
     if (!take || !cursorId || !params.category)
-        return NextResponse.error();
+        return NextResponse.json({});
 
     const colors = url.searchParams.get('color') ? url.searchParams.get('color')!.split(',') : [];
     const sizes = url.searchParams.get('size') ? url.searchParams.get('size')!.split(',') : [];

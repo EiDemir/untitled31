@@ -6,14 +6,16 @@ export async function DELETE(request: Request, {params}: { params: { cartItemId?
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-        return NextResponse.error();
+        return NextResponse.json({
+            error: 'User Not Logged In'
+        });
     }
 
     const {cartItemId} = params;
 
 
     if (!cartItemId) {
-        return new Error('Invalid ID');
+        return NextResponse.json({error: 'Invalid ID'});
     }
 
     await prisma.cartItem.delete({

@@ -6,13 +6,13 @@ export async function PUT(request: Request, {params}: { params: { productId?: st
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-        return NextResponse.error();
+        return NextResponse.json({});
     }
 
     const {productId} = params;
 
     if (!productId) {
-        return new Error('Invalid ID');
+        return NextResponse.json({error: 'Invalid ID'});
     }
 
     const newWishlist = await prisma.user.update({
@@ -36,13 +36,13 @@ export async function DELETE(request: Request, {params}: { params: { productId?:
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-        return NextResponse.error();
+        return NextResponse.json({});
     }
 
     const {productId} = params;
 
     if (!productId) {
-        return new Error('Invalid ID');
+        return NextResponse.json({error: 'Invalid ID'});
     }
 
     const newWishlist = await prisma.user.update({

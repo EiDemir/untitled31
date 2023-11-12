@@ -1,7 +1,7 @@
 import {getServerSession} from "next-auth/next";
 import {prisma} from "@/libs/prisma";
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {cache} from 'react';
+import {authOptions} from "@/app/auth";
 
 const getCurrentUser = cache(async (includeStripeId = false) => {
     const session = await getServerSession(authOptions);

@@ -11,7 +11,7 @@ export async function GET(request: Request, {params}: { params: { productId?: st
     const {productId} = params;
 
     if (!productId) {
-        return new Error('Invalid ID');
+        return NextResponse.json({error:'Invalid ID'});
     }
 
     const cartItem =

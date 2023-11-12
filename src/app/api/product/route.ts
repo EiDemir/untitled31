@@ -5,7 +5,7 @@ export async function GET(request: Request) {
     const ids = new URL(request.url).searchParams.get('ids');
 
     if (!ids) {
-        return NextResponse.error();
+        return NextResponse.json({});
     }
 
     const products = await prisma.product.findMany({
