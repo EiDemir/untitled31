@@ -34,7 +34,7 @@ export const authOptions: AuthOptions = {
 
                 if (!user)
                     throw new Error('No user with the given email was found.');
-                7
+
                 if (user.accounts.length === 1)
                     throw new Error(`A ${user.accounts[0].provider} account associated with this email was found. Please sign in with ${user.accounts[0].provider}.`);
 
