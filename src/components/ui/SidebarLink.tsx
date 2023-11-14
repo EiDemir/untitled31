@@ -15,7 +15,7 @@ export default function SidebarLink({href, children, onClick}: {
     const router = useRouter();
 
     return (
-        <motion.p whileHover={{scale: 1.1}} onClick={() => {
+        <motion.p onClick={() => {
             onClick();
             router.push(href);
         }}
